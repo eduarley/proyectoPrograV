@@ -1,17 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      >
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Kraken | Registrarse</title>
+        <title>Kraken | Inicio</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-        <!--link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Miss+Fajardose&display=swap" rel="stylesheet"-->
+        <!--link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Miss+Fajardose&display=swap" rel="stylesheet"/-->
 
         <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css"/>
         <link rel="stylesheet" href="css/animate.css"/>
@@ -31,12 +29,6 @@
         <link rel="stylesheet" href="css/flaticon.css"/>
         <link rel="stylesheet" href="css/icomoon.css"/>
         <link rel="stylesheet" href="css/style.css"/>
-
-        <link rel="stylesheet" href="css/main.css"/>
-
-
-        <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
-
     </h:head>
     <h:body>
         <div class="py-1 bg-black top">
@@ -45,8 +37,8 @@
                     <div class="col-lg-12 d-block">
                         <div class="row d-flex">
                             <div class="col-md pr-4 d-flex topper align-items-center">
-                                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span>
-                                </div>
+                                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
+                                        class="icon-phone2"></span></div>
                                 <span class="text"> 2435 5000</span>
                             </div>
                             <div class="col-md pr-4 d-flex topper align-items-center">
@@ -66,7 +58,7 @@
         </div>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-
+                <a class="navbar-brand" href="faces/menu.xhtml">Kraken</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                         aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
@@ -76,101 +68,70 @@
                     <ul class="navbar-nav ml-auto">
 
 
-                        <li class="nav-item "><a href="faces/menu.xhtml" class="nav-link">Menu</a></li>
 
-                        <li class="nav-item cta"><a href="faces/inicioSesion.xhtml" class="nav-link">Iniciar Sesión</a></li>
+
+                        <li class="nav-item active"><a href="menu.html" class="nav-link">Inicio</a></li>
+
+                        <li class="dropdown nav-item">
+                            <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
+                                 aria-haspopup="true" aria-expanded="false">
+                                Registro
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Clientes</a>
+                                <a class="dropdown-item" href="#">Productos</a>
+                                <a class="dropdown-item" href="#">Pedidos</a>
+                                <a class="dropdown-item" href="#">Despachos</a>
+                            </div>
+                        </li>
+
+                        
+                        
+                        
+                        
+                        <li class="nav-item"><a href="#" class="nav-link">Facturación</a></li>
+
+                        <li class="dropdown nav-item">
+                            <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
+                                 aria-haspopup="true" aria-expanded="false">
+                                Reportes
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Pedidos realizados</a>
+                                <a class="dropdown-item" href="#">Ventas</a>
+
+                            </div>
+                        </li>
+
+                        <li class="nav-item"><a href="#" class="nav-link">Salir</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- fin nav -->
 
+        <section class="hero-wrap hero-wrap-2" style="background-image: url('images/fondo-login.jpg');"
+                 data-stellar-background-ratio="0.5">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text align-items-end justify-content-center">
+                    <div class="col-md-9 ftco-animate text-center">
+                        <h1 class="mb-2 bread"><img src="images/logo blanco blanco.png" alt="" style="max-height: 200px;"/>
+                        </h1>
 
-
-
-
-        <div class="limiter">
-            <div class="container-registro " >
-                <div class="wrap-registro ftco-animate" style="margin-top: 100px">
-                    <div class="login100-pic js-tilt"  >					
-                        <img src="images/logo amarillo.png" alt="logo" style="padding-top: 150px"/>
                     </div>
-
-                    <h:form class="login100-form validate-form">
-                        <span class="login100-form-title">
-                            Registro
-                        </span>
-
-
-                        <div class="wrap-input100 validate-input" data-validate = "Identificación Requerida" >
-                            <h:inputText class="input100" a:placeholder="Identificación"  ></h:inputText>
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                            </span>
-                        </div>
-
-
-
-                        <div class="wrap-input100 validate-input" data-validate = "Usuario Requerido" >
-                            <h:inputText class="input100" a:placeholder="Usuario"  ></h:inputText>
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                            </span>
-                        </div>
-
-
-                        <div class="wrap-input100 validate-input" data-validate = "Teléfono Requerido" >
-                            <h:inputText class="input100" a:placeholder="Teléfono"  ></h:inputText>
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                            </span>
-                        </div>
-
-                        <div class="wrap-input100 validate-input" data-validate = "Dirección Requerida" >
-                            <h:inputTextarea class="input100" a:placeholder="Dirección" style="min-height: 200px" ></h:inputTextarea>
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa" aria-hidden="true"></i>
-                            </span>
-                        </div>
-
-
-
-
-
-
-
-                        <div class="container-login100-form-btn ">
-                            <div class="wrap-login100-form-btn">
-                                <div class="login100-form-bgbtn"></div>
-
-                                <div class="login100-form-btn">
-                                    <h:commandButton  class="login100-form-btn" value="Registrar" style="background-color: transparent"></h:commandButton>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                        <div class="text-center p-t-136">
-                            <a class="txt2" href="faces/inicioSesion.xhtml">
-                                <i class="fa fa-long-arrow-left m-l-5" aria-hidden="true"></i>
-                                Ya tienes una cuenta?
-
-                            </a>
-                        </div>
-
-
-
-                    </h:form>
-
-
                 </div>
             </div>
-        </div>
+        </section>
+
+        <section class="ftco-section">
+            <center>
+                Principal para Internos
+            </center>
+        </section>
+
+
+
 
 
 
@@ -211,8 +172,6 @@
 
 
         <script src="js/jquery.min.js"></script>
-        <script src="js/validaciones.js" type="text/javascript"></script>
-
         <script src="js/jquery-migrate-3.0.1.min.js"></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -229,16 +188,6 @@
 
         <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
-
-        <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
-
-        <script src="js/tilt.jquery.min.js"></script>
-
-        <script >
-                                $('.js-tilt').tilt({
-                                    scale: 1.1
-                                })
-        </script>
     </h:body>
 </html>
 
