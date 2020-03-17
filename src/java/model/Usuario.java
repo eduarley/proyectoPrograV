@@ -13,6 +13,7 @@ package model;
 public class Usuario {
    
     private int id, estado;
+   
     private String nombre, clave, direccion, telefono, rol;
 
     public Usuario(int id, int estado, String nombre, String clave, String direccion, String telefono, String rol) {
@@ -28,6 +29,9 @@ public class Usuario {
     public Usuario(int id, String clave) {
         this.id = id;
         this.clave = clave;
+    }
+
+    public Usuario() {
     }
 
     public int getId() {

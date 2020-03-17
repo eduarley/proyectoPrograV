@@ -25,21 +25,31 @@ public class beanInicioSesion implements Serializable {
     /**
      * Creates a new instance of beanInicioSesion
      */
-    private int id;
+    //private int id;
     private String clave;
-    
+
+    private String id;
+
     public beanInicioSesion() {
-        
+
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /*
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
+    }*/
     public String getClave() {
         return clave;
     }
@@ -49,12 +59,28 @@ public class beanInicioSesion implements Serializable {
     }
 
     public String validar() throws SNMPExceptions, SQLException {
-        InicioSesion inicio= new InicioSesion();
-        if (inicio.validarDatos(id, clave)) {
-            return "faces/index.xhtml";
-        } else {
-            return "";
+        InicioSesion inicio = new InicioSesion();
+
+        try {
+            int cedula = Integer.parseInt(id);
+
+            if (inicio.validarDatos(cedula, clave) != null) {
+                //return "faces/menu.xhtml";
+                //if()
+                if (inicio.validarDatos(cedula, clave).getRol().equalsIgnoreCase("admin")) {
+                    return "faces/principal.xhtml";
+                } else {
+                    return "faces/menu.xhtml";
+                }
+
+            } else {
+                return "";
+            }
+
+        } catch (Exception e) {
+            //poner alerta que no la cedula deben ser digitos
         }
+        return "";
     }
 
 }

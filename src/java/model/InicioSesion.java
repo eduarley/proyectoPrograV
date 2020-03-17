@@ -24,16 +24,13 @@ public class InicioSesion {
         accesoDatos= new AccesoDatos();
         accesoDatos.setDbConn(conn);
     }
-    
+    /*
     public boolean validarDatos(int id1, String clave1) 
             throws SNMPExceptions, SQLException{
         String select= "";
         
         try{
-            //Se intancia la clase de acceso a datos
-//            AccesoDatos accesoDatos= new AccesoDatos();
-            
-            //Se crea la sentencia de Busqueda
+ 
             select=
                     "SELECT id, clave FROM Usuario";
             //se ejecuta la sentencia sql
@@ -65,6 +62,74 @@ public class InicioSesion {
         }
         
         
+    }*/
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public Usuario validarDatos(int id1, String clave1) 
+            throws SNMPExceptions, SQLException{
+        String select= "";
+        
+        try{
+ 
+            select=
+                    "SELECT * FROM Usuario";
+            //se ejecuta la sentencia sql
+            ResultSet rsPA= accesoDatos.ejecutaSQLRetornaRS(select);
+            //se llama el array con los proyectos
+            while(rsPA.next()){
+                
+                Usuario us = new Usuario();
+                
+                us.setClave(rsPA.getString("clave"));
+                us.setId(rsPA.getInt("id"));
+                us.setNombre(rsPA.getString("nombre"));
+                us.setDireccion(rsPA.getString("direccion"));
+                us.setEstado( rsPA.getInt("estado"));
+                us.setRol(rsPA.getString("rol"));
+                us.setTelefono(rsPA.getString("telefono"));
+              
+                
+                
+                
+                if(us.getId()==id1 && us.getClave().equals(clave1)){
+                    return us;
+                }
+            }
+            rsPA.close();//se cierra el ResultSeat.
+            return null;
+            
+        }catch(SQLException e){
+            throw new SNMPExceptions (SNMPExceptions.SQL_EXCEPTION,
+                                     e.getMessage(),e.getErrorCode());
+        }catch(Exception e){
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,e.getMessage());
+        }finally{
+            
+        }
+        
+        
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
