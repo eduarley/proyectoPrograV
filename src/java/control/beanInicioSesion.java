@@ -10,6 +10,9 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import model.InicioSesion;
 import DAO.SNMPExceptions;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,6 +29,7 @@ public class beanInicioSesion implements Serializable {
     private String clave;
     
     public beanInicioSesion() {
+        
     }
 
     public int getId() {
@@ -43,13 +47,14 @@ public class beanInicioSesion implements Serializable {
     public void setClave(String clave) {
         this.clave = clave;
     }
-    
-    public String validar() throws SNMPExceptions{
-        if(InicioSesion.validarDatos(id, clave)){
+
+    public String validar() throws SNMPExceptions, SQLException {
+        InicioSesion inicio= new InicioSesion();
+        if (inicio.validarDatos(id, clave)) {
             return "faces/index.xhtml";
-        }else{
+        } else {
             return "";
         }
     }
-    
+
 }

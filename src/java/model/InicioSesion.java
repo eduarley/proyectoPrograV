@@ -10,23 +10,32 @@ import DAO.SNMPExceptions;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
 /**
  *
  * @author march
  */
 public class InicioSesion {
     
-    public static boolean validarDatos(int id1, String clave1) throws SNMPExceptions{
+    private AccesoDatos accesoDatos = new AccesoDatos();
+    private Connection conn;
+    
+    
+    public InicioSesion(){
+        accesoDatos= new AccesoDatos();
+        accesoDatos.setDbConn(conn);
+    }
+    
+    public boolean validarDatos(int id1, String clave1) 
+            throws SNMPExceptions, SQLException{
         String select= "";
         
         try{
             //Se intancia la clase de acceso a datos
-            AccesoDatos accesoDatos= new AccesoDatos();
+//            AccesoDatos accesoDatos= new AccesoDatos();
             
             //Se crea la sentencia de Busqueda
             select=
-                    "SELECT id, clave FROM Usuario group by id";
+                    "SELECT id, clave FROM Usuario";
             //se ejecuta la sentencia sql
             ResultSet rsPA= accesoDatos.ejecutaSQLRetornaRS(select);
             //se llama el array con los proyectos
