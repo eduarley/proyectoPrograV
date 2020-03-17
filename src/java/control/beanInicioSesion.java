@@ -5,11 +5,11 @@
  */
 package control;
 
-import DAO.SNMPExceptions;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import model.InicioSesion;
+import DAO.SNMPExceptions;
 
 /**
  *
@@ -45,8 +45,7 @@ public class beanInicioSesion implements Serializable {
     }
     
     public String validar() throws SNMPExceptions{
-        InicioSesion inicio= new InicioSesion();
-        if(inicio.validarDatos(id, clave)){
+        if(InicioSesion.validarDatos(id, clave)){
             return "faces/index.xhtml";
         }else{
             return "";

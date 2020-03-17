@@ -17,7 +17,7 @@ import java.util.LinkedList;
  */
 public class InicioSesion {
     
-    public boolean validarDatos(int id1, String clave1) throws SNMPExceptions{
+    public static boolean validarDatos(int id1, String clave1) throws SNMPExceptions{
         String select= "";
         
         try{
