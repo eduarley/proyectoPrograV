@@ -1,5 +1,11 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%-- 
+    Document   : principalPrueba
+    Created on : 17-mar-2020, 15:26:38
+    Author     : Usuario
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
@@ -29,8 +35,25 @@
         <link rel="stylesheet" href="css/flaticon.css"/>
         <link rel="stylesheet" href="css/icomoon.css"/>
         <link rel="stylesheet" href="css/style.css"/>
+        
+        
+        <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
     </h:head>
     <h:body>
+        
+        
+        
+        <jsp:useBean id="sesion" class="control.beanInicioSesion" scope="session"/>
+        <jsp:setProperty name="sesion" property="nombre" value="${beanInicioSesion.nombre}"/>
+        <jsp:setProperty name="sesion" property="id" value="${beanInicioSesion.nombre}"/>
+        <jsp:setProperty name="sesion" property="clave" value="${beanInicioSesion.clave}"/>
+        <jsp:setProperty name="sesion" property="direccion" value="${beanInicioSesion.direccion}"/>
+        <jsp:setProperty name="sesion" property="estado" value="${beanInicioSesion.estado}"/>
+        <jsp:setProperty name="sesion" property="rol" value="${beanInicioSesion.rol}"/>
+        <jsp:setProperty name="sesion" property="telefono" value="${beanInicioSesion.telefono}"/>
+        
+        
+        
         <div class="py-1 bg-black top">
             <div class="container">
                 <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
@@ -38,8 +61,8 @@
                         <div class="row d-flex">
                             <div class="col-md pr-4 d-flex topper align-items-center">
                                 <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
-                                        class="icon-phone2"></span></div>
-                                <span class="text"> 2435 5000</span>
+                                        class="fa fa-user"></span></div>
+                                <span class="text"> </span>
                             </div>
                             <div class="col-md pr-4 d-flex topper align-items-center">
                                 <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
@@ -58,7 +81,7 @@
         </div>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" href="faces/menu.xhtml">Kraken</a>
+                <a class="navbar-brand" href="faces/principal.jsp">Kraken</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                         aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
@@ -70,7 +93,7 @@
 
 
 
-                        <li class="nav-item active"><a href="menu.html" class="nav-link">Inicio</a></li>
+                        <li class="nav-item active"><a href="menu.jsp" class="nav-link">Inicio</a></li>
 
                         <li class="dropdown nav-item">
                             <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
@@ -86,7 +109,7 @@
                         </li>
 
                         
-                        
+                       
                         
                         
                         <li class="nav-item"><a href="#" class="nav-link">Facturación</a></li>
@@ -102,8 +125,37 @@
 
                             </div>
                         </li>
+                        
+                        
+                        
+                        
+                        
+                         <% if (sesion.getNombre().equalsIgnoreCase("")) { %>
+                        <li class="nav-item cta"><a href="faces/inicioSesion.xhtml" class="nav-link">Iniciar Sesión</a></li>
+                            <% } else { %>
 
-                        <li class="nav-item"><a href="#" class="nav-link">Salir</a></li>
+
+                        
+                        <li class="dropdown nav-item">
+                            <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
+                                 aria-haspopup="true" aria-expanded="false">
+                                Cerrar Sesión
+                            </div>
+                            <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+                                
+                                <a class="dropdown-item" href="#"><img src="images/usuario.png" height="80" width="80" /></a>
+                                <a class="dropdown-item" href="#">${sesion.nombre}</a>
+                                
+                                <div class="dropdown-divider" href="#"></div>
+                                
+                                <a href="inicioSesion.xhtml">Salir</a>
+                                
+                            </div>
+                        </li>
+
+
+                        <% }%>
+
                     </ul>
                 </div>
             </div>
@@ -190,4 +242,3 @@
         <script src="js/main.js"></script>
     </h:body>
 </html>
-

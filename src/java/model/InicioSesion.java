@@ -79,7 +79,7 @@ public class InicioSesion {
     
     
     
-    public Usuario validarDatos(int id1, String clave1) 
+        public Usuario validarDatos(int id1, String clave1) 
             throws SNMPExceptions, SQLException{
         String select= "";
         

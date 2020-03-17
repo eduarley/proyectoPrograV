@@ -19,6 +19,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/inicioSesion.xhtml</welcome-file>
+        <welcome-file>faces/menu.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
