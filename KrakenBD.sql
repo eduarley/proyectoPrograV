@@ -15,6 +15,7 @@ create table Usuario
 	rol varchar(15),
 	estado int
 )
+
 /*
 create table Telefono
 (
@@ -43,6 +44,7 @@ create table Producto
 	imagen image,
 	precio  money,
 	existencias int,
+	tipo varchar(50),
 	estado int
 )
 
@@ -164,7 +166,102 @@ alter table EncFactura add constraint FK_PedidoEncFactura foreign key (idPedido)
 
 
 
+Insert into Usuario values (123456, 'Bananito Pérez', 'Sa', 'Chilamate de Poás', '86758675', 'admin', 1)
 /*
 
 alter table EncFactura add constraint FK_EncFacturaDireccionEntrega foreign key (idDireccion) references DireccionEntrega(id)
 */
+
+
+
+
+--PROCEDIMIENTOS ALMACENADOS
+
+
+
+--Inserts
+
+--Insertar Cliente
+create procedure PA_InsertarCliente
+	@id int not null,
+	@nombre varchar(30),
+	@direccion varchar(50),
+	@telefono nvarchar(15),
+	@estado int
+
+AS
+BEGIN
+	INSERT INTO Cliente(id, nombre, direccion, telefono) VALUES (@id, @nombre, @direccion, @telefono, 1)
+END
+
+--Insertar Producto
+create procedure PA_InsertarProducto
+	@foto image,
+	@precio  decimal,
+	@cantidadDisponible int,
+	@estado int
+
+AS
+BEGIN
+	INSERT INTO Producto(foto, precio, cantidadDisponible, estado) VALUES (@foto, @precio, @cantidadDisponible, 1)
+END
+
+--Insertar ProductoPedido
+create procedure PA_InsertarProductoPedido
+	@idProducto int,
+	@idPedido int,
+	@cantidad int
+
+AS
+BEGIN
+	INSERT INTO ProductoPedido(idProducto, idPedido, cantidad) VALUES (@idProducto, @idPedido, @cantidad)
+END
+
+--Insertar Dirección Entrega
+create procedure PA_InsertarDireccionEntrega
+	@idCliente int,
+	@direccion varchar(50)
+
+AS
+BEGIN
+	INSERT INTO DireccionEntrega(idCliente, direccion) VALUES (@idCliente, @direccion)
+END
+
+--Insertar Pedido
+create procedure PA_InsertarPedido
+	@idCliente int,
+	@fechaEntrega date,
+	@horarioEntrega time,
+	@direccionEntrega varchar(50),
+	@estado varchar(30)
+
+AS
+BEGIN
+	INSERT INTO Pedido(idCliente, fechaEntrega,  horarioEntrega,  direccionEntrega,  estado) VALUES (@idCliente, @fechaEntrega,  @horarioEntrega,  @direccionEntrega,  @estado)
+END
+
+--Insertar Usuario
+create procedure PA_InsertarUsuario
+	@id int not null,
+	@nombre varchar(50),
+	@clave varchar(30),
+	@tipoUsuario varchar(40),
+	@estado int
+
+AS
+BEGIN
+	INSERT INTO Usuario(id, nombre, clave, tipoUsuario, estado) VALUES (@id, @nombre, @clave, @tipoUsuario, 1)
+END
+
+--Insertar Despacho
+create procedure PA_InsertarDespacho
+	@idFactura int,
+	@fechaEnvio date,
+	@horaEnvio time,
+	@medio varchar(30),
+	@estado int
+
+AS
+BEGIN
+	INSERT INTO Usuario(id, nombre, clave, tipoUsuario, estado) VALUES (@id, @nombre, @clave, @tipoUsuario, 1)
+END
