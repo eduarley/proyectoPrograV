@@ -99,7 +99,7 @@ public class UsuarioDB {
         try {
 
             select
-                    = "select id, nombre,direccion,telefono, estado from Usuario where rol='cliente'";
+                    = "select id, nombre, direccion, telefono, estado from Usuario where rol='cliente'";
             //se ejecuta la sentencia sql
             ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
             //se llama el array con los proyectos
