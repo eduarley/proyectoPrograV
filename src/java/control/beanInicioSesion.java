@@ -32,6 +32,7 @@ public class beanInicioSesion implements Serializable {
     private String telefono;
     private String rol;
     private int estado;
+    private String mensaje;
     
 
     
@@ -98,6 +99,16 @@ public class beanInicioSesion implements Serializable {
     public void setEstado(int estado) {
         this.estado = estado;
     }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+    
+    
     
     
     
@@ -137,9 +148,11 @@ public class beanInicioSesion implements Serializable {
             if (inicio.validarDatos(cedula, clave) != null) {
                 
                 if (inicio.validarDatos(cedula, clave).getRol().equalsIgnoreCase("admin")) {
+                    setMensaje("");
                     return "faces/principal.jsp";
                 } else {
                     //return "faces/menu.xhtml";
+                    setMensaje("");
                     return "faces/menu.jsp";
                 }
 
@@ -148,8 +161,9 @@ public class beanInicioSesion implements Serializable {
             }
 
         } catch (Exception e) {
-            //poner alerta que no la cedula deben ser digitos
+            setMensaje("No se permiten caracteres en el nombre de usuario");
         }
+        setMensaje("Datos incorrectos");
         return "";
     }
 

@@ -167,6 +167,7 @@ alter table EncFactura add constraint FK_PedidoEncFactura foreign key (idPedido)
 
 
 Insert into Usuario values (123456, 'Bananito Pérez', 'Sa', 'Chilamate de Poás', '86758675', 'admin', 1)
+Insert into Usuario values (1234, 'Eldes Pelote', 'Sa', 'Sarchí', '60973263', 'cliente', 1)
 /*
 
 alter table EncFactura add constraint FK_EncFacturaDireccionEntrega foreign key (idDireccion) references DireccionEntrega(id)
