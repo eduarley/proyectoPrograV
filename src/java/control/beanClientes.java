@@ -7,23 +7,23 @@ package control;
 
 import DAO.SNMPExceptions;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
-import model.UsuarioDB;
 import model.Usuario;
+import model.UsuarioDB;
+
 /**
  *
- * @author Usuario
+ * @author march
  */
 @Named(value = "beanClientes")
 @Dependent
 public class beanClientes {
 
-    
-    
-    
+    /**
+     * Creates a new instance of beanCliente
+     */
     public String lista;
     
     LinkedList<Usuario> listaUsuarios = new LinkedList<Usuario>();
@@ -104,11 +104,5 @@ public class beanClientes {
     public void setLista(String lista) {
         this.lista = lista;
     }
-   
- 
-    
-   
-    
-    
     
 }

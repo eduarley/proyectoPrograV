@@ -3,24 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package control;
 
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
+import java.io.Serializable;
 
 /**
  *
  * @author march
  */
 @Named(value = "beanDespacho")
-@Dependent
-public class beanDespacho {
+@SessionScoped
+public class beanDespacho implements Serializable {
 
     /**
      * Creates a new instance of beanDespacho
      */
     public beanDespacho() {
-        
     }
     
 }
