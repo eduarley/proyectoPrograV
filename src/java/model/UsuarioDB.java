@@ -27,31 +27,26 @@ public class UsuarioDB {
         accesoDatos.setDbConn(conn);
     }
 
- 
-    
-    
-    
-    
-    public LinkedList listaObjetosClientes()throws SNMPExceptions, SQLException{
+    public LinkedList<Usuario> listaObjetosClientes() throws SNMPExceptions, SQLException {
         String select = "";
-      LinkedList<Usuario> lista = new LinkedList<Usuario>();
-          
-          try {
-    
-              //Se instancia la clase de acceso a datos
-              AccesoDatos accesoDatos = new AccesoDatos();  
+        LinkedList<Usuario> lista = new LinkedList<Usuario>();
 
-              //Se crea la sentencia de búsqueda
-              select = 
-                      "select id, nombre,direccion,telefono, estado from Usuario where rol='cliente'";
-              
-              //Se ejecuta la sentencia SQL
-              ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
-              
-             //Se llena el arryaList con los proyectos   
-              while (rsPA.next()) {
+        try {
 
-                 Usuario us = new Usuario();
+            //Se instancia la clase de acceso a datos
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            //Se crea la sentencia de búsqueda
+            select
+                    = "select id, nombre,direccion,telefono, estado from Usuario where rol='cliente'";
+
+            //Se ejecuta la sentencia SQL
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+
+            //Se llena el arryaList con los proyectos   
+            while (rsPA.next()) {
+
+                Usuario us = new Usuario();
 
                 //us.setClave(rsPA.getString("clave"));
                 us.setId(rsPA.getInt("id"));
@@ -60,32 +55,26 @@ public class UsuarioDB {
                 us.setEstado(rsPA.getInt("estado"));
                 //us.setRol(rsPA.getString("rol"));
                 us.setTelefono(rsPA.getString("telefono"));
-                
+
                 lista.add(us);
-                
-                
-              }
-              
-              rsPA.close(); // cierra conexion
-              return lista;
-              
-          } catch (SQLException e) {
-              throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, 
-                                      e.getMessage(), e.getErrorCode());
-          }catch (Exception e) {
-              throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, 
-                                      e.getMessage());
-          } finally {
-              
-          }
-          
+
+            }
+
+            rsPA.close(); // cierra conexion
+            return lista;
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage());
+        } finally {
+
+        }
+
     }
-    
-    
-    
-    
-    
-    
+
     public String listaClientes() throws SNMPExceptions, SQLException {
 
         String filas = "";
@@ -133,8 +122,9 @@ public class UsuarioDB {
                             += //boton eliminar
                             "<td  button='true'><button type='button' class='btn btn-danger'><span class='glyphicon glyphicon-minus'></span> Eliminar</button></td>";
 
-                }else{
-                    filas+= //boton activar
+                } else {
+                    filas
+                            += //boton activar
                             "<td  button='true'><button type='button' class='btn btn-primary'><span class='glyphicon glyphicon-minus'></span> Activar</button></td>";
 
                 }
@@ -154,83 +144,80 @@ public class UsuarioDB {
         }
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    public String agregarCliente() throws SNMPExceptions, SQLException {
+    public boolean InsertarUsuario(Usuario usuario)
+            throws SNMPExceptions, SQLException {
+        String strSQL = "";
 
-       
-
-        
-        String insert = "";
-        
         try {
+            //Se obtienen los valores del objeto Departamento
+            Usuario us = new Usuario();
+            us = usuario;
 
-            insert
-                    = "insert into usuario values";
-            //se ejecuta la sentencia sql
-            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(insert);
-            //se llama el array con los proyectos
-            while (rsPA.next()) {
+            strSQL
+                    = "INSERT INTO USUARIO VALUES ('" + us.getId() + "','"
+                    + "" + us.getNombre() + ""
+                    + "','1234','" + us.getDireccion() + "','"
+                    + "" + us.getTelefono() + "',"
+                    + "'Cliente"
+                    + "','"
+                    + "1')";
 
-                Usuario us = new Usuario();
+            //Se ejecuta la sentencia SQL
+            accesoDatos.ejecutaSQL(strSQL);
+            return true;
 
-                //us.setClave(rsPA.getString("clave"));
-                us.setId(rsPA.getInt("id"));
-                us.setNombre(rsPA.getString("nombre"));
-                us.setDireccion(rsPA.getString("direccion"));
-                us.setEstado(rsPA.getInt("estado"));
-                //us.setRol(rsPA.getString("rol"));
-                us.setTelefono(rsPA.getString("telefono"));
-
-                lista.add(us);
-            }
-            rsPA.close();//se cierra el ResultSeat.
-
-           
-
-        } catch (SQLException e) {
-            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
-                    e.getMessage(), e.getErrorCode());
         } catch (Exception e) {
-            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+            //  throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+            return false;
+
         } finally {
 
         }
-    }*/
+    }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    public boolean eliminarUsuario(Usuario usuario)
+            throws SNMPExceptions, SQLException {
+        String strSQL = "";
+        Usuario us = new Usuario();
+        us = usuario;
+        try {
+
+            strSQL
+                    = "UPDATE USUARIO SET ESTADO=0 WHERE ID= '" + usuario.getId() + "'";
+
+            //Se ejecuta la sentencia SQL
+            accesoDatos.ejecutaSQL(strSQL);
+            return true;
+
+        } catch (Exception e) {
+            //  throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+            return false;
+
+        } finally {
+
+        }
+    }
+
+    public boolean activarUsuario(int id)
+            throws SNMPExceptions, SQLException {
+        String strSQL = "";
+
+        try {
+
+            strSQL
+                    = "UPDATE USUARIO SET ESTADO=1 WHERE ID= '" + id + "'";
+
+            //Se ejecuta la sentencia SQL
+            accesoDatos.ejecutaSQL(strSQL);
+            return true;
+
+        } catch (Exception e) {
+            //  throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+            return false;
+
+        } finally {
+
+        }
+    }
+
 }

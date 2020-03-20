@@ -31,6 +31,15 @@ public class Usuario {
         this.clave = clave;
     }
 
+    public Usuario(int id, int estado, String nombre, String direccion, String telefono) {
+        this.id = id;
+        this.estado = estado;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        
+    }
+
     public Usuario() {
     }
 

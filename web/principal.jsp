@@ -101,7 +101,7 @@
                                 Registro
                             </div>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="clientes.jsp">Clientes</a>
+                                <a class="dropdown-item" href="clientes.xhtml">Clientes</a>
                                 <a class="dropdown-item" href="producto.xhtml">Productos</a>
                                 <a class="dropdown-item" href="#">Pedidos</a>
                                 <a class="dropdown-item" href="#">Despachos</a>
