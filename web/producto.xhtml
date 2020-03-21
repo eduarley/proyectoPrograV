@@ -59,7 +59,7 @@
         </div>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" href="faces/menu.xhtml">Kraken</a>
+                <a class="navbar-brand" href="faces/principal.jsp">Kraken</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                         aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
@@ -69,9 +69,68 @@
                     <ul class="navbar-nav ml-auto">
 
 
-                        <li class="nav-item"><a href="faces/menu.xhtml" class="nav-link">Menu</a></li>
 
-                        <li class="nav-item cta"><a href="faces/inicioSesion.xhtml" class="nav-link">Iniciar Sesión</a></li>
+
+                        <li class="nav-item"><a href="menu.jsp" class="nav-link">Inicio</a></li>
+
+                        <li class="dropdown nav-item">
+                            <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
+                                 aria-haspopup="true" aria-expanded="false">
+                                Registro
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item active" href="clientes.xhtml">Clientes</a>
+                                <a class="dropdown-item" href="producto.xhtml">Productos</a>
+                                <a class="dropdown-item" href="#">Pedidos</a>
+                                <a class="dropdown-item" href="#">Despachos</a>
+                            </div>
+                        </li>
+
+
+
+
+
+                        <li class="nav-item"><a href="#" class="nav-link">Facturación</a></li>
+
+                        <li class="dropdown nav-item">
+                            <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
+                                 aria-haspopup="true" aria-expanded="false">
+                                Reportes
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Pedidos realizados</a>
+                                <a class="dropdown-item" href="#">Ventas</a>
+
+                            </div>
+                        </li>
+
+
+
+
+
+
+
+
+
+                        <li class="dropdown nav-item">
+                            <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
+                                 aria-haspopup="true" aria-expanded="false">
+                                Cerrar Sesión
+                            </div>
+                            <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+
+                                <a class="dropdown-item" href="#"><img src="images/usuario.png" height="80" width="80" /></a>
+                                <a class="dropdown-item" href="#">${sesion.nombre}</a>
+
+                                <div class="dropdown-divider" href="#"></div>
+
+                                <a href="inicioSesion.xhtml">Salir</a>
+
+                            </div>
+                        </li>
+
+
+
                     </ul>
                 </div>
             </div>
@@ -103,7 +162,7 @@
             <div class="container">
 
 
-                <h:outputLabel value="#{beanCliente.mensaje}"  style="font-size: 20px"></h:outputLabel>
+                <h:outputLabel value="#{beanProducto.mensaje}"  style="font-size: 20px"></h:outputLabel>
 
 
                 <div class="panel panel-default">
@@ -113,37 +172,43 @@
                             <div align="center" class="datagrid">
 
 
-                                <h:dataTable class="table table-striped table-hover" value="#{beanCliente.listaUsuarios}" var="cliente">
+                                <h:dataTable class="table table-striped table-hover" value="#{beanProducto.listaProductos}" var="producto">
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="ID"></h:outputText>
                                         </f:facet>
-                                        <h:outputText value="#{cliente.id}"></h:outputText>
+                                        <h:outputText value="#{producto.id}"></h:outputText>
                                     </h:column>
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Nombre Completo"></h:outputText>
+                                            <h:outputText value="Descripción"></h:outputText>
                                         </f:facet>
-                                        <h:outputText value="#{cliente.nombre}"></h:outputText>
+                                        <h:outputText value="#{producto.descripcion}"></h:outputText>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Dirección"></h:outputText>
+                                            <h:outputText value="Imagen"></h:outputText>
                                         </f:facet>
-                                        <h:outputText value="#{cliente.direccion}"></h:outputText>
+                                        <h:outputLabel value="#{producto.imagen}"></h:outputLabel>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Teléfono"></h:outputText>
+                                            <h:outputText value="Precio"></h:outputText>
                                         </f:facet>
-                                        <h:outputText value="#{cliente.telefono}"></h:outputText>
+                                        <h:outputText value="#{producto.precio}"></h:outputText>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Estado"></h:outputText>
+                                            <h:outputText value="Existencias"></h:outputText>
                                         </f:facet>
-                                        <h:outputText value="#{cliente.estado}"></h:outputText>
+                                        <h:outputText value="#{producto.existencias}"></h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Tipo"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{producto.tipo}"></h:outputText>
                                     </h:column>
                                     
                                     
@@ -152,17 +217,17 @@
                                         <h:commandButton type='submit'
                                                          value="Eliminar"
                                                          class='btn btn-danger'
-                                                         actionListener="#{beanCliente.eliminarCliente(cliente)}"
+                                                         actionListener="#{beanProducto.eliminarProducto(producto)}"
                                         ></h:commandButton>
                                     </h:column>
                                     
                                     
                                     
                                     <h:column>
-                                        <h:commandButton
-                                                         value="Activar"
+                                        <h:commandButton disabled="1"
+                                                         value="Modificar"
                                                          class="btn btn-success btn-lg"
-                                                         actionListener="#{beanCliente.activarCliente(cliente)}"
+                                                         
                                         ></h:commandButton>
                                     </h:column>
 
@@ -200,20 +265,24 @@
 
 
                                                 <div class="form-group">
-                                                    <label>Cédula</label>
-                                                    <h:inputText   class="form-control" required="true" value="#{beanCliente.cedula}"/>
+                                                    <label>Descripción</label>
+                                                    <h:inputText   class="form-control" required="true" value="#{beanProducto.descripcion}"/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Nombre Completo</label>
-                                                    <h:inputText  class="form-control" required="true" value="#{beanCliente.nombre}"/>
+                                                    <label>Imagen</label>
+                                                    <h:inputFile  class="form-control-file" required="true" value="#{beanProducto.imagen}"/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Dirección</label>
-                                                    <h:inputText  class="form-control" required="true" value="#{beanCliente.direccion}"/>
+                                                    <label>Precio</label>
+                                                    <h:inputText  class="form-control" required="true" value="#{beanProducto.precio}"/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Telefono</label>
-                                                    <h:inputText  class="form-control" required="true" value="#{beanCliente.telefono}"/>
+                                                    <label>Existencias</label>
+                                                    <h:inputText  class="form-control" required="true" value="#{beanProducto.existencias}"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Tipo</label>
+                                                    <h:inputText  class="form-control" required="true" value="#{beanProducto.tipo}"/>
                                                 </div>
 
 
@@ -222,7 +291,7 @@
 
                                                 <h:commandButton 
                                                     class="btn btn-primary btn-lg" 
-                                                    actionListener="#{beanCliente.insertarCliente()}"
+                                                    actionListener="#{beanProducto.insertarProducto()}"
                                                     value="Registrar"
 
                                                     type="submit"
@@ -315,6 +384,31 @@
 
         <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
+        
+        <script type="text/javascript">
+
+                                function ventananuevo() {
+                                    $('#modal').modal('show');
+                                }
+                                function cambiar() {
+                                    $('#modal2').modal('show');
+                                }
+
+                                function recargarPagina() {
+                                    location.reload(true);
+                                }
+
+                                function alertar() {
+
+                                    alert('#{beanCliente.mensaje}');
+                                    //$('#alerta').modal('show');
+                                    return;
+                                }
+
+
+        </script>
+        
+        
     </h:body>
 </html>
 
