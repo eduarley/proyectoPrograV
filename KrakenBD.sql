@@ -13,15 +13,8 @@ create table Usuario
 	direccion varchar(50),
 	telefono varchar(8),
 	rol varchar(15),
-	estado int
+	estado varchar(10)
 )
-
-/*
-create table Telefono
-(
-	idUsuario int not null,
-	telefono varchar(20) not null
-)*/
 
 create table DireccionEntrega
 (
@@ -118,7 +111,6 @@ alter table Pedido add constraint PK_Pedido primary key (id)
 alter table EncFactura add constraint PK_EncFactura primary key (id)
 alter table DireccionEntrega add constraint PK_DireccionEntrega primary key (id, idUsuario)
 alter table Despacho add constraint PK_Despacho primary key (id)
---alter table telefono add constraint PK_Telefono primary key (idUsuario,telefono)
 alter table CXC add constraint PK_Cxc primary key (idEncFactura, idUsuario)
 alter table DetFactura add constraint PK_DetFactura primary key (idEncFactura, idProducto)
 alter table DetPedido add constraint PK_DetPedido primary key (idPedido, idProducto)
@@ -166,8 +158,8 @@ alter table EncFactura add constraint FK_PedidoEncFactura foreign key (idPedido)
 
 
 
-Insert into Usuario values (123456, 'Bananito Pérez', 'Sa', 'Chilamate de Poás', '86758675', 'admin', 1)
-Insert into Usuario values (1234, 'Eldes Pelote', 'Sa', 'Sarchí', '60973263', 'cliente', 1)
+Insert into Usuario values (123456, 'Bananito Pérez', 'Sa', 'Chilamate de Poás', '86758675', 'admin', 'activo')
+Insert into Usuario values (1234, 'Eldes Pelote', 'Sa', 'Sarchí', '60973263', 'cliente', 'inactivo')
 /*
 
 alter table EncFactura add constraint FK_EncFacturaDireccionEntrega foreign key (idDireccion) references DireccionEntrega(id)

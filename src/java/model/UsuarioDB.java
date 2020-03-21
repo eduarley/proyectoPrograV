@@ -52,7 +52,7 @@ public class UsuarioDB {
                 us.setId(rsPA.getInt("id"));
                 us.setNombre(rsPA.getString("nombre"));
                 us.setDireccion(rsPA.getString("direccion"));
-                us.setEstado(rsPA.getInt("estado"));
+                us.setEstado(rsPA.getString("estado"));
                 //us.setRol(rsPA.getString("rol"));
                 us.setTelefono(rsPA.getString("telefono"));
 
@@ -100,7 +100,7 @@ public class UsuarioDB {
                 us.setId(rsPA.getInt("id"));
                 us.setNombre(rsPA.getString("nombre"));
                 us.setDireccion(rsPA.getString("direccion"));
-                us.setEstado(rsPA.getInt("estado"));
+                us.setEstado(rsPA.getString("estado"));
                 //us.setRol(rsPA.getString("rol"));
                 us.setTelefono(rsPA.getString("telefono"));
 
@@ -109,15 +109,15 @@ public class UsuarioDB {
             rsPA.close();//se cierra el ResultSeat.
 
             for (Usuario usuario : lista) {
-                String estado = usuario.getEstado() == 1 ? "Activo" : "Inactivo";
+//                String estado = usuario.getEstado() == 1 ? "Activo" : "Inactivo";
                 filas += "<tr>"
                         + "<td>" + usuario.getId() + "</td>"
                         + "<td>" + usuario.getNombre() + "</td>"
                         + "<td>" + usuario.getDireccion() + "</td>"
                         + "<td>" + usuario.getTelefono() + "</td>"
-                        + "<td>" + estado + "</td>";
+                        + "<td>" + usuario.getEstado() + "</td>";
 
-                if (usuario.getEstado() == 1) {
+                if ("activo".equals(usuario.getEstado())) {
                     filas
                             += //boton eliminar
                             "<td  button='true'><button type='button' class='btn btn-danger'><span class='glyphicon glyphicon-minus'></span> Eliminar</button></td>";
@@ -160,7 +160,7 @@ public class UsuarioDB {
                     + "" + us.getTelefono() + "',"
                     + "'Cliente"
                     + "','"
-                    + "1')";
+                    + "inactivo')";
 
             //Se ejecuta la sentencia SQL
             accesoDatos.ejecutaSQL(strSQL);
@@ -183,7 +183,7 @@ public class UsuarioDB {
         try {
 
             strSQL
-                    = "UPDATE USUARIO SET ESTADO=0 WHERE ID= '" + usuario.getId() + "'";
+                    = "UPDATE USUARIO SET ESTADO='inactivo' WHERE ID= '" + usuario.getId() + "'";
 
             //Se ejecuta la sentencia SQL
             accesoDatos.ejecutaSQL(strSQL);
@@ -205,7 +205,7 @@ public class UsuarioDB {
         try {
 
             strSQL
-                    = "UPDATE USUARIO SET ESTADO=1 WHERE ID= '" + id + "'";
+                    = "UPDATE USUARIO SET ESTADO='activo' WHERE ID= '" + id + "'";
 
             //Se ejecuta la sentencia SQL
             accesoDatos.ejecutaSQL(strSQL);

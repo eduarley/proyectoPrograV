@@ -84,11 +84,11 @@ public class InicioSesion {
                 us.setId(rsPA.getInt("id"));
                 us.setNombre(rsPA.getString("nombre"));
                 us.setDireccion(rsPA.getString("direccion"));
-                us.setEstado(rsPA.getInt("estado"));
+                us.setEstado(rsPA.getString("estado"));
                 us.setRol(rsPA.getString("rol"));
                 us.setTelefono(rsPA.getString("telefono"));
 
-                if (us.getId() == id1 && us.getClave().equals(clave1)) {
+                if (us.getId() == id1 && us.getClave().equals(clave1) && us.getEstado().equals("activo")) {
                     return us;
                 }
             }

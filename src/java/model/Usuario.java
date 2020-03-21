@@ -12,11 +12,11 @@ package model;
 
 public class Usuario {
    
-    private int id, estado;
+    private int id;
    
-    private String nombre, clave, direccion, telefono, rol;
+    private String nombre, clave, direccion, telefono, rol, estado;
 
-    public Usuario(int id, int estado, String nombre, String clave, String direccion, String telefono, String rol) {
+    public Usuario(int id, String estado, String nombre, String clave, String direccion, String telefono, String rol) {
         this.id = id;
         this.estado = estado;
         this.nombre = nombre;
@@ -31,7 +31,7 @@ public class Usuario {
         this.clave = clave;
     }
 
-    public Usuario(int id, int estado, String nombre, String direccion, String telefono) {
+    public Usuario(int id, String estado, String nombre, String direccion, String telefono) {
         this.id = id;
         this.estado = estado;
         this.nombre = nombre;
@@ -51,11 +51,11 @@ public class Usuario {
         this.id = id;
     }
 
-    public int getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

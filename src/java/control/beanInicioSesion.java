@@ -31,7 +31,7 @@ public class beanInicioSesion implements Serializable {
     private String direccion;
     private String telefono;
     private String rol;
-    private int estado;
+    private String estado;
     private String mensaje;
     
 
@@ -92,11 +92,11 @@ public class beanInicioSesion implements Serializable {
         this.rol = rol;
     }
 
-    public int getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -163,7 +163,7 @@ public class beanInicioSesion implements Serializable {
         } catch (Exception e) {
             setMensaje("No se permiten caracteres en el nombre de usuario");
         }
-        setMensaje("Datos incorrectos");
+        setMensaje("Datos incorrectos, \nverifique que su usuario esté activo");
         return "";
     }
 

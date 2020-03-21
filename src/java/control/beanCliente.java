@@ -47,7 +47,7 @@ public class beanCliente implements Serializable {
     
     
     public String insertarCliente()throws SNMPExceptions, SQLException{
-        Usuario usuario = new Usuario(Integer.parseInt(this.cedula), 1, this.nombre, this.direccion, this.telefono);
+        Usuario usuario = new Usuario(Integer.parseInt(this.cedula), "activo", this.nombre, this.direccion, this.telefono);
         UsuarioDB uDB= new UsuarioDB();
         
         if(uDB.InsertarUsuario(usuario))
@@ -157,13 +157,5 @@ public class beanCliente implements Serializable {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
