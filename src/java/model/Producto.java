@@ -13,10 +13,11 @@ package model;
 public class Producto {
     
    private int id, estado, existencias;
-   private String descripcion, tipo, imagen; 
+   private String descripcion, tipo;
+   private byte[] imagen;
    private double precio;
 
-    public Producto(int id, String descripcion, String imagen, double precio, int existencias, String tipo, int estado) {
+    public Producto(int id, String descripcion, byte[] imagen, double precio, int existencias, String tipo, int estado) {
         this.id = id;
         this.estado = estado;
         this.existencias = existencias;
@@ -29,6 +30,16 @@ public class Producto {
     public Producto() {
         
     }
+
+    public Producto(String descripcion, byte[] imagen, double precio, int existencias, String tipo) {
+        this.existencias = existencias;
+        this.descripcion = descripcion;
+        this.tipo = tipo;
+        this.imagen = imagen;
+        this.precio = precio;
+    }
+
+    
 
     public int getId() {
         return id;
@@ -70,11 +81,11 @@ public class Producto {
         this.tipo = tipo;
     }
 
-    public String getImagen() {
+    public byte[] getImagen() {
         return imagen;
     }
 
-    public void setImagen(String imagen) {
+    public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
 

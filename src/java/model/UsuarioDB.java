@@ -183,7 +183,7 @@ public class UsuarioDB {
         try {
 
             strSQL
-                    = "UPDATE USUARIO SET ESTADO='inactivo' WHERE ID= '" + usuario.getId() + "'";
+                    = "UPDATE USUARIO SET ESTADO='inactivo' WHERE ID= '" + us.getId() + "'";
 
             //Se ejecuta la sentencia SQL
             accesoDatos.ejecutaSQL(strSQL);

@@ -51,7 +51,7 @@ public class ProductoDB {
                 //us.setClave(rsPA.getString("clave"));
                 pro.setId(rsPA.getInt("id"));
                 pro.setDescripcion(rsPA.getString("descripcion"));
-                pro.setImagen(rsPA.getString("imagen"));
+                pro.setImagen(rsPA.getBytes("imagen"));
                 pro.setPrecio(rsPA.getDouble("precio"));
                 pro.setExistencias(rsPA.getInt("existencias"));
                 pro.setTipo(rsPA.getString("tipo"));
@@ -99,29 +99,28 @@ public class ProductoDB {
 
                 Producto pro = new Producto();
 
-                //us.setClave(rsPA.getString("clave"));
                 pro.setId(rsPA.getInt("id"));
                 pro.setDescripcion(rsPA.getString("descripcion"));
-                pro.setImagen(rsPA.getString("imagen"));
+                pro.setImagen(rsPA.getBytes("imagen"));
                 pro.setPrecio(rsPA.getDouble("precio"));
                 pro.setExistencias(rsPA.getInt("existencias"));
                 pro.setTipo(rsPA.getString("tipo"));
-                pro.setEstado(rsPA.getInt("estado"));
+                pro.setEstado(rsPA.getInt("estado"));   //Esta línea puede permanecer, NO AFECTA
                 
                 lista.add(pro);
             }
             rsPA.close();//se cierra el ResultSeat.
 
             for (Producto producto : lista) {
-                String estado = producto.getEstado() == 1 ? "Activo" : "Inactivo";
+//                String estado = producto.getEstado() == 1 ? "Activo" : "Inactivo";
                 filas += "<tr>"
                         + "<td>" + producto.getId() + "</td>"
                         + "<td>" + producto.getDescripcion()+ "</td>"
                         + "<td>" + producto.getImagen()+ "</td>"
                         + "<td>" + producto.getPrecio()+ "</td>"
                         + "<td>" + producto.getExistencias()+ "</td>"
-                        + "<td>" + producto.getTipo()+ "</td>"
-                        + "<td>" + estado + "</td>";
+                        + "<td>" + producto.getTipo()+ "</td>";
+//                        + "<td>" + estado + "</td>";
 
                 if (producto.getEstado() == 1) {
                     filas
@@ -144,6 +143,60 @@ public class ProductoDB {
                     e.getMessage(), e.getErrorCode());
         } catch (Exception e) {
             throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+        } finally {
+
+        }
+    }
+    
+    
+    public boolean InsertarProducto(Producto producto)
+            throws SNMPExceptions, SQLException {
+        String strSQL = "";
+
+        try {
+            //Se obtienen los valores del objeto Departamento
+            Producto pro = new Producto();
+            pro = producto;
+            int estado= 1;
+            strSQL
+                    = "INSERT INTO USUARIO VALUES ('" + pro.getDescripcion() + "','" +
+                    "" + pro.getImagen()+ "" + "','" + 
+                    "" + pro.getPrecio() + "" + "','" + 
+                    "" + pro.getExistencias()+ "" + "','" + 
+                    "" + pro.getTipo()+ "','" + "" + estado + "')";
+
+            //Se ejecuta la sentencia SQL
+            accesoDatos.ejecutaSQL(strSQL);
+            return true;
+
+        } catch (Exception e) {
+            //  throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+            return false;
+
+        } finally {
+
+        }
+    }
+
+    //NOTA
+    public boolean eliminarProducto(Producto producto)
+            throws SNMPExceptions, SQLException {
+        String strSQL = "";
+        Producto pro = new Producto();
+        pro = producto;
+        try {
+
+            strSQL
+                    = "UPDATE USUARIO SET ESTADO=0 WHERE ID= '" + pro.getId() + "'";
+
+            //Se ejecuta la sentencia SQL
+            accesoDatos.ejecutaSQL(strSQL);
+            return true;
+
+        } catch (Exception e) {
+            //  throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+            return false;
+
         } finally {
 
         }
