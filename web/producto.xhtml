@@ -2,7 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+
+      xmlns:p="http://primefaces.org/ui"
+
+      >
     <h:head>
         <title>Kraken | Producto</title>
         <meta charset="utf-8"/>
@@ -30,8 +34,10 @@
         <link rel="stylesheet" href="css/flaticon.css"/>
         <link rel="stylesheet" href="css/icomoon.css"/>
         <link rel="stylesheet" href="css/style.css"/>
+        <link href="css/tabla.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
+
         <div class="py-1 bg-black top">
             <div class="container">
                 <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
@@ -79,8 +85,8 @@
                                 Registro
                             </div>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item active" href="clientes.xhtml">Clientes</a>
-                                <a class="dropdown-item" href="producto.xhtml">Productos</a>
+                                <a class="dropdown-item" href="clientes.xhtml">Clientes</a>
+                                <a class="dropdown-item active" href="producto.xhtml">Productos</a>
                                 <a class="dropdown-item" href="#">Pedidos</a>
                                 <a class="dropdown-item" href="#">Despachos</a>
                             </div>
@@ -150,12 +156,12 @@
                 </div>
             </div>
         </section>
+
+
         
-        
-        
-        
-        
-        
+
+
+
 
         <section class="ftco-section">
 
@@ -168,8 +174,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">LISTA DE PRODUCTOS</div>
                     <div class="table-responsive">
-                        <h:form>
+                        <h:form enctype="multipart/form-data">
                             <div align="center" class="datagrid">
+
+                                <p:growl showDetail="true"/>
 
 
                                 <h:dataTable class="table table-striped table-hover" value="#{beanProducto.listaProductos}" var="producto">
@@ -191,6 +199,7 @@
                                             <h:outputText value="Imagen"></h:outputText>
                                         </f:facet>
                                         <h:outputLabel value="#{producto.imagen}"></h:outputLabel>
+                                        <h:graphicImage></h:graphicImage>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
@@ -210,25 +219,25 @@
                                         </f:facet>
                                         <h:outputText value="#{producto.tipo}"></h:outputText>
                                     </h:column>
-                                    
-                                    
-                     
+
+
+
                                     <h:column>
                                         <h:commandButton type='submit'
                                                          value="Eliminar"
                                                          class='btn btn-danger'
                                                          actionListener="#{beanProducto.eliminarProducto(producto)}"
-                                        ></h:commandButton>
+                                                         ></h:commandButton>
                                     </h:column>
-                                    
-                                    
-                                    
+
+
+
                                     <h:column>
                                         <h:commandButton disabled="1"
                                                          value="Modificar"
                                                          class="btn btn-success btn-lg"
-                                                         
-                                        ></h:commandButton>
+
+                                                         ></h:commandButton>
                                     </h:column>
 
                                 </h:dataTable>
@@ -240,13 +249,11 @@
 
 
 
+                            <!--/////////////////////////////////      MODAL   //////////////////////////////////////////////////////-->
 
 
- <!--/////////////////////////////////      MODAL   //////////////////////////////////////////////////////-->
- 
- 
- 
- 
+
+
                             <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -270,7 +277,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Imagen</label>
-                                                    <h:inputFile  class="form-control-file" required="true" value="#{beanProducto.imagen}"/>
+
+
+                                                    <p:fileUpload value="#{beanProducto.file}" mode="advanced" cancelLabel="Cancelar" label="Seleccionar" uploadLabel="Subir">
+                                                        <!--f:passThroughAttribute name="accept" value="image/png"/-->
+                                                    </p:fileUpload>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Precio</label>
@@ -384,7 +395,7 @@
 
         <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
-        
+
         <script type="text/javascript">
 
                                 function ventananuevo() {
@@ -407,8 +418,8 @@
 
 
         </script>
-        
-        
+
+
     </h:body>
 </html>
 

@@ -160,7 +160,7 @@ public class UsuarioDB {
                     + "" + us.getTelefono() + "',"
                     + "'Cliente"
                     + "','"
-                    + "inactivo')";
+                    + "activo')";
 
             //Se ejecuta la sentencia SQL
             accesoDatos.ejecutaSQL(strSQL);

@@ -88,7 +88,7 @@ public class InicioSesion {
                 us.setRol(rsPA.getString("rol"));
                 us.setTelefono(rsPA.getString("telefono"));
 
-                if (us.getId() == id1 && us.getClave().equals(clave1) && us.getEstado().equals("activo")) {
+                if (us.getId() == id1 && us.getClave().equals(clave1) && us.getEstado().equalsIgnoreCase("activo")) {
                     return us;
                 }
             }
