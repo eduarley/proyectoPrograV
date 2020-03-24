@@ -158,7 +158,7 @@
         </section>
 
 
-        
+
 
 
 
@@ -168,7 +168,7 @@
             <div class="container">
 
 
-                <h:outputLabel value="#{beanProducto.mensaje}"  style="font-size: 20px"></h:outputLabel>
+
 
 
                 <div class="panel panel-default">
@@ -244,15 +244,15 @@
                             </div>
 
 
+                        </h:form>
 
 
 
 
-
-                            <!--/////////////////////////////////      MODAL   //////////////////////////////////////////////////////-->
-
+                        <!--/////////////////////////////////      MODAL   //////////////////////////////////////////////////////-->
 
 
+                        <h:form>
 
                             <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -263,13 +263,7 @@
                                         </div>
                                         <div role="form" >
 
-
-
-
-
                                             <div class="col-lg-12">               
-
-
 
                                                 <div class="form-group">
                                                     <label>Descripción</label>
@@ -279,8 +273,8 @@
                                                     <label>Imagen</label>
 
 
-                                                    <p:fileUpload value="#{beanProducto.file}" mode="advanced" cancelLabel="Cancelar" label="Seleccionar" uploadLabel="Subir">
-                                                        <!--f:passThroughAttribute name="accept" value="image/png"/-->
+                                                    <p:fileUpload  value="#{beanProducto.file}" mode="advanced" cancelLabel="Cancelar" label="Seleccionar" uploadLabel="Subir">
+                                                        <f:passThroughAttribute name="accept" value="image/png"/>
                                                     </p:fileUpload>
                                                 </div>
                                                 <div class="form-group">
@@ -293,7 +287,15 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Tipo</label>
-                                                    <h:inputText  class="form-control" required="true" value="#{beanProducto.tipo}"/>
+                                                    <!--h:inputText  class="form-control" required="true" value="#{beanProducto.tipo}"/-->
+                                                    
+                                                    
+                                                    <h:selectOneMenu value="#{beanProducto.tipo}" class="form-control">
+                                                        <f:selectItem itemLabel="Desayuno" itemValue="desayuno"></f:selectItem>
+                                                        <f:selectItem itemLabel="Almuerzo" itemValue="almuerzo"></f:selectItem>
+                                                        <f:selectItem itemLabel="Cena" itemValue="cena"></f:selectItem>
+                                                    </h:selectOneMenu>
+                                                    
                                                 </div>
 
 
@@ -305,8 +307,8 @@
                                                     actionListener="#{beanProducto.insertarProducto()}"
                                                     value="Registrar"
 
-                                                    type="submit"
-                                                    ></h:commandButton>
+                                                    type="submit">
+                                                </h:commandButton>
 
 
                                             </div>
@@ -409,12 +411,12 @@
                                     location.reload(true);
                                 }
 
-                                function alertar() {
-
-                                    alert('#{beanCliente.mensaje}');
-                                    //$('#alerta').modal('show');
-                                    return;
-                                }
+                                /* function alertar() {
+                                 
+                                 alert('#{beanCliente.mensaje}');
+                                 //$('#alerta').modal('show');
+                                 return;
+                                 }*/
 
 
         </script>

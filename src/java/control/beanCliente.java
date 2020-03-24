@@ -11,6 +11,8 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import model.Usuario;
 import model.UsuarioDB;
@@ -26,91 +28,79 @@ public class beanCliente implements Serializable {
     /**
      * Creates a new instance of beanCliente
      */
-    
-    
-    
     LinkedList<Usuario> listaUsuarios = new LinkedList<Usuario>();
-    
-    String cedula,nombre,direccion,telefono;
-    
-    String mensaje="";
-    
+
+    String cedula, nombre, direccion, telefono;
+
+    String mensaje = "";
+
     public beanCliente() {
         /*this.cedula="";
         this.direccion="";
         this.mensaje="";
         this.nombre="";
         this.telefono="";*/
-        
+
     }
 
-    
-    
-    public String insertarCliente()throws SNMPExceptions, SQLException{
+    public void insertarCliente() throws SNMPExceptions, SQLException {
         Usuario usuario = new Usuario(Integer.parseInt(this.cedula), "activo", this.nombre, this.direccion, this.telefono);
-        UsuarioDB uDB= new UsuarioDB();
-        
-        if(uDB.InsertarUsuario(usuario))
-            mensaje="Se ha guargado exitosamente!";
-        else
-             mensaje="Se ha producido un error al guardar!";
-        
-        
-        
-        
-        /*
-        this.cedula="";
-        this.direccion="";
-        //this.mensaje="";
-        this.nombre="";
-        this.telefono="";*/
-        
-        return mensaje;
-        
-        
-         
+        UsuarioDB uDB = new UsuarioDB();
+
+        try {
+            if (uDB.InsertarUsuario(usuario)) {
+                FacesMessage message = new FacesMessage("El usuario " + usuario.getNombre() + " se ha registrado correctamente");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            } else {
+                FacesMessage message = new FacesMessage("Error al registrar");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            }
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage("Hubo una falla: " + e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+
     }
-    
-     public String eliminarCliente(Usuario us)throws SNMPExceptions, SQLException{
-       
-        UsuarioDB uDB= new UsuarioDB();
-        
-        if(uDB.eliminarUsuario(us))
-            mensaje="Se ha desactivado exitosamente!";
-        else
-             mensaje="Se ha producido un error al desactivar!";
-        
-        
-        return mensaje;
-        
-        
-         
+
+    public void eliminarCliente(Usuario us) throws SNMPExceptions, SQLException {
+
+        UsuarioDB uDB = new UsuarioDB();
+
+        try {
+            if (uDB.eliminarUsuario(us)) {
+                FacesMessage message = new FacesMessage("El usuario " + us.getNombre() + " ha sido desactivado correctamente");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            } else {
+                FacesMessage message = new FacesMessage("Error al desactivar");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            }
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage("Hubo una falla: " + e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+
     }
-     
-     
-     
-      public String activarCliente(Usuario us)throws SNMPExceptions, SQLException{
-        Usuario usuario = new Usuario();
-        usuario=us;
-        UsuarioDB uDB= new UsuarioDB();
-        
-        if(uDB.activarUsuario(usuario.getId()))
-            mensaje="Se ha desactivado exitosamente!";
-        else
-             mensaje="Se ha producido un error al desactivar!";
-        
-        
-        return mensaje;
-        
-        
-         
+
+    public void activarCliente(Usuario us) throws SNMPExceptions, SQLException {
+        UsuarioDB uDB = new UsuarioDB();
+
+        try {
+            if (uDB.activarUsuario(us.getId())) {
+                FacesMessage message = new FacesMessage("El usuario " + us.getNombre() + " ha sido activado correctamente");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            } else {
+                FacesMessage message = new FacesMessage("Error al activar");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            }
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage("Hubo una falla: " + e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+
     }
-     
-     
-     
-    
-    public LinkedList<Usuario> getListaUsuarios() throws SNMPExceptions, SQLException{
-        UsuarioDB uDB= new UsuarioDB();
+
+    public LinkedList<Usuario> getListaUsuarios() throws SNMPExceptions, SQLException {
+        UsuarioDB uDB = new UsuarioDB();
         return uDB.listaObjetosClientes();
     }
 
@@ -157,5 +147,5 @@ public class beanCliente implements Serializable {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
-    
+
 }
