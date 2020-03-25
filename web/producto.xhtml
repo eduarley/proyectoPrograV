@@ -3,9 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-
+      
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-
+      template="/templates/template.xhtml"
       >
     <h:head>
         <title>Kraken | Producto</title>
@@ -194,6 +195,7 @@
                                         </f:facet>
                                         <h:outputText value="#{producto.descripcion}"></h:outputText>
                                     </h:column>
+                                    <!--
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Imagen"></h:outputText>
@@ -201,6 +203,7 @@
                                         <h:outputLabel value="#{producto.imagen}"></h:outputLabel>
                                         <h:graphicImage></h:graphicImage>
                                     </h:column>
+                                    -->
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Precio"></h:outputText>
@@ -252,7 +255,7 @@
                         <!--/////////////////////////////////      MODAL   //////////////////////////////////////////////////////-->
 
 
-                        <h:form>
+                        <h:form enctype="multipart/form-data">
 
                             <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -269,22 +272,25 @@
                                                     <label>Descripción</label>
                                                     <h:inputText   class="form-control" required="true" value="#{beanProducto.descripcion}"/>
                                                 </div>
-                                                <!--
+                                             <!--
                                                 <div class="form-group">
                                                     <label>Imagen</label>
 
 
                                                     <p:fileUpload  value="#{beanProducto.file}" mode="advanced" cancelLabel="Cancelar" label="Seleccionar" uploadLabel="Subir">
                                                         <f:passThroughAttribute name="accept" value="image/png"/>
+                                                        <p:
                                                     </p:fileUpload>
                                                 </div>
-                                               -->
+                                             -->
+                                              
                                                 <div class="form-group">
                                                     <label>Imagen</label>
 
 
                                                     <h:inputFile value="#{beanProducto.file}"></h:inputFile>
                                                 </div>
+                                              
                                                 <div class="form-group">
                                                     <label>Precio</label>
                                                     <h:inputText  class="form-control" required="true" value="#{beanProducto.precio}"/>

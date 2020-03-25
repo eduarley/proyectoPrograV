@@ -150,45 +150,45 @@ public class ProductoDB {
     }
     
     
-    public boolean InsertarProducto(Producto producto)
-            throws SNMPExceptions, SQLException {
-        String strSQL = "";
-
-        try {
-         
-            
-            
-            Producto pro = new Producto();
-            pro = producto;
-            
-//            strSQL
-//                    = "INSERT INTO producto(descripcion,imagen,precio,existencias,tipo,estado) "
-//                    + "VALUES ('" + pro.getDescripcion() + "','"+pro.getFile()+"','"+pro.getPrecio()+"','"+pro.getExistencias()+"','"+pro.getTipo()+"','Activo')";
-//                    
-            
-
-            PreparedStatement st= conn.prepareStatement("INSERT INTO producto(descripcion,imagen,precio,existencias,tipo,estado)"
-                    + "VALUES ('" + pro.getDescripcion() + "','?','"+pro.getPrecio()+"','"+pro.getExistencias()+"','"+pro.getTipo()+"','Activo')");
-            st.setBinaryStream(1, pro.getFile().getInputstream());
-            
-            st.executeUpdate();
-            
-            conn.close();
-            //Se ejecuta la sentencia SQL
-            //accesoDatos.ejecutaSQL(strSQL);
-            return true;
-
-        } catch (Exception e) {
-            //  throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
-            return false;
-
-        } finally {
-
-        }
-    }
+//    public boolean InsertarProducto(Producto producto)
+//            throws SNMPExceptions, SQLException {
+//        String strSQL = "";
+//
+//        try {
+//         
+//            
+//            
+//            Producto pro = new Producto();
+//            pro = producto;
+//            
+////            strSQL
+////                    = "INSERT INTO producto(descripcion,imagen,precio,existencias,tipo,estado) "
+////                    + "VALUES ('" + pro.getDescripcion() + "','"+pro.getFile()+"','"+pro.getPrecio()+"','"+pro.getExistencias()+"','"+pro.getTipo()+"','Activo')";
+////                    
+//            
+//
+//            PreparedStatement st= conn.prepareStatement("INSERT INTO producto(descripcion,imagen,precio,existencias,tipo,estado)"
+//                    + "VALUES ('" + pro.getDescripcion() + "','?','"+pro.getPrecio()+"','"+pro.getExistencias()+"','"+pro.getTipo()+"','Activo')");
+//            st.setBinaryStream(1, pro.getFile());
+//            
+//            st.executeUpdate();
+//            
+//            conn.close();
+//            //Se ejecuta la sentencia SQL
+//            //accesoDatos.ejecutaSQL(strSQL);
+//            return true;
+//
+//        } catch (Exception e) {
+//            //  throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+//            return false;
+//
+//        } finally {
+//
+//        }
+//    }
     
     
-    /*
+    
     public boolean InsertarProducto(Producto producto)
             throws SNMPExceptions, SQLException {
         String strSQL = "";
@@ -206,7 +206,7 @@ public class ProductoDB {
               
                strSQL
                     = "INSERT INTO producto(descripcion,imagen,precio,existencias,tipo,estado) "
-                    + "VALUES ('" + pro.getDescripcion() + "','"+pro.getImagen()+"','"+pro.getPrecio()+"','"+pro.getExistencias()+"','"+pro.getTipo()+"','Activo')";
+                    + "VALUES ('" + pro.getDescripcion() + "','"+pro.getUploadedFile().getSubmittedFileName()+"','"+pro.getPrecio()+"','"+pro.getExistencias()+"','"+pro.getTipo()+"','1')";
                     
               PreparedStatement statement = conn.prepareStatement(strSQL);
               
@@ -231,15 +231,15 @@ public class ProductoDB {
             return true;
 
         } catch (Exception e) {
-            //  throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
-            return false;
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+            /*return false;*/
 
         } finally {
 
         }
     }
     
-    */
+    
     
 
     //NOTA

@@ -45,20 +45,22 @@ public class beanProducto implements Serializable {
 
     private String id, descripcion, precio, existencias, tipo;
   
-
-    private UploadedFile file;
+    private Part uploadedFile;
+    private byte[] file;
 
 
     public beanProducto() {
     }
 
     public void insertarProducto() throws SNMPExceptions, SQLException {
-
-        Producto producto = new Producto(descripcion, file, Double.valueOf(this.precio), Integer.parseInt(this.existencias), tipo);
+        
+        //this.file=  uploadedFile.getSubmittedFileName();
+        Producto producto = new Producto(descripcion, uploadedFile, Double.valueOf(this.precio), Integer.parseInt(this.existencias), tipo);
         ProductoDB pDB = new ProductoDB();
 
             if (pDB.InsertarProducto(producto)) {
-                FacesMessage message = new FacesMessage("Éxito", file.getFileName() + " fue guardado con éxito");
+                //FacesMessage message = new FacesMessage("Éxito", file.getFileName() + " fue guardado con éxito");
+                FacesMessage message = new FacesMessage("Éxito", "Guardado con éxito");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
                 FacesMessage message = new FacesMessage("Error al guardar la imagen.!");
@@ -142,11 +144,21 @@ public class beanProducto implements Serializable {
         this.tipo = tipo;
     }
 
-    public UploadedFile getFile() {
+    public byte[] getFile() {
         return file;
     }
 
-    public void setFile(UploadedFile file) {
+    public void setFile(byte[] file) {
         this.file = file;
     }
+
+    public Part getUploadedFile() {
+        return uploadedFile;
+    }
+
+    public void setUploadedFile(Part uploadedFile) {
+        this.uploadedFile = uploadedFile;
+    }
+
+    
 }

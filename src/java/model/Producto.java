@@ -6,6 +6,7 @@
 package model;
 
 import java.awt.Image;
+import javax.servlet.http.Part;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -19,7 +20,9 @@ public class Producto {
     //private byte[] imagen;
     private double precio;
     //private Image img;
-    private UploadedFile file;
+//    private UploadedFile file;
+    private byte[] file;
+    private Part uploadedFile;
 
     /*
     public Producto(int id, String descripcion, byte[] imagen, double precio, int existencias, String tipo, int estado) {
@@ -44,11 +47,19 @@ public class Producto {
         this.precio = precio;
     }*/
 
-    public Producto(String descripcion, UploadedFile file, double precio, int existencias, String tipo) {
+//    public Producto(String descripcion, UploadedFile file, double precio, int existencias, String tipo) {
+//        this.existencias = existencias;
+//        this.descripcion = descripcion;
+//        this.tipo = tipo;
+//        this.file= file;
+//        this.precio = precio;
+//    }
+    
+    public Producto(String descripcion, Part uploadedFile, double precio, int existencias, String tipo) {
         this.existencias = existencias;
         this.descripcion = descripcion;
         this.tipo = tipo;
-        this.file= file;
+        this.uploadedFile= uploadedFile;
         this.precio = precio;
     }
 
@@ -117,11 +128,29 @@ public class Producto {
     }
     
     */
-    public UploadedFile getFile() {
+//    public UploadedFile getFile() {
+//        return file;
+//    }
+//
+//    public void setFile(UploadedFile file) {
+//        this.file = file;
+//    }
+
+    public byte[] getFile() {
         return file;
     }
 
-    public void setFile(UploadedFile file) {
+    public void setFile(byte[] file) {
         this.file = file;
     }
+
+    public Part getUploadedFile() {
+        return uploadedFile;
+    }
+
+    public void setUploadedFile(Part uploadedFile) {
+        this.uploadedFile = uploadedFile;
+    }
+    
+    
 }
