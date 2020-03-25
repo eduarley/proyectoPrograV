@@ -269,6 +269,7 @@
                                                     <label>Descripción</label>
                                                     <h:inputText   class="form-control" required="true" value="#{beanProducto.descripcion}"/>
                                                 </div>
+                                                <!--
                                                 <div class="form-group">
                                                     <label>Imagen</label>
 
@@ -276,6 +277,13 @@
                                                     <p:fileUpload  value="#{beanProducto.file}" mode="advanced" cancelLabel="Cancelar" label="Seleccionar" uploadLabel="Subir">
                                                         <f:passThroughAttribute name="accept" value="image/png"/>
                                                     </p:fileUpload>
+                                                </div>
+                                               -->
+                                                <div class="form-group">
+                                                    <label>Imagen</label>
+
+
+                                                    <h:inputFile value="#{beanProducto.file}"></h:inputFile>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Precio</label>
