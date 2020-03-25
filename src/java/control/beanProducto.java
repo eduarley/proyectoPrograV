@@ -43,7 +43,7 @@ public class beanProducto implements Serializable {
      */
     LinkedList<Producto> listaProductos = new LinkedList<Producto>();
 
-    private String id, descripcion, precio, existencias, tipo;
+    private String id, descripcion, precio, existencias, tipo, ingredientes;
   
     private Part uploadedFile;
     private byte[] file;
@@ -55,7 +55,7 @@ public class beanProducto implements Serializable {
     public void insertarProducto() throws SNMPExceptions, SQLException {
         
         //this.file=  uploadedFile.getSubmittedFileName();
-        Producto producto = new Producto(descripcion, uploadedFile, Double.valueOf(this.precio), Integer.parseInt(this.existencias), tipo);
+        Producto producto = new Producto(descripcion, uploadedFile, Double.valueOf(this.precio), Integer.parseInt(this.existencias), tipo, ingredientes);
         ProductoDB pDB = new ProductoDB();
 
             if (pDB.InsertarProducto(producto)) {

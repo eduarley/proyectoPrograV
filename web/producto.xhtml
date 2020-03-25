@@ -222,6 +222,12 @@
                                         </f:facet>
                                         <h:outputText value="#{producto.tipo}"></h:outputText>
                                     </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Ingredientes"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{producto.ingredientes}"></h:outputText>
+                                    </h:column>
 
 
 
@@ -283,14 +289,14 @@
                                                     </p:fileUpload>
                                                 </div>
                                              -->
-                                              
+                                              <!--
                                                 <div class="form-group">
                                                     <label>Imagen</label>
 
 
                                                     <h:inputFile value="#{beanProducto.file}"></h:inputFile>
                                                 </div>
-                                              
+                                              -->
                                                 <div class="form-group">
                                                     <label>Precio</label>
                                                     <h:inputText  class="form-control" required="true" value="#{beanProducto.precio}"/>
@@ -310,6 +316,10 @@
                                                         <f:selectItem itemLabel="Cena" itemValue="cena"></f:selectItem>
                                                     </h:selectOneMenu>
                                                     
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Ingredientes</label>
+                                                    <h:inputTextarea  class="form-control" required="true" value="#{beanProducto.ingredientes}"/>
                                                 </div>
 
 

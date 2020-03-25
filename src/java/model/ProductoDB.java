@@ -57,6 +57,7 @@ public class ProductoDB {
                 pro.setExistencias(rsPA.getInt("existencias"));
                 pro.setTipo(rsPA.getString("tipo"));
                 pro.setEstado(rsPA.getInt("estado"));
+                pro.setIngredientes(rsPA.getString("ingredientes"));
                 
                 lista.add(pro);
                 
@@ -92,7 +93,7 @@ public class ProductoDB {
         try {
 
             select
-                    = "select id, descripcion, imagen, precio, existencias, tipo, estado from Producto";
+                    = "select id, descripcion, imagen, precio, existencias, tipo, ingredientes, estado from Producto";
             //se ejecuta la sentencia sql
             ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
             //se llama el array con los proyectos
@@ -106,6 +107,7 @@ public class ProductoDB {
                 pro.setPrecio(rsPA.getDouble("precio"));
                 pro.setExistencias(rsPA.getInt("existencias"));
                 pro.setTipo(rsPA.getString("tipo"));
+                pro.setIngredientes(rsPA.getString("ingredientes"));
                 pro.setEstado(rsPA.getInt("estado"));   //Esta línea puede permanecer, NO AFECTA
                 
                 lista.add(pro);
@@ -120,7 +122,8 @@ public class ProductoDB {
                         //+ "<td>" + producto.getImagen()+ "</td>"
                         + "<td>" + producto.getPrecio()+ "</td>"
                         + "<td>" + producto.getExistencias()+ "</td>"
-                        + "<td>" + producto.getTipo()+ "</td>";
+                        + "<td>" + producto.getTipo()+ "</td>"
+                        + "<td>" + producto.getIngredientes()+ "</td>";
 //                        + "<td>" + estado + "</td>";
 
                 if (producto.getEstado() == 1) {
@@ -206,7 +209,8 @@ public class ProductoDB {
               
                strSQL
                     = "INSERT INTO producto(descripcion,imagen,precio,existencias,tipo,estado) "
-                    + "VALUES ('" + pro.getDescripcion() + "','"+pro.getUploadedFile().getSubmittedFileName()+"','"+pro.getPrecio()+"','"+pro.getExistencias()+"','"+pro.getTipo()+"','1')";
+                    + "VALUES ('" + pro.getDescripcion() + "','"+pro.getUploadedFile().getSubmittedFileName()+"','"
+                       +pro.getPrecio()+"','"+pro.getExistencias()+"','"+pro.getTipo()+"','"+pro.getIngredientes()+"','1')";
                     
               PreparedStatement statement = conn.prepareStatement(strSQL);
               

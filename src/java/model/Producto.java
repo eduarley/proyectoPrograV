@@ -16,7 +16,7 @@ import org.primefaces.model.UploadedFile;
 public class Producto {
 
     private int id, estado, existencias;
-    private String descripcion, tipo;
+    private String descripcion, tipo, ingredientes;
     //private byte[] imagen;
     private double precio;
     //private Image img;
@@ -55,12 +55,13 @@ public class Producto {
 //        this.precio = precio;
 //    }
     
-    public Producto(String descripcion, Part uploadedFile, double precio, int existencias, String tipo) {
+    public Producto(String descripcion, Part uploadedFile, double precio, int existencias, String tipo, String ingredientes) {
         this.existencias = existencias;
         this.descripcion = descripcion;
         this.tipo = tipo;
         this.uploadedFile= uploadedFile;
         this.precio = precio;
+        this.ingredientes= ingredientes;
     }
 
     public int getId() {
@@ -150,6 +151,14 @@ public class Producto {
 
     public void setUploadedFile(Part uploadedFile) {
         this.uploadedFile = uploadedFile;
+    }
+
+    public String getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(String ingredientes) {
+        this.ingredientes = ingredientes;
     }
     
     
