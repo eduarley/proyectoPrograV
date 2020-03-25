@@ -255,7 +255,34 @@ public class ProductoDB {
         try {
 
             strSQL
-                    = "UPDATE USUARIO SET ESTADO=0 WHERE ID= '" + pro.getId() + "'";
+                    = "UPDATE Producto SET ESTADO=0 WHERE ID= '" + pro.getId() + "'";
+
+            //Se ejecuta la sentencia SQL
+            accesoDatos.ejecutaSQL(strSQL);
+            return true;
+
+        } catch (Exception e) {
+            //  throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+            return false;
+
+        } finally {
+
+        }
+    }
+    
+    
+    
+    
+    
+    public boolean modificarProducto(Producto producto)
+            throws SNMPExceptions, SQLException {
+        String strSQL = "";
+        Producto pro = new Producto();
+        pro = producto;
+        try {
+
+            strSQL
+                    = "UPDATE Producto SET descripcion=0 WHERE ID= '" + pro.getId() + "'";
 
             //Se ejecuta la sentencia SQL
             accesoDatos.ejecutaSQL(strSQL);

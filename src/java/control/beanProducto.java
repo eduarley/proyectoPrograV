@@ -43,7 +43,7 @@ public class beanProducto implements Serializable {
      */
     LinkedList<Producto> listaProductos = new LinkedList<Producto>();
 
-    private String id, descripcion, precio, existencias, tipo, ingredientes;
+    private String id, descripcion, precio, existencias, tipo, ingredientes, mensaje;
   
     private Part uploadedFile;
     private byte[] file;
@@ -72,21 +72,21 @@ public class beanProducto implements Serializable {
     
     
     
-    /*
+    
     public String eliminarProducto(Producto pro) throws SNMPExceptions, SQLException {
 
         ProductoDB pDB = new ProductoDB();
 
         if (pDB.eliminarProducto(pro)) {
-            mensaje = "Se ha desactivado exitosamente!";
+            mensaje = "Se ha eliminado exitosamente!";
         } else {
-            mensaje = "Se ha producido un error al desactivar!";
+            mensaje = "Se ha producido un error al eliminar!";
         }
 
         return mensaje;
 
     }
-*/
+
     public LinkedList<Producto> getListaProductos() throws SNMPExceptions, SQLException {
         ProductoDB pDB = new ProductoDB();
         return pDB.listaObjetosProductos();
@@ -158,6 +158,22 @@ public class beanProducto implements Serializable {
 
     public void setUploadedFile(Part uploadedFile) {
         this.uploadedFile = uploadedFile;
+    }
+
+    public String getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(String ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
     }
 
     
