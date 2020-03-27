@@ -1,0 +1,9 @@
+C:\Users\Usuario\Desktop\AgregarImagenC-Sharp\AgregarImagenC-Sharp\bin\Debug\AgregarImagenC-Sharp.exe.config
+C:\Users\Usuario\Desktop\AgregarImagenC-Sharp\AgregarImagenC-Sharp\bin\Debug\AgregarImagenC-Sharp.exe
+C:\Users\Usuario\Desktop\AgregarImagenC-Sharp\AgregarImagenC-Sharp\bin\Debug\AgregarImagenC-Sharp.pdb
+C:\Users\Usuario\Desktop\AgregarImagenC-Sharp\AgregarImagenC-Sharp\obj\Debug\AgregarImagenC_Sharp.Form1.resources
+C:\Users\Usuario\Desktop\AgregarImagenC-Sharp\AgregarImagenC-Sharp\obj\Debug\AgregarImagenC_Sharp.Properties.Resources.resources
+C:\Users\Usuario\Desktop\AgregarImagenC-Sharp\AgregarImagenC-Sharp\obj\Debug\AgregarImagenC-Sharp.csproj.GenerateResource.Cache
+C:\Users\Usuario\Desktop\AgregarImagenC-Sharp\AgregarImagenC-Sharp\obj\Debug\AgregarImagenC-Sharp.exe
+C:\Users\Usuario\Desktop\AgregarImagenC-Sharp\AgregarImagenC-Sharp\obj\Debug\AgregarImagenC-Sharp.pdb
+C:\Users\Usuario\Desktop\AgregarImagenC-Sharp\AgregarImagenC-Sharp\obj\Debug\AgregarImagenC-Sharp.csprojResolveAssemblyReference.cache
