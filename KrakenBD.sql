@@ -171,6 +171,48 @@ alter table EncFactura add constraint FK_EncFacturaDireccionEntrega foreign key 
 
 --PROCEDIMIENTOS ALMACENADOS
 
+--Agregar Producto con Imagen
+create procedure PA_InsertarProducto
+	@descripcion varchar(50),
+	@imagen image,
+	@precio money,
+	@existencias int,
+	@tipo varchar(50),
+	@ingredientes varchar(200),
+	@estado int
+
+AS
+BEGIN
+	INSERT INTO Producto(descripcion,imagen,precio,existencias,tipo,ingredientes,estado) VALUES (@descripcion,@imagen,@precio,@existencias,@tipo,@ingredientes,@estado)
+END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 --Inserts

@@ -52,7 +52,7 @@ public class ProductoDB {
                 //us.setClave(rsPA.getString("clave"));
                 pro.setId(rsPA.getInt("id"));
                 pro.setDescripcion(rsPA.getString("descripcion"));
-                //pro.setImagen(rsPA.getBytes("imagen"));
+                pro.setFile(rsPA.getBytes("imagen"));
                 pro.setPrecio(rsPA.getDouble("precio"));
                 pro.setExistencias(rsPA.getInt("existencias"));
                 pro.setTipo(rsPA.getString("tipo"));
