@@ -6,7 +6,22 @@
 
 <%@page import="model.Usuario"%>
 <%@page import="control.beanInicioSesion"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true" %>
+
+
+<%
+    Usuario usuario = null;
+    HttpSession sesionOK = request.getSession();
+    if (sesionOK.getAttribute("usuario") != null)
+        usuario = (Usuario) session.getAttribute("usuario");
+    else
+%>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
@@ -45,14 +60,7 @@
     </h:head>
     <h:body>
 
-        <jsp:useBean id="sesion" class="control.beanInicioSesion" scope="session"/>
-        <jsp:setProperty name="sesion" property="nombre" value="${beanInicioSesion.nombre}"/>
-        <jsp:setProperty name="sesion" property="id" value="${beanInicioSesion.nombre}"/>
-        <jsp:setProperty name="sesion" property="clave" value="${beanInicioSesion.clave}"/>
-        <jsp:setProperty name="sesion" property="direccion" value="${beanInicioSesion.direccion}"/>
-        <jsp:setProperty name="sesion" property="estado" value="${beanInicioSesion.estado}"/>
-        <jsp:setProperty name="sesion" property="rol" value="${beanInicioSesion.rol}"/>
-        <jsp:setProperty name="sesion" property="telefono" value="${beanInicioSesion.telefono}"/>
+        
 
         <!--jsp:setProperty name="" property="" value=""/-->
         <div class="py-1 bg-black top">
@@ -65,7 +73,12 @@
 
                                 <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
                                         class="fa fa-user"></span></div>
-                                <span class="text"> ${sesion.nombre}</span>
+                                        <span class="text"> <%
+                                            if (sesionOK.getAttribute("usuario") != null)
+                                                out.print(usuario.getNombre()); 
+                                            else
+                                                out.print("No se ha iniciado sesión"); 
+                                        %></span>
                             </div>
                             <div class="col-md pr-4 d-flex topper align-items-center">
                                 <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
@@ -97,7 +110,7 @@
                         <li class="nav-item active"><a href="faces/menu.jsp" class="nav-link">Menu</a></li>
 
 
-                        <% if (sesion.getNombre().equalsIgnoreCase("")) { %>
+                        <% if (usuario==null) { %>
                         <li class="nav-item cta"><a href="faces/inicioSesion.xhtml" class="nav-link">Iniciar Sesión</a></li>
                             <% } else { %>
 
@@ -111,11 +124,16 @@
                             <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
                                 
                                 <a class="dropdown-item" href="#"><img src="images/usuario.png" height="80" width="80" /></a>
-                                <a class="dropdown-item" href="#">${sesion.nombre}</a>
+                                <a class="dropdown-item" href="#"><% out.print(usuario.getNombre()); %></a>
                                 
                                 <div class="dropdown-divider" href="#"></div>
                                 
-                                <a href="inicioSesion.xhtml">Salir</a>
+                                <a href="inicioSesion.xhtml">
+                                    <%
+                                        out.print("Salir");
+                                        sesionOK.invalidate();
+                                    %>
+                                </a>
                                 
                             </div>
                         </li>
@@ -132,6 +150,11 @@
         </nav>
         <!-- fin nav -->
 
+        
+        
+        
+        
+        
         <section class="hero-wrap hero-wrap-2" style="background-image: url('images/fondo-login.jpg');"
                  data-stellar-background-ratio="0.5">
             <div class="overlay"></div>
@@ -156,64 +179,15 @@
                         <h2 class="mb-4">Menú</h2>
                     </div>
                 </div>
-
+                
 
                 <div class="row">
                     <div class="col-md-6 col-lg-4 menu-wrap">
                         <div class="heading-menu text-center ftco-animate">
                             <h3>Desayunos</h3>
+                            ${beanProducto.listaMenuDesayunos()}
                         </div>
-                        <a href="producto.xhtml">
-                            <div class="menus d-flex ftco-animate">
-                                <div class="menu-img img" style="background-image: url(images/gallo-pinto1.jpg);"></div>
-                                <div class="text">
-                                    <div class="d-flex">
-                                        <div class="one-half">
-                                            <h3>Gallo Pinto</h3>
-                                        </div>
-                                        <div class="one-forth">
-                                            <span class="price">₡1500</span>
-                                        </div>
-                                    </div>
-                                    <p><span>Arroz</span>, <span>Frijoles</span>, <span>Salsa Lizano</span></p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="producto.xhtml">
-                            <div class="menus d-flex ftco-animate">
-                                <div class="menu-img img" style="background-image: url(images/gallo-pinto1.jpg);"></div>
-                                <div class="text">
-                                    <div class="d-flex">
-                                        <div class="one-half">
-                                            <h3>Gallo Pinto</h3>
-                                        </div>
-                                        <div class="one-forth">
-                                            <span class="price">₡1500</span>
-                                        </div>
-                                    </div>
-                                    <p><span>Arroz</span>, <span>Frijoles</span>, <span>Salsa Lizano</span></p>
-                                </div>
-                            </div>
-                        </a>
-
-
-                        <a href="producto.xhtml">
-                            <div class="menus d-flex ftco-animate">
-                                <div class="menu-img img" style="background-image: url(images/gallo-pinto1.jpg);"></div>
-                                <div class="text">
-                                    <div class="d-flex">
-                                        <div class="one-half">
-                                            <h3>Gallo Pinto</h3>
-                                        </div>
-                                        <div class="one-forth">
-                                            <span class="price">₡1500</span>
-                                        </div>
-                                    </div>
-                                    <p><span>Arroz</span>, <span>Frijoles</span>, <span>Salsa Lizano</span></p>
-                                </div>
-                            </div>
-                        </a>
+                        
                     </div>
 
                     <!--Fin desayunos-->
@@ -223,57 +197,7 @@
                         <div class="heading-menu text-center ftco-animate">
                             <h3>Almuerzos</h3>
                         </div>
-                        <a href="producto.xhtml">
-                            <div class="menus d-flex ftco-animate">
-                                <div class="menu-img img" style="background-image: url(images/gallo-pinto1.jpg);"></div>
-                                <div class="text">
-                                    <div class="d-flex">
-                                        <div class="one-half">
-                                            <h3>Gallo Pinto</h3>
-                                        </div>
-                                        <div class="one-forth">
-                                            <span class="price">₡1500</span>
-                                        </div>
-                                    </div>
-                                    <p><span>Arroz</span>, <span>Frijoles</span>, <span>Salsa Lizano</span></p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="producto.xhtml">
-                            <div class="menus d-flex ftco-animate">
-                                <div class="menu-img img" style="background-image: url(images/gallo-pinto1.jpg);"></div>
-                                <div class="text">
-                                    <div class="d-flex">
-                                        <div class="one-half">
-                                            <h3>Gallo Pinto</h3>
-                                        </div>
-                                        <div class="one-forth">
-                                            <span class="price">₡1500</span>
-                                        </div>
-                                    </div>
-                                    <p><span>Arroz</span>, <span>Frijoles</span>, <span>Salsa Lizano</span></p>
-                                </div>
-                            </div>
-                        </a>
-
-
-                        <a href="producto.xhtml">
-                            <div class="menus d-flex ftco-animate">
-                                <div class="menu-img img" style="background-image: url(images/gallo-pinto1.jpg);"></div>
-                                <div class="text">
-                                    <div class="d-flex">
-                                        <div class="one-half">
-                                            <h3>Gallo Pinto</h3>
-                                        </div>
-                                        <div class="one-forth">
-                                            <span class="price">₡1500</span>
-                                        </div>
-                                    </div>
-                                    <p><span>Arroz</span>, <span>Frijoles</span>, <span>Salsa Lizano</span></p>
-                                </div>
-                            </div>
-                        </a>
+                        ${beanProducto.listaMenuAlmuerzos()}
                     </div>
 
                     <!--Fin almuerzos-->
@@ -283,56 +207,7 @@
                         <div class="heading-menu text-center ftco-animate">
                             <h3>Cenas</h3>
                         </div>
-                        <a href="producto.xhtml">
-                            <div class="menus d-flex ftco-animate">
-                                <div class="menu-img img" style="background-image: url(images/gallo-pinto1.jpg);"></div>
-                                <div class="text">
-                                    <div class="d-flex">
-                                        <div class="one-half">
-                                            <h3>Gallo Pinto</h3>
-                                        </div>
-                                        <div class="one-forth">
-                                            <span class="price">₡1500</span>
-                                        </div>
-                                    </div>
-                                    <p><span>Arroz</span>, <span>Frijoles</span>, <span>Salsa Lizano</span></p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="producto.xhtml">
-                            <div class="menus d-flex ftco-animate">
-                                <div class="menu-img img" style="background-image: url(images/gallo-pinto1.jpg);"></div>
-                                <div class="text">
-                                    <div class="d-flex">
-                                        <div class="one-half">
-                                            <h3>Gallo Pinto</h3>
-                                        </div>
-                                        <div class="one-forth">
-                                            <span class="price">₡1500</span>
-                                        </div>
-                                    </div>
-                                    <p><span>Arroz</span>, <span>Frijoles</span>, <span>Salsa Lizano</span></p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="producto.xhtml">
-                            <div class="menus d-flex ftco-animate">
-                                <div class="menu-img img" style="background-image: url(images/gallo-pinto1.jpg);"></div>
-                                <div class="text">
-                                    <div class="d-flex">
-                                        <div class="one-half">
-                                            <h3>Gallo Pinto</h3>
-                                        </div>
-                                        <div class="one-forth">
-                                            <span class="price">₡1500</span>
-                                        </div>
-                                    </div>
-                                    <p><span>Arroz</span>, <span>Frijoles</span>, <span>Salsa Lizano</span></p>
-                                </div>
-                            </div>
-                        </a>
+                        ${beanProducto.listaMenuCena()}
                     </div>
 
                     <!--Fin cenas-->

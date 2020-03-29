@@ -44,35 +44,31 @@ public class beanProducto implements Serializable {
     LinkedList<Producto> listaProductos = new LinkedList<Producto>();
 
     private String id, descripcion, precio, existencias, tipo, ingredientes, mensaje;
-  
+
     private Part uploadedFile;
     private byte[] file;
-
-
+    
+    
     public beanProducto() {
     }
 
     public void insertarProducto() throws SNMPExceptions, SQLException {
-        
+
         //this.file=  uploadedFile.getSubmittedFileName();
         Producto producto = new Producto(descripcion, uploadedFile, Double.valueOf(this.precio), Integer.parseInt(this.existencias), tipo, ingredientes);
         ProductoDB pDB = new ProductoDB();
 
-            if (pDB.InsertarProducto(producto)) {
-                //FacesMessage message = new FacesMessage("Éxito", file.getFileName() + " fue guardado con éxito");
-                FacesMessage message = new FacesMessage("Éxito", "Guardado con éxito");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-            } else {
-                FacesMessage message = new FacesMessage("Error al guardar la imagen.!");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-            }
-     
+        if (pDB.InsertarProducto(producto)) {
+            //FacesMessage message = new FacesMessage("Éxito", file.getFileName() + " fue guardado con éxito");
+            FacesMessage message = new FacesMessage("Éxito", "Guardado con éxito");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else {
+            FacesMessage message = new FacesMessage("Error al guardar la imagen.!");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+
     }
 
-    
-    
-    
-    
     public String eliminarProducto(Producto pro) throws SNMPExceptions, SQLException {
 
         ProductoDB pDB = new ProductoDB();
@@ -91,15 +87,22 @@ public class beanProducto implements Serializable {
         ProductoDB pDB = new ProductoDB();
         return pDB.listaObjetosProductos();
     }
-    
-    
-    
-    
-    
-    
-    
 
-  
+    public String listaMenuDesayunos() throws SNMPExceptions, SQLException {
+        ProductoDB pDB = new ProductoDB();
+        return pDB.listaMenuDesayuno();
+    }
+
+    public String listaMenuAlmuerzos() throws SNMPExceptions, SQLException {
+        ProductoDB pDB = new ProductoDB();
+        return pDB.listaMenuAlmuerzo();
+    }
+
+    public String listaMenuCena() throws SNMPExceptions, SQLException {
+        ProductoDB pDB = new ProductoDB();
+        return pDB.listaMenuCena();
+    }
+
     public void setListaProductos(LinkedList<Producto> listaProductos) {
         this.listaProductos = listaProductos;
     }
@@ -176,5 +179,4 @@ public class beanProducto implements Serializable {
         this.mensaje = mensaje;
     }
 
-    
 }

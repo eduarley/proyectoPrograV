@@ -11,6 +11,7 @@ import java.io.Serializable;
 import model.InicioSesion;
 import DAO.SNMPExceptions;
 import java.sql.SQLException;
+import javax.faces.context.FacesContext;
 
 
 /**
@@ -149,11 +150,15 @@ public class beanInicioSesion implements Serializable {
                 
                 if (inicio.validarDatos(cedula, clave).getRol().equalsIgnoreCase("admin")) {
                     setMensaje("");
-                    return "faces/principal.jsp";
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",inicio.validarDatos(cedula, clave));
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("principal.jsp");
+                    //return "faces/principal.jsp";
                 } else {
-                    //return "faces/menu.xhtml";
+                    
                     setMensaje("");
-                    return "faces/menu.jsp";
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",inicio.validarDatos(cedula, clave));
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("menu.jsp");
+                    //return "faces/menu.jsp";
                 }
 
             } else {

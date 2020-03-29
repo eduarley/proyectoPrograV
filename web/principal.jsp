@@ -4,7 +4,24 @@
     Author     : Usuario
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.Usuario"%>
+<%@page session="true" contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    Usuario usuario = null;
+    HttpSession sesionOK = request.getSession();
+    if (sesionOK.getAttribute("usuario") == null) {
+%>
+<jsp:forward page="paginaError.xhtml">
+    <jsp:param name="error" value="es necesario identificarse"/>
+</jsp:forward>
+<%
+    } else {
+        usuario = (Usuario) session.getAttribute("usuario");
+    }
+%>
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
@@ -35,25 +52,17 @@
         <link rel="stylesheet" href="css/flaticon.css"/>
         <link rel="stylesheet" href="css/icomoon.css"/>
         <link rel="stylesheet" href="css/style.css"/>
-        
-        
+
+
         <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
     </h:head>
     <h:body>
-        
-        
-        
-        <jsp:useBean id="sesion" class="control.beanInicioSesion" scope="session"/>
-        <jsp:setProperty name="sesion" property="nombre" value="${beanInicioSesion.nombre}"/>
-        <jsp:setProperty name="sesion" property="id" value="${beanInicioSesion.nombre}"/>
-        <jsp:setProperty name="sesion" property="clave" value="${beanInicioSesion.clave}"/>
-        <jsp:setProperty name="sesion" property="direccion" value="${beanInicioSesion.direccion}"/>
-        <jsp:setProperty name="sesion" property="estado" value="${beanInicioSesion.estado}"/>
-        <jsp:setProperty name="sesion" property="rol" value="${beanInicioSesion.rol}"/>
-        <jsp:setProperty name="sesion" property="telefono" value="${beanInicioSesion.telefono}"/>
-        
-        
-        
+
+
+
+
+
+
         <div class="py-1 bg-black top">
             <div class="container">
                 <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
@@ -62,7 +71,7 @@
                             <div class="col-md pr-4 d-flex topper align-items-center">
                                 <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
                                         class="fa fa-user"></span></div>
-                                        <span class="text"> ${beanInicioSesion.nombre} </span>
+                                <span class="text"> <% out.print(usuario.getNombre()); %> </span>
                             </div>
                             <div class="col-md pr-4 d-flex topper align-items-center">
                                 <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
@@ -108,10 +117,10 @@
                             </div>
                         </li>
 
-                        
-                       
-                        
-                        
+
+
+
+
                         <li class="nav-item"><a href="#" class="nav-link">Facturación</a></li>
 
                         <li class="dropdown nav-item">
@@ -125,31 +134,38 @@
 
                             </div>
                         </li>
-                        
-                        
-                        
-                        
-                        
-                         <% if (sesion.getNombre().equalsIgnoreCase("")) { %>
+
+
+
+
+
+                        <% if (usuario == null) { %>
                         <li class="nav-item cta"><a href="faces/inicioSesion.xhtml" class="nav-link">Iniciar Sesión</a></li>
                             <% } else { %>
 
 
-                        
+
                         <li class="dropdown nav-item">
                             <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
                                  aria-haspopup="true" aria-expanded="false">
                                 Cerrar Sesión
                             </div>
                             <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
-                                
+
                                 <a class="dropdown-item" href="#"><img src="images/usuario.png" height="80" width="80" /></a>
-                                <a class="dropdown-item" href="#">${sesion.nombre}</a>
-                                
+                                <a class="dropdown-item" href="#"><% out.print(usuario.getNombre()); %></a>
+
                                 <div class="dropdown-divider" href="#"></div>
-                                
-                                <a href="inicioSesion.xhtml">Salir</a>
-                                
+
+                                <a href="inicioSesion.xhtml">
+                                    <%
+                                        out.print("Salir");
+                                        sesionOK.invalidate();
+                                    %>
+                                </a>
+
+
+
                             </div>
                         </li>
 

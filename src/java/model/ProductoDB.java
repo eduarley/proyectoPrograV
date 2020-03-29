@@ -7,12 +7,16 @@ package model;
 
 import DAO.AccesoDatos;
 import DAO.SNMPExceptions;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -296,5 +300,224 @@ public class ProductoDB {
 
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ////////////////////////////////////// PARTE DEL MENU////////////////////////////////////
+    
+    
+    
+    
+    public String listaMenuDesayuno() throws SNMPExceptions, SQLException {
+
+        String estructura = "";
+
+       
+        String select = "";
+        ArrayList<Producto> lista = new ArrayList<Producto>();
+        try {
+
+            select
+                    = "select descripcion, imagen, precio, ingredientes from producto where estado=1 and tipo='desayuno'";
+            //se ejecuta la sentencia sql
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+            //se llama el array con los proyectos
+            while (rsPA.next()) {
+
+                Producto prod= new Producto();
+
+                
+                prod.setDescripcion(rsPA.getString("descripcion"));
+                
+                prod.setPrecio(rsPA.getDouble("precio"));
+                prod.setIngredientes(rsPA.getString("ingredientes"));
+                
+                
+                Blob blob=  (rsPA.getBlob("imagen"));
+                InputStream in = blob.getBinaryStream();  
+                BufferedImage image = ImageIO.read(in);
+                prod.setImg(image);
+                
+                
+                lista.add(prod);
+            }
+            rsPA.close();//se cierra el ResultSeat.
+
+            for (Producto producto : lista) {
+                estructura+="<a href=\"producto.xhtml\">"
+                
+                            +"<div class=\"menus d-flex ftco-animate\">"
+                               +"<div class=\"menu-img img\" style=\"background-image: url();\"></div>"
+                              
+                               +" <div class=\"text\">"
+                                +"<div class=\"d-flex\">"    
+                                       +" <div class=\"one-half\">"
+                                        +"<h3>"+producto.getDescripcion()+"</h3>"
+                                        +"</div>"
+                                        +"<div class=\"one-forth\">"
+                                            +"<span class=\"price\">₡"+producto.getPrecio()+"</span>"
+                                        +"</div>"
+                                    +"</div>"
+                                    +"<p><span>"+producto.getIngredientes()+"</span></p>"
+                                +"</div>"
+                            +"</div>"
+                      +"</a>";
+            }
+
+            return estructura;
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+        } finally {
+
+        }
+    }
+    
+    
+    
+    
+    
+    public String listaMenuAlmuerzo() throws SNMPExceptions, SQLException {
+
+        String estructura = "";
+
+       
+        String select = "";
+        ArrayList<Producto> lista = new ArrayList<Producto>();
+        try {
+
+            select
+                    = "select descripcion, imagen, precio, ingredientes from producto where estado=1 and tipo='almuerzo'";
+            //se ejecuta la sentencia sql
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+            //se llama el array con los proyectos
+            while (rsPA.next()) {
+
+                Producto prod= new Producto();
+
+                
+                prod.setDescripcion(rsPA.getString("descripcion"));
+                //prod.setFile(rsPA.getBytes("imagen"));
+                prod.setPrecio(rsPA.getDouble("precio"));
+                prod.setIngredientes(rsPA.getString("ingredientes"));
+
+                lista.add(prod);
+            }
+            rsPA.close();//se cierra el ResultSeat.
+
+            for (Producto producto : lista) {
+                estructura+="<a href=\"producto.xhtml\">"
+                
+                            +"<div class=\"menus d-flex ftco-animate\">"
+                               +"<div class=\"menu-img img\" style=\"background-image: url();\"></div>"
+                              
+                               +" <div class=\"text\">"
+                                +"<div class=\"d-flex\">"    
+                                       +" <div class=\"one-half\">"
+                                        +"<h3>"+producto.getDescripcion()+"</h3>"
+                                        +"</div>"
+                                        +"<div class=\"one-forth\">"
+                                            +"<span class=\"price\">₡"+producto.getPrecio()+"</span>"
+                                        +"</div>"
+                                    +"</div>"
+                                    +"<p><span>"+producto.getIngredientes()+"</span></p>"
+                                +"</div>"
+                            +"</div>"
+                      +"</a>";
+            }
+
+            return estructura;
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+        } finally {
+
+        }
+    }
+    
+    
+    
+    
+    
+    
+       public String listaMenuCena() throws SNMPExceptions, SQLException {
+
+        String estructura = "";
+
+       
+        String select = "";
+        ArrayList<Producto> lista = new ArrayList<Producto>();
+        try {
+
+            select
+                    = "select descripcion, imagen, precio, ingredientes from producto where estado=1 and tipo='cena'";
+            //se ejecuta la sentencia sql
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+            //se llama el array con los proyectos
+            while (rsPA.next()) {
+
+                Producto prod= new Producto();
+
+                
+                prod.setDescripcion(rsPA.getString("descripcion"));
+                //prod.setFile(rsPA.getBytes("imagen"));
+                prod.setPrecio(rsPA.getDouble("precio"));
+                prod.setIngredientes(rsPA.getString("ingredientes"));
+
+                lista.add(prod);
+            }
+            rsPA.close();//se cierra el ResultSeat.
+
+            for (Producto producto : lista) {
+                estructura+="<a href=\"producto.xhtml\">"
+                
+                            +"<div class=\"menus d-flex ftco-animate\">"
+                               +"<div class=\"menu-img img\" style=\"background-image: url();\"></div>"
+                              
+                               +" <div class=\"text\">"
+                                +"<div class=\"d-flex\">"    
+                                       +" <div class=\"one-half\">"
+                                        +"<h3>"+producto.getDescripcion()+"</h3>"
+                                        +"</div>"
+                                        +"<div class=\"one-forth\">"
+                                            +"<span class=\"price\">₡"+producto.getPrecio()+"</span>"
+                                        +"</div>"
+                                    +"</div>"
+                                    +"<p><span>"+producto.getIngredientes()+"</span></p>"
+                                +"</div>"
+                            +"</div>"
+                      +"</a>";
+            }
+
+            return estructura;
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+        } finally {
+
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     
 }

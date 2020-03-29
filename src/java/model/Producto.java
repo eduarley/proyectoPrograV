@@ -6,6 +6,9 @@
 package model;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.sql.Blob;
+import javax.imageio.ImageIO;
 import javax.servlet.http.Part;
 import org.primefaces.model.UploadedFile;
 
@@ -17,43 +20,20 @@ public class Producto {
 
     private int id, estado, existencias;
     private String descripcion, tipo, ingredientes;
-    //private byte[] imagen;
+   
     private double precio;
-    //private Image img;
-//    private UploadedFile file;
+
     private byte[] file;
     private Part uploadedFile;
 
-    /*
-    public Producto(int id, String descripcion, byte[] imagen, double precio, int existencias, String tipo, int estado) {
-        this.id = id;
-        this.estado = estado;
-        this.existencias = existencias;
-        this.descripcion = descripcion;
-        this.tipo = tipo;
-        this.imagen = imagen;
-        this.precio = precio;
-    }
-*/
+    private BufferedImage img;
+ 
+    private ImageIO image;
+    
     public Producto() {
 
     }
-/*
-    public Producto(String descripcion, byte[] imagen, double precio, int existencias, String tipo) {
-        this.existencias = existencias;
-        this.descripcion = descripcion;
-        this.tipo = tipo;
-        this.imagen = imagen;
-        this.precio = precio;
-    }*/
 
-//    public Producto(String descripcion, UploadedFile file, double precio, int existencias, String tipo) {
-//        this.existencias = existencias;
-//        this.descripcion = descripcion;
-//        this.tipo = tipo;
-//        this.file= file;
-//        this.precio = precio;
-//    }
     
     public Producto(String descripcion, Part uploadedFile, double precio, int existencias, String tipo, String ingredientes) {
         this.existencias = existencias;
@@ -103,15 +83,7 @@ public class Producto {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-/*
-    public byte[] getImagen() {
-        return imagen;
-    }
 
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
-    }
-*/
     public double getPrecio() {
         return precio;
     }
@@ -119,23 +91,6 @@ public class Producto {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-/*
-    public Image getImg() {
-        return img;
-    }
-
-    public void setImg(Image img) {
-        this.img = img;
-    }
-    
-    */
-//    public UploadedFile getFile() {
-//        return file;
-//    }
-//
-//    public void setFile(UploadedFile file) {
-//        this.file = file;
-//    }
 
     public byte[] getFile() {
         return file;
@@ -160,6 +115,25 @@ public class Producto {
     public void setIngredientes(String ingredientes) {
         this.ingredientes = ingredientes;
     }
+
+    public BufferedImage getImg() {
+        return img;
+    }
+
+    public void setImg(BufferedImage img) {
+        this.img = img;
+    }
+
+    public ImageIO getImage() {
+        return image;
+    }
+
+    public void setImage(ImageIO image) {
+        this.image = image;
+    }
+
+   
+   
     
     
 }
