@@ -3,6 +3,7 @@ create database KrakenBD
 
 use KrakenBD
 
+
 --Tablas
 
 create table Usuario
@@ -34,7 +35,8 @@ create table Producto
 (
 	id int not null identity(1,1),
 	descripcion varchar(50),
-	imagen image,
+	--imagen image,
+	urlImagen varchar(500),
 	precio  money,
 	existencias int,
 	tipo varchar(50),
@@ -158,7 +160,7 @@ alter table EncFactura add constraint FK_PedidoEncFactura foreign key (idPedido)
 ------------------------------------------------
 
 
-
+Insert into Usuario values (1, 'Eduardo Arley', '1234', 'Naranjo', '64488685', 'admin', 'activo')
 Insert into Usuario values (123456, 'Bananito Pérez', 'Sa', 'Chilamate de Poás', '86758675', 'admin', 'activo')
 Insert into Usuario values (1234, 'Eldes Pelote', 'Sa', 'Sarchí', '60973263', 'cliente', 'inactivo')
 /*
@@ -171,51 +173,14 @@ alter table EncFactura add constraint FK_EncFacturaDireccionEntrega foreign key 
 
 --PROCEDIMIENTOS ALMACENADOS
 
---Agregar Producto con Imagen
-create procedure PA_InsertarProducto
-	@descripcion varchar(50),
-	@imagen image,
-	@precio money,
-	@existencias int,
-	@tipo varchar(50),
-	@ingredientes varchar(200),
-	@estado int
-
-AS
-BEGIN
-	INSERT INTO Producto(descripcion,imagen,precio,existencias,tipo,ingredientes,estado) VALUES (@descripcion,@imagen,@precio,@existencias,@tipo,@ingredientes,@estado)
-END
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 --Inserts
+
+
+
+
+
 
 --Insertar Cliente
 create procedure PA_InsertarCliente
@@ -230,16 +195,21 @@ BEGIN
 	INSERT INTO Cliente(id, nombre, direccion, telefono) VALUES (@id, @nombre, @direccion, @telefono, 1)
 END
 
+--select * from Producto
+
 --Insertar Producto
 create procedure PA_InsertarProducto
-	@foto image,
-	@precio  decimal,
-	@cantidadDisponible int,
+	@descripcion varchar(50),
+	@imagen image,
+	@precio money,
+	@existencias int,
+	@tipo varchar(50),
+	@ingredientes varchar(200),
 	@estado int
 
 AS
 BEGIN
-	INSERT INTO Producto(foto, precio, cantidadDisponible, estado) VALUES (@foto, @precio, @cantidadDisponible, 1)
+	INSERT INTO Producto(descripcion,imagen,precio,existencias,tipo,ingredientes,estado) VALUES (@descripcion,@imagen,@precio,@existencias,@tipo,@ingredientes,@estado)
 END
 
 --Insertar ProductoPedido

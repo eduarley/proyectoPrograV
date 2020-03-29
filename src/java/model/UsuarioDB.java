@@ -74,15 +74,15 @@ public class UsuarioDB {
         }
 
     }
-
+/*
     public String listaClientes() throws SNMPExceptions, SQLException {
 
         String filas = "";
 
-        /*
-        filas="<td>Hola</td>";
+        
+        //filas="<td>Hola</td>";
 
-        return filas;*/
+        //return filas;
         String select = "";
         ArrayList<Usuario> lista = new ArrayList<Usuario>();
         try {
@@ -143,7 +143,7 @@ public class UsuarioDB {
 
         }
     }
-
+*/
     public boolean InsertarUsuario(Usuario usuario)
             throws SNMPExceptions, SQLException {
         String strSQL = "";

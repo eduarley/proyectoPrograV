@@ -11,7 +11,10 @@ import java.io.Serializable;
 import model.InicioSesion;
 import DAO.SNMPExceptions;
 import java.sql.SQLException;
+import java.util.Map;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import model.Usuario;
 
 
 /**
@@ -37,13 +40,40 @@ public class beanInicioSesion implements Serializable {
     
 
     
-    //private Usuario user;
+    private Usuario usuario;
             
     public beanInicioSesion() {
 
     }
 
 
+    /*
+    public void consultarSesion(){
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        
+        final ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+	final Map session = context.getSessionMap();
+	final Usuario user = (Usuario) session.get("usuario");
+
+	if (user != null) {
+		try {
+			this.usuario=(Usuario)user;
+			
+		} catch (ClassCastException e) {
+			
+			
+		}
+	}else{
+		context.invalidateSession();
+		
+	}
+	
+	
+    }*/
+    
+    
+    
+    
     public String getId() {
         return id;
     }
@@ -107,6 +137,14 @@ public class beanInicioSesion implements Serializable {
 
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
+    }
+
+    public Usuario getUser() {
+        return usuario;
+    }
+
+    public void setUser(Usuario user) {
+        this.usuario = user;
     }
     
     

@@ -43,10 +43,9 @@ public class beanProducto implements Serializable {
      */
     LinkedList<Producto> listaProductos = new LinkedList<Producto>();
 
-    private String id, descripcion, precio, existencias, tipo, ingredientes, mensaje;
+    private String id, descripcion, precio, existencias, tipo, ingredientes, mensaje,url;
 
-    private Part uploadedFile;
-    private byte[] file;
+   
     
     
     public beanProducto() {
@@ -54,12 +53,11 @@ public class beanProducto implements Serializable {
 
     public void insertarProducto() throws SNMPExceptions, SQLException {
 
-        //this.file=  uploadedFile.getSubmittedFileName();
-        Producto producto = new Producto(descripcion, uploadedFile, Double.valueOf(this.precio), Integer.parseInt(this.existencias), tipo, ingredientes);
+        Producto producto = new Producto(Integer.parseInt(this.existencias), descripcion, tipo, ingredientes, Double.valueOf(this.precio), this.url);
         ProductoDB pDB = new ProductoDB();
 
         if (pDB.InsertarProducto(producto)) {
-            //FacesMessage message = new FacesMessage("Éxito", file.getFileName() + " fue guardado con éxito");
+            
             FacesMessage message = new FacesMessage("Éxito", "Guardado con éxito");
             FacesContext.getCurrentInstance().addMessage(null, message);
         } else {
@@ -90,17 +88,36 @@ public class beanProducto implements Serializable {
 
     public String listaMenuDesayunos() throws SNMPExceptions, SQLException {
         ProductoDB pDB = new ProductoDB();
-        return pDB.listaMenuDesayuno();
+        String menu="";
+        if(pDB.listaMenuDesayuno().equalsIgnoreCase("")){
+            menu+="<h3 class=\"text-center\">No hay desayunos registrados</h3>";
+        }else{
+            menu+=pDB.listaMenuDesayuno();
+        }
+        return menu;
     }
 
     public String listaMenuAlmuerzos() throws SNMPExceptions, SQLException {
         ProductoDB pDB = new ProductoDB();
-        return pDB.listaMenuAlmuerzo();
+        String menu="";
+        if(pDB.listaMenuAlmuerzo().equalsIgnoreCase("")){
+            menu+="<h3 class=\"text-center\">No hay almuerzos registrados</h3>";
+        }else{
+            menu+=pDB.listaMenuAlmuerzo();
+        }
+        return menu;
+        //return pDB.listaMenuAlmuerzo();
     }
 
     public String listaMenuCena() throws SNMPExceptions, SQLException {
         ProductoDB pDB = new ProductoDB();
-        return pDB.listaMenuCena();
+        String menu="";
+        if(pDB.listaMenuCena().equalsIgnoreCase("")){
+            menu+="<h3 class=\"text-center\">No hay cenas registrados</h3>";
+        }else{
+            menu+=pDB.listaMenuCena();
+        }
+        return menu;
     }
 
     public void setListaProductos(LinkedList<Producto> listaProductos) {
@@ -147,21 +164,6 @@ public class beanProducto implements Serializable {
         this.tipo = tipo;
     }
 
-    public byte[] getFile() {
-        return file;
-    }
-
-    public void setFile(byte[] file) {
-        this.file = file;
-    }
-
-    public Part getUploadedFile() {
-        return uploadedFile;
-    }
-
-    public void setUploadedFile(Part uploadedFile) {
-        this.uploadedFile = uploadedFile;
-    }
 
     public String getIngredientes() {
         return ingredientes;
@@ -177,6 +179,14 @@ public class beanProducto implements Serializable {
 
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 }

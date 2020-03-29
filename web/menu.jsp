@@ -154,7 +154,6 @@
         
         
         
-        
         <section class="hero-wrap hero-wrap-2" style="background-image: url('images/fondo-login.jpg');"
                  data-stellar-background-ratio="0.5">
             <div class="overlay"></div>
@@ -185,9 +184,9 @@
                     <div class="col-md-6 col-lg-4 menu-wrap">
                         <div class="heading-menu text-center ftco-animate">
                             <h3>Desayunos</h3>
-                            ${beanProducto.listaMenuDesayunos()}
+                            
                         </div>
-                        
+                        ${beanProducto.listaMenuDesayunos()}
                     </div>
 
                     <!--Fin desayunos-->

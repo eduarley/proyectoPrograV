@@ -23,27 +23,25 @@ public class Producto {
    
     private double precio;
 
-    private byte[] file;
-    private Part uploadedFile;
-
-    private BufferedImage img;
- 
-    private ImageIO image;
+    private String url;
     
     public Producto() {
 
     }
 
-    
-    public Producto(String descripcion, Part uploadedFile, double precio, int existencias, String tipo, String ingredientes) {
+    public Producto(int existencias, String descripcion, String tipo, String ingredientes, double precio, String url) {
         this.existencias = existencias;
         this.descripcion = descripcion;
         this.tipo = tipo;
-        this.uploadedFile= uploadedFile;
+        this.ingredientes = ingredientes;
         this.precio = precio;
-        this.ingredientes= ingredientes;
+        this.url = url;
     }
 
+    
+
+    
+    
     public int getId() {
         return id;
     }
@@ -92,21 +90,7 @@ public class Producto {
         this.precio = precio;
     }
 
-    public byte[] getFile() {
-        return file;
-    }
-
-    public void setFile(byte[] file) {
-        this.file = file;
-    }
-
-    public Part getUploadedFile() {
-        return uploadedFile;
-    }
-
-    public void setUploadedFile(Part uploadedFile) {
-        this.uploadedFile = uploadedFile;
-    }
+ 
 
     public String getIngredientes() {
         return ingredientes;
@@ -116,23 +100,15 @@ public class Producto {
         this.ingredientes = ingredientes;
     }
 
-    public BufferedImage getImg() {
-        return img;
+    public String getUrl() {
+        return url;
     }
 
-    public void setImg(BufferedImage img) {
-        this.img = img;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public ImageIO getImage() {
-        return image;
-    }
-
-    public void setImage(ImageIO image) {
-        this.image = image;
-    }
-
-   
+    
    
     
     
