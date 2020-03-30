@@ -37,6 +37,16 @@ public class Producto {
         this.precio = precio;
         this.url = url;
     }
+    
+    public Producto(int id, int existencias, String descripcion, String tipo, String ingredientes, double precio, String url) {
+        this.id= id;
+        this.existencias = existencias;
+        this.descripcion = descripcion;
+        this.tipo = tipo;
+        this.ingredientes = ingredientes;
+        this.precio = precio;
+        this.url = url;
+    }
 
     
 

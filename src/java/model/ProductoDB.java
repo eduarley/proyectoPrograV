@@ -63,7 +63,9 @@ public class ProductoDB {
                 pro.setEstado(rsPA.getInt("estado"));
                 pro.setIngredientes(rsPA.getString("ingredientes"));
                 
-                lista.add(pro);
+                if(pro.getEstado()==1){
+                    lista.add(pro);
+                }
                 
                 
               }
@@ -128,6 +130,35 @@ public class ProductoDB {
 
             strSQL
                     = "UPDATE Producto SET ESTADO=0 WHERE ID= '" + pro.getId() + "'";
+
+            //Se ejecuta la sentencia SQL
+            accesoDatos.ejecutaSQL(strSQL);
+            return true;
+
+        } catch (Exception e) {
+            //  throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+            return false;
+
+        } finally {
+
+        }
+    }
+    
+    
+    public boolean modificarProducto(Producto producto)
+            throws SNMPExceptions, SQLException {
+        String strSQL = "";
+        Producto pro = new Producto();
+        pro = producto;
+        try {
+
+            strSQL
+                    = "UPDATE Producto SET descripcion='" + pro.getDescripcion() + "' WHERE ID= '" + pro.getId() + "';'"
+                    + "UPDATE Producto SET urlImagen='" + pro.getUrl()+ "' WHERE ID= '" + pro.getId() + "';'"
+                    + "UPDATE Producto SET precio='" + pro.getPrecio()+ "' WHERE ID= '" + pro.getId() + "';'"
+                    + "UPDATE Producto SET existencias='" + pro.getExistencias()+ "' WHERE ID= '" + pro.getId() + "';'"
+                    + "UPDATE Producto SET tipo='" + pro.getTipo()+ "' WHERE ID= '" + pro.getId() + "';'"
+                    + "UPDATE Producto SET ingredientes='" + pro.getIngredientes()+ "' WHERE ID= '" + pro.getId() + "';'";
 
             //Se ejecuta la sentencia SQL
             accesoDatos.ejecutaSQL(strSQL);

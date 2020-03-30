@@ -80,6 +80,45 @@ public class beanProducto implements Serializable {
         return mensaje;
 
     }
+    
+    public void modificarProducto() throws SNMPExceptions, SQLException {
+
+        Producto pro= new Producto(Integer.parseInt(id) ,Integer.parseInt(existencias), descripcion, tipo, ingredientes, Double.valueOf(precio), url);
+        ProductoDB pDB = new ProductoDB();
+
+        if (pDB.modificarProducto(pro)) {
+            
+            FacesMessage message = new FacesMessage("Éxito", "Modificado con éxito");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else {
+            FacesMessage message = new FacesMessage("Error al modificar el producto!");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+    
+    
+    
+    public void cargarModificar(Producto pro){
+        this.id= String.valueOf(pro.getId());
+        this.descripcion= String.valueOf(pro.getDescripcion());
+        this.precio= String.valueOf(pro.getPrecio());
+        this.existencias= String.valueOf(pro.getExistencias());
+        this.tipo= pro.getTipo();
+        this.ingredientes= pro.getIngredientes();
+        this.url= pro.getUrl();
+        
+    }
+    
+    public void limpiar(){
+        this.id= "";
+        this.descripcion= "";
+        this.precio= "";
+        this.existencias= "";
+        this.tipo= "";
+        this.ingredientes= "";
+        this.url= "";
+        
+    }
 
     public LinkedList<Producto> getListaProductos() throws SNMPExceptions, SQLException {
         ProductoDB pDB = new ProductoDB();

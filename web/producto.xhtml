@@ -7,6 +7,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       template="/templates/template.xhtml"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       >
     <h:head>
         <title>Kraken | Producto</title>
@@ -191,7 +192,13 @@
                                         </f:facet>
                                         <h:graphicImage style="max-height: 50px;" url="#{producto.url}"></h:graphicImage>
                                     </h:column>
-
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="ID"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{producto.id}"></h:outputText>
+                                    </h:column>
 
                                     <h:column>
                                         <f:facet name="header">
@@ -225,13 +232,14 @@
                                         <h:outputText value="#{producto.ingredientes}"></h:outputText>
                                     </h:column>
 
+                                    <!---->
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Estado"></h:outputText>
                                         </f:facet>
                                         <h:outputText value="#{producto.estado}"></h:outputText>
                                     </h:column>
-
+                                    <!---->
 
 
                                     <h:column>
@@ -245,7 +253,7 @@
 
 
                                     <h:column>
-                                        <button type="button" onclick="ventanaModificar()" class="btn btn-primary" >
+                                        <button type="button" onclick="#{beanProducto.cargarModificar(producto)};ventanaModificar()" class="btn btn-primary" >
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Modificar
                                         </button>
                                     </h:column>
@@ -302,7 +310,7 @@
 
                                                 <div class="form-group">
                                                     <label>URL Imagen</label>
-                                                    <h:inputText  class="form-control" required="true" value="#{beanProducto.url}"/>
+                                                    <h:inputText a:placeholder="Debe ingresar una URL de internet" class="form-control" required="true" value="#{beanProducto.url}"/>
                                                 </div>
 
                                                 <div class="form-group">
@@ -317,7 +325,7 @@
                                                 <h:commandButton 
                                                     class="btn btn-primary btn-lg" 
                                                     actionListener="#{beanProducto.insertarProducto()}"
-                                                    value="Registrar"
+                                                    value="Agregar"
 
                                                     type="submit">
                                                 </h:commandButton>
@@ -352,7 +360,12 @@
                                         </div>
                                         <div role="form" >
 
-                                            <div class="col-lg-12">               
+                                            <div class="col-lg-12">     
+                                                
+                                                <div class="form-group">
+                                                    <label>ID</label>
+                                                    <h:inputText   class="form-control" required="true" value="#{beanProducto.id}"/>
+                                                </div>
 
                                                 <div class="form-group">
                                                     <label>Descripción</label>
@@ -381,7 +394,7 @@
 
                                                 <div class="form-group">
                                                     <label>URL Imagen</label>
-                                                    <h:inputText  class="form-control" required="true" value="#{beanProducto.url}"/>
+                                                    <h:inputText class="form-control" required="true" value="#{beanProducto.url}"/>
                                                 </div>
 
                                                 <div class="form-group">
@@ -395,8 +408,8 @@
 
                                                 <h:commandButton 
                                                     class="btn btn-primary btn-lg" 
-                                                    actionListener="#{beanProducto.insertarProducto()}"
-                                                    value="Registrar"
+                                                    actionListener="#{beanProducto.modificarProducto()}"
+                                                    value="Modificar"
 
                                                     type="submit">
                                                 </h:commandButton>
@@ -420,7 +433,7 @@
                 </div>
 
                 <br></br>
-                <button type="button" onclick="ventananuevo();" class="btn btn-success btn-lg" >
+                <button type="button" onclick="#{beanProducto.limpiar()};ventananuevo();" class="btn btn-success btn-lg" >
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar
                 </button>
 
