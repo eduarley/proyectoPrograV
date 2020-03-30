@@ -9,7 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="true" %>
 
 
-<%
+<% 
     Usuario usuario = null;
     HttpSession sesionOK = request.getSession();
     if (sesionOK.getAttribute("usuario") != null)

@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="model.Usuario"%>
-<%@page session="true" contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
 
 <%
     Usuario usuario = null;

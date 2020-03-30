@@ -153,12 +153,14 @@ public class ProductoDB {
         try {
 
             strSQL
-                    = "UPDATE Producto SET descripcion='" + pro.getDescripcion() + "' WHERE ID= '" + pro.getId() + "';'"
-                    + "UPDATE Producto SET urlImagen='" + pro.getUrl()+ "' WHERE ID= '" + pro.getId() + "';'"
-                    + "UPDATE Producto SET precio='" + pro.getPrecio()+ "' WHERE ID= '" + pro.getId() + "';'"
-                    + "UPDATE Producto SET existencias='" + pro.getExistencias()+ "' WHERE ID= '" + pro.getId() + "';'"
-                    + "UPDATE Producto SET tipo='" + pro.getTipo()+ "' WHERE ID= '" + pro.getId() + "';'"
-                    + "UPDATE Producto SET ingredientes='" + pro.getIngredientes()+ "' WHERE ID= '" + pro.getId() + "';'";
+                    = "UPDATE Producto SET descripcion='" + pro.getDescripcion() + "', urlImagen='" + pro.getUrl()+ "', precio='" + pro.getPrecio()+ "', existencias='" + pro.getExistencias()+ "', tipo='" + pro.getTipo()+ "', ingredientes='" + pro.getIngredientes()+ "' WHERE ID= '" + pro.getId() + "'";
+
+//                    = "UPDATE Producto SET descripcion='" + pro.getDescripcion() + "' WHERE ID= '" + pro.getId() + "';'"
+//                    + "UPDATE Producto SET urlImagen='" + pro.getUrl()+ "' WHERE ID= '" + pro.getId() + "';'"
+//                    + "UPDATE Producto SET precio='" + pro.getPrecio()+ "' WHERE ID= '" + pro.getId() + "';'"
+//                    + "UPDATE Producto SET existencias='" + pro.getExistencias()+ "' WHERE ID= '" + pro.getId() + "';'"
+//                    + "UPDATE Producto SET tipo='" + pro.getTipo()+ "' WHERE ID= '" + pro.getId() + "';'"
+//                    + "UPDATE Producto SET ingredientes='" + pro.getIngredientes()+ "' WHERE ID= '" + pro.getId() + "';'";
 
             //Se ejecuta la sentencia SQL
             accesoDatos.ejecutaSQL(strSQL);
