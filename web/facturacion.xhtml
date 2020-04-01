@@ -170,23 +170,76 @@
         <section class="ftco-section">
             
             <div class="container">
-                
-                <div class="row">
-                    
-                    <div class="col-6">
-                        
-                        <h:selectOneMenu>
-                            <f:selectItem></f:selectItem>
-                        </h:selectOneMenu>
-                        
+                <h:form>
+
+
+
+                    <div class="row">
+
+                        <div class="col-6">
+
+                            <h:outputText value="Seleccione el producto que desea comprar"></h:outputText>
+                            <h:selectOneMenu>
+                                <f:selectItem value="#{beanFactura.listaProductos}"></f:selectItem>
+                            </h:selectOneMenu>
+                            <br></br>
+
+                            <h:commandButton type='submit'
+                                             value="AGREGAR AL CARRITO"
+                                             class='btn btn-danger'
+                                             actionListener="#{beanFactura.agregarProducto()}">
+                            </h:commandButton>
+
+                        </div>
+
+
+
+
+                        <div class="col-6">
+
+                            <section class="ftco-section">
+                                <div class="container-fluid px-4">
+                                    <div class="row justify-content-center mb-5 pb-2">
+                                        <div class="col-md-7 text-center heading-section ftco-animate">
+                                            <span class="subheading">El producto que elegiste es:</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-6 col-lg-4 menu-wrap">
+                                            <div class="heading-menu text-center ftco-animate">
+                                                <h3>Producto:</h3>
+                                            </div>
+                                            
+                                            <div class="menus d-flex ftco-animate">
+                                                <img class="menu-img img" src="#{beanFactura.productoTemp.url}" alt="imagen"/>
+
+                                                <div class="text">
+                                                    <div class="d-flex">   
+                                                        <div class="one-half">
+                                                            <h3>#{beanFactura.productoTemp.descripcion}</h3>
+                                                            </div>
+                                                        <div class="one-forth">
+                                                            <span class="price">#{beanFactura.productoTemp.precio}</span>
+                                                            </div>
+                                                        </div>
+                                                    <p><span>#{beanFactura.productoTemp.ingredientes}</span></p>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </section>
+
+                        </div>
+
                     </div>
-                    
-                    <div class="col-6">
-                        
-                    </div>
-                    
-                </div>
-                
+                </h:form>
+
             </div>
             
         </section>
@@ -207,7 +260,7 @@
 
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">DETALLE DEL PEDIDO</div>
+                    <div class="panel-heading">CARRITO DE COMPRAS</div>
                     <div class="table-responsive">
                         <h:form enctype="multipart/form-data">
                             <div align="center" class="datagrid">
@@ -293,9 +346,11 @@
                 </div>
 
                 <br></br>
+                <!--
                 <button type="button" onclick="" class="btn btn-success btn-lg" >
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Confirmar compra
                 </button>
+                -->
 
 
 

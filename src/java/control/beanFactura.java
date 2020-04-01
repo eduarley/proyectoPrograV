@@ -33,14 +33,18 @@ public class beanFactura implements Serializable {
     private Usuario usuario;
     private Pedido pedido;
     private Direccion direccion;
+    private Producto productoTemp;
     
     
     public beanFactura() {
     }
+    
+    public void agregarProducto(){
+        listaProductos.add(productoTemp);
+    }
 
-    public LinkedList<Producto> getListaProductos() throws SNMPExceptions, SQLException {
-        ProductoDB pDB = new ProductoDB();
-        return pDB.listaObjetosProductos();
+    public LinkedList<Producto> getListaProductos() {
+        return listaProductos;
     }
 
     public void setListaProductos(LinkedList<Producto> listaProductos) {
@@ -110,7 +114,12 @@ public class beanFactura implements Serializable {
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
-    
-    
-    
+
+    public Producto getProductoTemp() {
+        return productoTemp;
+    }
+
+    public void setProductoTemp(Producto productoTemp) {
+        this.productoTemp = productoTemp;
+    }
 }
