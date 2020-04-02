@@ -10,7 +10,9 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.LinkedList;
+import javax.faces.model.SelectItem;
 import model.Direccion;
 import model.Pedido;
 import model.Producto;
@@ -34,6 +36,7 @@ public class beanFactura implements Serializable {
     private Pedido pedido;
     private Direccion direccion;
     private Producto productoTemp;
+    private LinkedList<SelectItem> comboProductos = new LinkedList();
     
     
     public beanFactura() {
@@ -41,6 +44,34 @@ public class beanFactura implements Serializable {
     
     public void agregarProducto(){
         listaProductos.add(productoTemp);
+    }
+
+    public LinkedList<SelectItem> getComboProductos() throws SNMPExceptions, SQLException {
+        String descripcion="";
+        int id=0;
+        
+        LinkedList<Producto> lista= new LinkedList<Producto>();
+        ProductoDB pDB= new ProductoDB();
+        
+        lista=pDB.listaObjetosProductos();
+        
+        LinkedList resultList= new LinkedList();
+        //resultList.add(new SelectItem(0,"Seleccione Producto"));
+        
+        for(Iterator iter= lista.iterator();
+                iter.hasNext();){
+            
+            Producto pro= (Producto)iter.next();
+            id=pro.getId();
+            descripcion=pro.getDescripcion();
+            resultList.add(new SelectItem(id,descripcion));
+            
+        }
+        return resultList;
+    }
+
+    public void setComboProductos(LinkedList<SelectItem> comboProductos) {
+        this.comboProductos = comboProductos;
     }
 
     public LinkedList<Producto> getListaProductos() {
