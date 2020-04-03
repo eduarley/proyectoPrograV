@@ -180,14 +180,14 @@
 
                             <h:outputText value="Seleccione el producto que desea comprar:"></h:outputText>
                             <br></br>
-                            <h:selectOneMenu value="#{beanFactura.productoTemp}">
-                                <f:selectItems value="#{beanProducto.listaProductos}"></f:selectItems>
+                            <h:selectOneMenu value="#{beanFactura.idProducto}">
+                                <f:selectItems value="#{beanFactura.comboProductos}"></f:selectItems>
                             </h:selectOneMenu>
                             <br></br>
 
                             <h:commandButton type='submit'
                                              value="AGREGAR AL CARRITO"
-                                             class='btn btn-danger'
+                                             class='btn btn-info'
                                              actionListener="#{beanFactura.agregarProducto()}">
                             </h:commandButton>
 
@@ -218,6 +218,14 @@
                                     <p><span>#{beanFactura.productoTemp.ingredientes}</span></p>
                                 </div>
                             </div>
+                            
+                            <br></br>
+
+                            <h:commandButton type='submit'
+                                             value="VER DETALLES DEL PRODUCTO SELECCIONADO"
+                                             class='btn btn-dark'
+                                             actionListener="#{beanFactura.agregarProducto()}">
+                            </h:commandButton>
 
                         </div>
 

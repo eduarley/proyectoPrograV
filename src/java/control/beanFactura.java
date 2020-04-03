@@ -35,17 +35,24 @@ public class beanFactura implements Serializable {
     private Usuario usuario;
     private Pedido pedido;
     private Direccion direccion;
-    private Producto productoTemp;
+    private int idProducto;
+    private Producto productoTemp= new Producto();
     private LinkedList<SelectItem> comboProductos = new LinkedList();
     
     
     public beanFactura() {
     }
     
-    public void agregarProducto(){
+    public void verDetalle() throws SNMPExceptions, SQLException{
+        productoTemp= ProductoDB.consultarProducto(idProducto);
+    }
+    
+    public void agregarProducto() throws SNMPExceptions, SQLException{
+        productoTemp= ProductoDB.consultarProducto(idProducto);
         listaProductos.add(productoTemp);
     }
-
+    
+    //
     public LinkedList<SelectItem> getComboProductos() throws SNMPExceptions, SQLException {
         String descripcion="";
         int id=0;
@@ -56,7 +63,7 @@ public class beanFactura implements Serializable {
         lista=pDB.listaObjetosProductos();
         
         LinkedList resultList= new LinkedList();
-        //resultList.add(new SelectItem(0,"Seleccione Producto"));
+        resultList.add(new SelectItem(0,"Seleccione un Producto"));
         
         for(Iterator iter= lista.iterator();
                 iter.hasNext();){
@@ -64,7 +71,8 @@ public class beanFactura implements Serializable {
             Producto pro= (Producto)iter.next();
             id=pro.getId();
             descripcion=pro.getDescripcion();
-            resultList.add(new SelectItem(id,descripcion));
+//            resultList.add(new SelectItem(id,descripcion + ", ¢" + pro.getPrecio()));
+             resultList.add(new SelectItem(id,descripcion));
             
         }
         return resultList;
@@ -153,4 +161,14 @@ public class beanFactura implements Serializable {
     public void setProductoTemp(Producto productoTemp) {
         this.productoTemp = productoTemp;
     }
+
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+    
+    
 }

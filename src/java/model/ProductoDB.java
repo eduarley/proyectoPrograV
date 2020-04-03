@@ -86,6 +86,64 @@ public class ProductoDB {
     }
     
     
+    
+    public static Producto consultarProducto(int id)throws SNMPExceptions, SQLException{
+        String select = "";
+        Producto pro = new Producto();
+          
+          try {
+    
+              //Se instancia la clase de acceso a datos
+              AccesoDatos accesoDatos = new AccesoDatos();  
+
+              //Se crea la sentencia de búsqueda
+              select = 
+                      "select * from Producto where id='" + id + "'";
+              
+              //Se ejecuta la sentencia SQL
+              ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+              
+             //Se llena el arryaList con los proyectos   
+              while (rsPA.next()) {
+
+                
+
+                //us.setClave(rsPA.getString("clave"));
+                pro.setId(rsPA.getInt("id"));
+                pro.setDescripcion(rsPA.getString("descripcion"));
+                pro.setUrl(rsPA.getString("urlImagen"));
+                pro.setPrecio(rsPA.getDouble("precio"));
+                pro.setExistencias(rsPA.getInt("existencias"));
+                pro.setTipo(rsPA.getString("tipo"));
+                pro.setEstado(rsPA.getInt("estado"));
+                pro.setIngredientes(rsPA.getString("ingredientes"));
+                
+//                if(pro.getEstado()==1){
+//                    lista.add(pro);
+//                }
+                
+                
+              }
+              
+              rsPA.close(); // cierra conexion
+              return pro;
+              
+          } catch (SQLException e) {
+              throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, 
+                                      e.getMessage(), e.getErrorCode());
+          }catch (Exception e) {
+              throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, 
+                                      e.getMessage());
+          } finally {
+              
+          }
+          
+    }
+    
+    
+    
+    
+    
     public boolean InsertarProducto(Producto producto)
             throws SNMPExceptions, SQLException {
         String strSQL = "";

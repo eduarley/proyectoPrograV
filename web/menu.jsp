@@ -175,7 +175,7 @@
                 <div class="row justify-content-center mb-5 pb-2">
                     <div class="col-md-7 text-center heading-section ftco-animate">
                         <span class="subheading">Menú</span>
-                        <h2 class="mb-4">Menú</h2>
+                        <!--<h2 class="mb-4">Menú</h2>-->
                     </div>
                 </div>
                 
