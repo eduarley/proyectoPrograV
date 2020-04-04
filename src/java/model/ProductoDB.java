@@ -284,7 +284,7 @@ public class ProductoDB {
             rsPA.close();//se cierra el ResultSeat.
 
             for (Producto producto : lista) {
-                estructura+="<a href=\"#\">"
+                estructura+="<a href=\"pedir.xhtml\">"
                 
                             +"<div class=\"menus d-flex ftco-animate\">"
                                +"<img class=\"menu-img img\" src="+producto.getUrl()+" alt=\"imagen\"/>"
@@ -353,7 +353,7 @@ public class ProductoDB {
             rsPA.close();//se cierra el ResultSeat.
 
             for (Producto producto : lista) {
-                estructura+="<a href=\"#\">"
+                estructura+="<a href=\"pedir.xhtml\">"
                 
                             +"<div class=\"menus d-flex ftco-animate\">"
                                +"<img class=\"menu-img img\" src="+producto.getUrl()+" alt=\"imagen\"/>"
@@ -423,7 +423,7 @@ public class ProductoDB {
             rsPA.close();//se cierra el ResultSeat.
 
             for (Producto producto : lista) {
-                estructura+="<a href=\"#\">"
+                estructura+="<a href=\"pedir.xhtml\">"
                 
                             +"<div class=\"menus d-flex ftco-animate\">"
                                +"<img class=\"menu-img img\" src="+producto.getUrl()+" alt=\"imagen\"/>"

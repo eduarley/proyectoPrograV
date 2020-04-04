@@ -25,16 +25,6 @@
 
 
 
-<%
-
-    if (sesion.getNombre().equalsIgnoreCase("")) {
-%>
-<jsp:forward page="paginaError.xhtml">
-    <jsp:param name="error" value="es necesario identificarse"/>
-</jsp:forward>
-<%
-    }
-%>
 
 
 
@@ -83,32 +73,6 @@
 
 
 
-
-        <div class="py-1 bg-black top">
-            <div class="container">
-                <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-                    <div class="col-lg-12 d-block">
-                        <div class="row d-flex">
-                            <div class="col-md pr-4 d-flex topper align-items-center">
-                                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
-                                        class="fa fa-user"></span></div>
-                                <span class="text"> <% out.print(sesion.getNombre()); %> </span>
-                            </div>
-                            <div class="col-md pr-4 d-flex topper align-items-center">
-                                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
-                                        class="icon-paper-plane"></span></div>
-                                <span class="text">krakensystem@gmail.com</span>
-                            </div>
-                            <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right justify-content-end">
-                                <p class="mb-0 register-link"><span>Abierto:</span> <span>Lunes - Domingo</span>
-                                    <span>8:00AM
-                                        - 9:00PM</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
                 <a class="navbar-brand" href="faces/principal.jsp">Kraken</a>
@@ -123,45 +87,14 @@
 
 
 
-                        <li class="nav-item active"><a href="principal.jsp" class="nav-link">Inicio</a></li>
 
-                        <li class="dropdown nav-item">
-                            <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
-                                 aria-haspopup="true" aria-expanded="false">
-                                Registro
-                            </div>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="clientes.xhtml">Clientes</a>
-                                <a class="dropdown-item" href="producto.xhtml">Productos</a>
-                                <a class="dropdown-item" href="#">Pedidos</a>
-                                <a class="dropdown-item" href="#">Despachos</a>
-                            </div>
-                        </li>
-
-
-
-
-
-                        <li class="nav-item"><a href="pedir.xhtml" class="nav-link">Facturación</a></li>
-
-                        <li class="dropdown nav-item">
-                            <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
-                                 aria-haspopup="true" aria-expanded="false">
-                                Reportes
-                            </div>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Pedidos realizados</a>
-                                <a class="dropdown-item" href="#">Ventas</a>
-
-                            </div>
-                        </li>
 
 
 
 
 
                         <% if (sesion.getNombre().equalsIgnoreCase("")) { %>
-                        <li class="nav-item cta"><a href="faces/inicioSesion.xhtml" class="nav-link">Iniciar Sesión</a></li>
+                        <li class="nav-item cta"><a href="#" class="nav-link">Regresar</a></li>
                             <% } else { %>
 
 
@@ -180,11 +113,11 @@
 
                                 <a href="inicioSesion.xhtml">
                                     <%
-                                        
+
                                         out.print("Salir");
                                         //sesionOK.invalidate();
                                     %>
-                                 
+
                                 </a>
 
 
@@ -201,27 +134,71 @@
         </nav>
         <!-- fin nav -->
 
-        <section class="hero-wrap hero-wrap-2" style="background-image: url('images/fondo-login.jpg');"
-                 data-stellar-background-ratio="0.5">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row no-gutters slider-text align-items-end justify-content-center">
-                    <div class="col-md-9 ftco-animate text-center">
-                        <h1 class="mb-2 bread"><img src="images/logo blanco blanco.png" alt="" style="max-height: 200px;"/>
-                        </h1>
 
+
+        
+
+        <section class="ftco-section ftco-no-pt ftco-no-pb contact-section">
+            <h2 class="text-center">Perfil</h2>
+            <div class="container">
+                <div class="row d-flex align-items-stretch no-gutters">
+                    <div class="col-md-6 p-5 order-md-last">
+                        <h2 class="h4 mb-5 font-weight-bold">Editar Perfil</h2>
+                        <form action="#">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Your Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Your Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Subject">
+                            </div>
+                            <div class="form-group">
+                                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-stretch">
+                        <div>
+                            <div class="container">
+                                <div class="row justify-content-center mb-5 pb-2">
+                                    <div class="col-md-7 text-center heading-section ftco-animate">
+
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-8 col-lg-8 ftco-animate">
+                                        <div class="staff">
+                                            <div class="img" style="background-image: url(images/usuario.png);"></div>
+                                            <div class="text pt-4">
+                                                <h3>John Smooth</h3>
+                                                <span class="position mb-2">Restaurant Owner</span>
+                                                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                                                <div class="faded">
+
+                                                    <ul class="ftco-social d-flex">
+                                                        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                                                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                                                        <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
+                                                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
         </section>
-
-        <section class="ftco-section">
-            <center>
-                Principal para Internos
-            </center>
-        </section>
-
-
 
 
 

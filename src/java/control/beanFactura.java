@@ -12,6 +12,8 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedList;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import model.Direccion;
 import model.Pedido;
@@ -78,6 +80,37 @@ public class beanFactura implements Serializable {
         return resultList;
     }
 
+    
+    
+    
+    
+    
+    
+    public void removerProductoDeLista(Producto prod) throws SNMPExceptions, SQLException {
+        try {
+            listaProductos.remove(prod);
+            //getComboProductos();
+            FacesMessage message = new FacesMessage("Exito", "Eliminado con éxito");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage("Error", "Hubo un error");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+      
+
+   }
+    
+    
+    
+    public double subtotal(){
+        double monto=0;
+        for (Producto p : listaProductos) {
+            monto+=p.getPrecio();
+        }
+        return monto;
+    }
+    
+    
     public void setComboProductos(LinkedList<SelectItem> comboProductos) {
         this.comboProductos = comboProductos;
     }

@@ -9,15 +9,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="true" %>
 
 
-<% 
-    Usuario usuario = null;
-    HttpSession sesionOK = request.getSession();
-    if (sesionOK.getAttribute("usuario") != null)
-        usuario = (Usuario) session.getAttribute("usuario");
-    else
-%>
-
-
 
 
 
@@ -60,7 +51,15 @@
     </h:head>
     <h:body>
 
-        
+
+<jsp:useBean id="sesion" class="control.beanInicioSesion" scope="session"/>
+<jsp:setProperty name="sesion" property="nombre" value="${beanInicioSesion.nombre}"/>
+<jsp:setProperty name="sesion" property="id" value="${beanInicioSesion.nombre}"/>
+<jsp:setProperty name="sesion" property="clave" value="${beanInicioSesion.clave}"/>
+<jsp:setProperty name="sesion" property="direccion" value="${beanInicioSesion.direccion}"/>
+<jsp:setProperty name="sesion" property="estado" value="${beanInicioSesion.estado}"/>
+<jsp:setProperty name="sesion" property="rol" value="${beanInicioSesion.rol}"/>
+<jsp:setProperty name="sesion" property="telefono" value="${beanInicioSesion.telefono}"/>
 
         <!--jsp:setProperty name="" property="" value=""/-->
         <div class="py-1 bg-black top">
@@ -73,12 +72,14 @@
 
                                 <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
                                         class="fa fa-user"></span></div>
-                                        <span class="text"> <%
-                                            if (sesionOK.getAttribute("usuario") != null)
-                                                out.print(usuario.getNombre()); 
-                                            else
-                                                out.print("No se ha iniciado sesión"); 
-                                        %></span>
+                                <span class="text"> <%
+                                    if (sesion.getNombre().equalsIgnoreCase("") ) {
+                                        out.print("No se ha iniciado sesión");
+                                      
+                                    } else {
+                                          out.print(sesion.getNombre());
+                                    }
+                                    %></span>
                             </div>
                             <div class="col-md pr-4 d-flex topper align-items-center">
                                 <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
@@ -110,31 +111,32 @@
                         <li class="nav-item active"><a href="faces/menu.jsp" class="nav-link">Menu</a></li>
 
 
-                        <% if (usuario==null) { %>
+                        <% if (sesion.getNombre().equalsIgnoreCase("")) { %>
                         <li class="nav-item cta"><a href="faces/inicioSesion.xhtml" class="nav-link">Iniciar Sesión</a></li>
                             <% } else { %>
 
 
-                        
+
                         <li class="dropdown nav-item">
                             <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
                                  aria-haspopup="true" aria-expanded="false">
                                 Cerrar Sesión
                             </div>
                             <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
-                                
-                                <a class="dropdown-item" href="#"><img src="images/usuario.png" height="80" width="80" /></a>
-                                <a class="dropdown-item" href="#"><% out.print(usuario.getNombre()); %></a>
-                                
+
+                                <a class="dropdown-item" href="perfil.xhtml"><img src="images/usuario.png" height="80" width="80" /></a>
+                                <a class="dropdown-item" href="perfil.xhtml"><% out.print(sesion.getNombre()); %></a>
+
                                 <div class="dropdown-divider" href="#"></div>
-                                
+
                                 <a href="inicioSesion.xhtml">
                                     <%
                                         out.print("Salir");
-                                        sesionOK.invalidate();
+                                        //sesionOK.invalidate();
+                                        
                                     %>
                                 </a>
-                                
+
                             </div>
                         </li>
 
@@ -150,10 +152,10 @@
         </nav>
         <!-- fin nav -->
 
-        
-        
-        
-        
+
+
+
+
         <section class="hero-wrap hero-wrap-2" style="background-image: url('images/fondo-login.jpg');"
                  data-stellar-background-ratio="0.5">
             <div class="overlay"></div>
@@ -178,13 +180,13 @@
                         <!--<h2 class="mb-4">Menú</h2>-->
                     </div>
                 </div>
-                
+
 
                 <div class="row">
                     <div class="col-md-6 col-lg-4 menu-wrap">
                         <div class="heading-menu text-center ftco-animate">
                             <h3>Desayunos</h3>
-                            
+
                         </div>
                         ${beanProducto.listaMenuDesayunos()}
                     </div>

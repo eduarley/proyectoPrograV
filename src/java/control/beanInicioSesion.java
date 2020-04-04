@@ -209,5 +209,18 @@ public class beanInicioSesion implements Serializable {
         setMensaje("Datos incorrectos, \nverifique que su usuario esté activo");
         return "";
     }
+    
+    
+    public void cerrarSesion(){
+        this.nombre="";
+        this.clave="";
+        this.direccion="";
+        this.estado="";
+        this.id="";
+        this.mensaje="";
+        this.rol="";
+        this.telefono="";
+        this.usuario=null;
+    }
 
 }

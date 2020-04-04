@@ -39,6 +39,8 @@
         <link href="css/tabla.css" rel="stylesheet" type="text/css"/>
 
 
+
+        <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
     </h:head>
     <h:body>
 
@@ -49,8 +51,8 @@
                         <div class="row d-flex">
                             <div class="col-md pr-4 d-flex topper align-items-center">
                                 <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
-                                        class="icon-phone2"></span></div>
-                                <span class="text"> 2435 5000</span>
+                                        class="fa fa-user"></span></div>
+                                <span class="text"> #{beanInicioSesion.nombre}</span>
                             </div>
                             <div class="col-md pr-4 d-flex topper align-items-center">
                                 <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
@@ -130,7 +132,7 @@
                             <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
 
                                 <a class="dropdown-item" href="#"><img src="images/usuario.png" height="80" width="80" /></a>
-                                <a class="dropdown-item" href="#">${sesion.nombre}</a>
+                                <a class="dropdown-item" href="#">${beanInicioSesion.nombre}</a>
 
                                 <div class="dropdown-divider" href="#"></div>
 
@@ -160,27 +162,32 @@
                 </div>
             </div>
         </section>
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
         <section class="ftco-section">
-            
+
             <div class="container">
+
+
+
                 <h:form>
 
 
 
                     <div class="row">
 
-                        <div class="col-6">
+                        <div class="col-md-6 menu-wrap">
+
+                            <br></br><br></br>
 
                             <h:outputText value="Seleccione el producto que desea comprar:"></h:outputText>
                             <br></br>
-                            <h:selectOneMenu value="#{beanFactura.idProducto}">
+                            <h:selectOneMenu value="#{beanFactura.idProducto}"  class="form-control">
                                 <f:selectItems value="#{beanFactura.comboProductos}"></f:selectItems>
                             </h:selectOneMenu>
                             <br></br>
@@ -196,11 +203,11 @@
 
 
 
-                        <div class="col-6">
+                        <div class="col-md-6 menu-wrap">
 
 
                             <div class="heading-menu text-center ftco-animate">
-                                <h3>El producto que elegiste es:</h3>
+                                <h3>Producto seleccionado:</h3>
                             </div>
 
                             <div class="menus d-flex ftco-animate">
@@ -218,13 +225,13 @@
                                     <p><span>#{beanFactura.productoTemp.ingredientes}</span></p>
                                 </div>
                             </div>
-                            
+
                             <br></br>
 
                             <h:commandButton type='submit'
-                                             value="VER DETALLES DEL PRODUCTO SELECCIONADO"
+                                             value="DETALLES DEL PRODUCTO SELECCIONADO"
                                              class='btn btn-dark'
-                                             actionListener="#{beanFactura.agregarProducto()}">
+                                             actionListener="#{beanFactura.verDetalle()}">
                             </h:commandButton>
 
                         </div>
@@ -233,24 +240,9 @@
                 </h:form>
 
             </div>
-            
-        </section>
-        
 
-
-
-
-
-
-
-        <section class="ftco-section">
 
             <div class="container">
-
-
-
-
-
                 <div class="panel panel-default">
                     <div class="panel-heading">CARRITO DE COMPRAS</div>
                     <div class="table-responsive">
@@ -269,12 +261,7 @@
                                         <h:graphicImage style="max-height: 50px;" url="#{producto.url}"></h:graphicImage>
                                     </h:column>
 
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="ID"></h:outputText>
-                                        </f:facet>
-                                        <h:outputText value="#{producto.id}"></h:outputText>
-                                    </h:column>
+
 
                                     <h:column>
                                         <f:facet name="header">
@@ -289,12 +276,7 @@
                                         </f:facet>
                                         <h:outputText value="#{producto.precio}"></h:outputText>
                                     </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Existencias"></h:outputText>
-                                        </f:facet>
-                                        <h:outputText value="#{producto.existencias}"></h:outputText>
-                                    </h:column>
+
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Tipo"></h:outputText>
@@ -308,28 +290,31 @@
                                         <h:outputText value="#{producto.ingredientes}"></h:outputText>
                                     </h:column>
 
-                                    <!---->
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Estado"></h:outputText>
-                                        </f:facet>
-                                        <h:outputText value="#{producto.estado}"></h:outputText>
-                                    </h:column>
-                                    <!---->
+
 
 
                                     <h:column>
                                         <h:commandButton type='submit'
                                                          value="Eliminar"
                                                          class='btn btn-danger'
-                                                         actionListener="#{beanProducto.eliminarProducto(producto)}">
+                                                         action="#{beanFactura.removerProductoDeLista(producto)}"
+                                                         >
                                         </h:commandButton>
                                     </h:column>
 
                                 </h:dataTable>
                             </div>
-
-
+                            <h:outputText class="text-info" style="font-size: 30px; margin-left: 15px" value="Subtotal: #{beanFactura.subtotal()}"></h:outputText>
+                            
+                            <br></br>
+                            
+                            <h:commandButton type='submit'
+                                             value="Realizar Pedido"
+                                             style="margin: 0 0 15px 15px"
+                                             class='btn btn-primary'>
+                            </h:commandButton>
+                            
+                            
                         </h:form>
 
 
@@ -338,24 +323,9 @@
                 </div>
 
                 <br></br>
-                <!--
-                <button type="button" onclick="" class="btn btn-success btn-lg" >
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Confirmar compra
-                </button>
-                -->
-
-
-
-
-
             </div>
+
         </section>
-
-
-
-
-
-
 
 
 
