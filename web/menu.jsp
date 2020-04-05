@@ -108,7 +108,7 @@
                     <ul class="navbar-nav ml-auto">
 
 
-                        <li class="nav-item active"><a href="faces/menu.jsp" class="nav-link">Menu</a></li>
+                        <!--<li class="nav-item active"><a href="faces/menu.jsp" class="nav-link">Menu</a></li>-->
 
 
                         <% if (sesion.getNombre().equalsIgnoreCase("")) { %>

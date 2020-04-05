@@ -86,7 +86,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item active" href="clientes.jsp">Clientes</a>
                                 <a class="dropdown-item" href="producto.xhtml">Productos</a>
-                                <a class="dropdown-item" href="#">Pedidos</a>
+                                <a class="dropdown-item" href="pedir.xhtml">Pedidos</a>
                                 <a class="dropdown-item" href="#">Despachos</a>
                             </div>
                         </li>
@@ -95,7 +95,7 @@
 
 
 
-                        <li class="nav-item"><a href="#" class="nav-link">Facturación</a></li>
+                        <li class="nav-item"><a href="facturar.xhtml" class="nav-link">Facturar</a></li>
 
                         <li class="dropdown nav-item">
                             <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
@@ -108,9 +108,9 @@
 
                             </div>
                         </li>
-
-
-
+                        
+                        
+                    <!--    <li class="nav-item"> <h:commandButton actionListener="#{beanCliente.ayuda()}"> <img width="8%" height="8%" src="https://image.flaticon.com/icons/svg/35/35704.svg"></img></h:commandButton>></li>  -->
 
 
 
@@ -237,7 +237,7 @@
                         </h:form>
 
 
-                            <!--/////////////////////////////////      MODAL   //////////////////////////////////////////////////////-->
+                            <!--/////////////////////////////////      MODAL AGREGAR  //////////////////////////////////////////////////////-->
 
 
 
@@ -297,6 +297,68 @@
                                     </div>
                                 </div>
                             </h:form>
+                            
+                            
+                            <!--/////////////////////////////////      MODAL MODIFICAR  //////////////////////////////////////////////////////-->
+
+
+
+                            <h:form>
+                                <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <!--h4 class="modal-title">Nuevo Paciente</h4-->
+                                            </div>
+                                            <div role="form" >
+
+
+
+
+
+                                                <div class="col-lg-12">               
+
+
+
+                                                    <div class="form-group">
+                                                        <label>Cédula</label>
+                                                        <h:inputText   class="form-control" required="true" value="#{beanCliente.cedula}"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Nombre Completo</label>
+                                                        <h:inputText  class="form-control" required="true" value="#{beanCliente.nombre}"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Dirección</label>
+                                                        <h:inputText  class="form-control" required="true" value="#{beanCliente.direccion}"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Telefono</label>
+                                                        <h:inputText  class="form-control" required="true" value="#{beanCliente.telefono}"/>
+                                                    </div>
+
+
+
+
+
+                                                    <h:commandButton 
+                                                        class="btn btn-primary btn-lg" 
+                                                        actionListener="#{beanCliente.insertarCliente()}"
+                                                        value="Modificar"
+
+                                                        type="submit"
+                                                        ></h:commandButton>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
 
                     </div>
                 </div>
@@ -305,6 +367,12 @@
                 <button type="button" onclick="ventananuevo();" class="btn btn-success btn-lg" >
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar
                 </button>
+                
+                <!--
+                <button type="button" onclick="modificar()" class="btn btn-success btn-lg" >
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Modificar
+                </button>
+                -->
 
 
 
@@ -388,6 +456,10 @@
                                 }
                                 function cambiar() {
                                     $('#modal2').modal('show');
+                                }
+                                
+                                function modificar(){
+                                    $('#modal3').modal('show');
                                 }
 
                                 function recargarPagina() {

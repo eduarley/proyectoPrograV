@@ -133,7 +133,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="clientes.xhtml">Clientes</a>
                                 <a class="dropdown-item" href="producto.xhtml">Productos</a>
-                                <a class="dropdown-item" href="#">Pedidos</a>
+                                <a class="dropdown-item" href="pedir.xhtml">Pedidos</a>
                                 <a class="dropdown-item" href="#">Despachos</a>
                             </div>
                         </li>
@@ -141,8 +141,8 @@
 
 
 
-
-                        <li class="nav-item"><a href="pedir.xhtml" class="nav-link">Facturación</a></li>
+                        
+                        <li class="nav-item"><a href="facturar.xhtml" class="nav-link">Facturar</a></li>
 
                         <li class="dropdown nav-item">
                             <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"

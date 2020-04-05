@@ -61,6 +61,30 @@ public class beanCliente implements Serializable {
         }
 
     }
+    
+    public void ayuda() {
+        FacesMessage message = new FacesMessage("Ayuda", "En esta página podrá insertar, modificar, eliminar y consultar usuarios");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+    
+    public void modificarCliente() throws SNMPExceptions, SQLException {
+        Usuario usuario = new Usuario(Integer.parseInt(this.cedula), "activo", this.nombre, this.direccion, this.telefono);
+        UsuarioDB uDB = new UsuarioDB();
+
+        try {
+            if (uDB.InsertarUsuario(usuario)) {
+                FacesMessage message = new FacesMessage("El usuario " + usuario.getNombre() + " se ha registrado correctamente");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            } else {
+                FacesMessage message = new FacesMessage("Error al registrar");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            }
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage("Hubo una falla: " + e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+
+    }
 
     public void eliminarCliente(Usuario us) throws SNMPExceptions, SQLException {
 

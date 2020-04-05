@@ -49,13 +49,13 @@ public class beanProducto implements Serializable {
     
     
     public beanProducto() {
-//        this.id= "";
-//        this.descripcion= "";
-//        this.precio= "";
-//        this.existencias= "";
-//        this.tipo= "";
-//        this.ingredientes= "";
-//        this.url= "";
+        this.id= "";
+        this.descripcion= "";
+        this.precio= "";
+        this.existencias= "";
+        this.tipo= "";
+        this.ingredientes= "";
+        this.url= "";
     }
 
     public void insertarProducto() throws SNMPExceptions, SQLException {
