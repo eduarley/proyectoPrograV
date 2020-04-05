@@ -40,7 +40,7 @@ create table Producto
 	precio  money,
 	existencias int,
 	tipo varchar(50),
-	ingredientes varchar(200),
+	ingredientes varchar(1500),
 	estado int
 )
 

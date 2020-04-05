@@ -17,93 +17,14 @@
       >
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+            <title>JSP Page</title>
+            <link href="css/tabla.css" rel="stylesheet" type="text/css"/>
+            
     </head>
     <body>
-    <h:form enctype="multipart/form-data">
-        <div align="center" class="datagrid">
-
-            <p:growl showDetail="true"/>
-
-
-            <h:dataTable class="table table-striped table-hover" value="${beanProducto.listaProductos}" var="producto">
-
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Imagen"></h:outputText>
-                    </f:facet>
-                    <h:graphicImage style="max-height: 50px;" url="${producto.url}"></h:graphicImage>
-                </h:column>
-
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="ID"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="${producto.id}"></h:outputText>
-                </h:column>
-
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Descripción"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="${producto.descripcion}"></h:outputText>
-                </h:column>
-
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Precio"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="${producto.precio}"></h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Existencias"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="${producto.existencias}"></h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Tipo"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="${producto.tipo}"></h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Ingredientes"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="${producto.ingredientes}"></h:outputText>
-                </h:column>
-
-                <!---->
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Estado"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="${producto.estado}"></h:outputText>
-                </h:column>
-                <!---->
-
-
-                <h:column>
-                    <button type='submit'
-                                     value="Eliminar"
-                                     class='btn btn-danger'
-                                     actionListener="${beanProducto.eliminarProducto(producto)}">
-                    </button>
-                </h:column>
+        
 
 
 
-                <h:column>
-                    <button type="button" class="btn btn-primary" >
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Modificar
-                    </button>
-                </h:column>
-
-            </h:dataTable>
-        </div>
-
-
-    </h:form>
-</body>
+    </body>
 </html>

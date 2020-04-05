@@ -10,7 +10,7 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       >
     <h:head>
-        <title>Kraken | Facturacion</title>
+        <title>Kraken | Realizar Pedido</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
@@ -38,42 +38,17 @@
         <link rel="stylesheet" href="css/style.css"/>
         <link href="css/tabla.css" rel="stylesheet" type="text/css"/>
 
-
+        <!--link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/-->
 
         <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
     </h:head>
     <h:body>
 
-        <div class="py-1 bg-black top">
-            <div class="container">
-                <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-                    <div class="col-lg-12 d-block">
-                        <div class="row d-flex">
-                            <div class="col-md pr-4 d-flex topper align-items-center">
-                                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
-                                        class="fa fa-user"></span></div>
-                                <span class="text"> #{beanInicioSesion.nombre}</span>
-                            </div>
-                            <div class="col-md pr-4 d-flex topper align-items-center">
-                                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
-                                        class="icon-paper-plane"></span></div>
-                                <span class="text">krakensystem@gmail.com</span>
-                            </div>
-                            <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right justify-content-end">
-                                <p class="mb-0 register-link"><span>Abierto:</span> <span>Lunes - Domingo</span>
-                                    <span>8:00AM
-                                        - 9:00PM</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-            <div class="container">
-                <a class="navbar-brand" href="faces/principal.jsp">Kraken</a>
+        <nav  class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" >
+            <div  class="container" style="background:-webkit-gradient(linear, 72% 56%, 10% 21%, from(#9BE0FF), to(#FFD928));">
+                <a  class="navbar-brand" href="faces/menu.jsp">Kraken</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-                        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation" >
                     <span class="oi oi-menu"></span> Menu
                 </button>
 
@@ -81,48 +56,9 @@
                     <ul class="navbar-nav ml-auto">
 
 
-
-
-                        <li  class="nav-item"><a href="menu.jsp" class="nav-link">Inicio</a></li>
-
-                        <li class="dropdown nav-item">
-                            <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
-                                 aria-haspopup="true" aria-expanded="false">
-                                Registro
-                            </div>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="clientes.xhtml">Clientes</a>
-                                <a class="dropdown-item active" href="producto.xhtml">Productos</a>
-                                <a class="dropdown-item" href="#">Pedidos</a>
-                                <a class="dropdown-item" href="#">Despachos</a>
-                            </div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="menu.jsp">Menu</a>
                         </li>
-
-
-
-
-
-                        <li class="nav-item"><a href="pedir.xhtml" class="nav-link">Pedido</a></li>
-
-                        <li class="dropdown nav-item">
-                            <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
-                                 aria-haspopup="true" aria-expanded="false">
-                                Reportes
-                            </div>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Pedidos realizados</a>
-                                <a class="dropdown-item" href="#">Ventas</a>
-
-                            </div>
-                        </li>
-
-
-
-
-
-
-
-
 
                         <li class="dropdown nav-item">
                             <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
@@ -131,12 +67,14 @@
                             </div>
                             <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
 
-                                <a class="dropdown-item" href="#"><img src="images/usuario.png" height="80" width="80" /></a>
-                                <a class="dropdown-item" href="#">${beanInicioSesion.nombre}</a>
+                                <a class="dropdown-item" href="perfil.xhtml"><img src="images/usuario.png" height="80" width="80" /></a>
+                                <a class="dropdown-item" href="perfil.xhtml">#{beanInicioSesion.nombre}</a>
 
                                 <div class="dropdown-divider" href="#"></div>
 
-                                <a href="inicioSesion.xhtml">Salir</a>
+                                <a href="inicioSesion.xhtml">
+                                    Salir
+                                </a>
 
                             </div>
                         </li>
@@ -149,19 +87,7 @@
         </nav>
         <!-- fin nav -->
 
-        <section class="hero-wrap hero-wrap-2" style="background-image: url('images/fondo-login.jpg');"
-                 data-stellar-background-ratio="0.5">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row no-gutters slider-text align-items-end justify-content-center">
-                    <div class="col-md-9 ftco-animate text-center">
-                        <h1 class="mb-2 bread"><img src="images/logo blanco blanco.png" alt="" style="max-height: 200px;"/>
-                        </h1>
 
-                    </div>
-                </div>
-            </div>
-        </section>
 
 
 
@@ -179,7 +105,7 @@
 
 
 
-                    <div class="row">
+                    <div class="row ftco-animate">
 
                         <div class="col-md-6 menu-wrap">
 
@@ -242,7 +168,7 @@
             </div>
 
 
-            <div class="container">
+            <div class="container ftco-animate">
                 <div class="panel panel-default">
                     <div class="panel-heading">CARRITO DE COMPRAS</div>
                     <div class="table-responsive">
@@ -305,16 +231,21 @@
                                 </h:dataTable>
                             </div>
                             <h:outputText class="text-info" style="font-size: 30px; margin-left: 15px" value="Subtotal: #{beanFactura.subtotal()}"></h:outputText>
-                            
+
                             <br></br>
-                            
-                            <h:commandButton type='submit'
-                                             value="Realizar Pedido"
-                                             style="margin: 0 0 15px 15px"
-                                             class='btn btn-primary'>
-                            </h:commandButton>
-                            
-                            
+
+
+
+
+                            <button type="button" 
+                                    onclick="ventananuevo()" 
+                                    class="btn btn-primary" 
+                                    style="margin: 0 0 15px 15px">
+
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Aceptar
+                            </button>
+
+
                         </h:form>
 
 
@@ -326,6 +257,92 @@
             </div>
 
         </section>
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--//////////////////////////////////////////      MODAL    //////////////////////////////////////////////////////-->
+
+
+        <h:form enctype="multipart/form-data">
+
+            <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                        </div>
+                        <div role="form" >
+
+                            <div class="col-lg-12">               
+
+
+                                <div class="form-group">
+                                    <label>Seleccionar Dirección de entrega</label>
+
+
+                                    <h:selectOneMenu value="#{beanProducto.tipo}" class="form-control">
+
+                                    </h:selectOneMenu>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Seleccionar Horario de entrega</label>
+
+
+                                    <h:selectOneMenu value="#{beanProducto.tipo}" class="form-control">
+
+                                    </h:selectOneMenu>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="">Fecha para entrega</label>
+                                    <input type="text" class="form-control" id="book_date" />
+                                </div>
+
+
+
+                                <h:commandButton 
+                                    class="btn btn-primary btn-lg" 
+
+                                    value="Realizar Pedido"
+
+                                    type="submit">
+                                </h:commandButton>
+
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+
+
+        <!--//////////////////////////////////////////   FIN       MODAL    //////////////////////////////////////////////////////-->
+
+
+
+
+
+
+
 
 
 

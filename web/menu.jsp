@@ -52,14 +52,14 @@
     <h:body>
 
 
-<jsp:useBean id="sesion" class="control.beanInicioSesion" scope="session"/>
-<jsp:setProperty name="sesion" property="nombre" value="${beanInicioSesion.nombre}"/>
-<jsp:setProperty name="sesion" property="id" value="${beanInicioSesion.nombre}"/>
-<jsp:setProperty name="sesion" property="clave" value="${beanInicioSesion.clave}"/>
-<jsp:setProperty name="sesion" property="direccion" value="${beanInicioSesion.direccion}"/>
-<jsp:setProperty name="sesion" property="estado" value="${beanInicioSesion.estado}"/>
-<jsp:setProperty name="sesion" property="rol" value="${beanInicioSesion.rol}"/>
-<jsp:setProperty name="sesion" property="telefono" value="${beanInicioSesion.telefono}"/>
+        <jsp:useBean id="sesion" class="control.beanInicioSesion" scope="session"/>
+        <jsp:setProperty name="sesion" property="nombre" value="${beanInicioSesion.nombre}"/>
+        <jsp:setProperty name="sesion" property="id" value="${beanInicioSesion.nombre}"/>
+        <jsp:setProperty name="sesion" property="clave" value="${beanInicioSesion.clave}"/>
+        <jsp:setProperty name="sesion" property="direccion" value="${beanInicioSesion.direccion}"/>
+        <jsp:setProperty name="sesion" property="estado" value="${beanInicioSesion.estado}"/>
+        <jsp:setProperty name="sesion" property="rol" value="${beanInicioSesion.rol}"/>
+        <jsp:setProperty name="sesion" property="telefono" value="${beanInicioSesion.telefono}"/>
 
         <!--jsp:setProperty name="" property="" value=""/-->
         <div class="py-1 bg-black top">
@@ -73,11 +73,11 @@
                                 <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
                                         class="fa fa-user"></span></div>
                                 <span class="text"> <%
-                                    if (sesion.getNombre().equalsIgnoreCase("") ) {
+                                    if (sesion.getNombre().equalsIgnoreCase("")) {
                                         out.print("No se ha iniciado sesión");
-                                      
+
                                     } else {
-                                          out.print(sesion.getNombre());
+                                        out.print(sesion.getNombre());
                                     }
                                     %></span>
                             </div>
@@ -104,6 +104,10 @@
                     <span class="oi oi-menu"></span> Menu
                 </button>
 
+
+
+
+
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
 
@@ -118,7 +122,7 @@
 
 
                         <li class="dropdown nav-item">
-                            <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
+                            <div class="nav-link cta"  id="dropdownMenuButton" data-toggle="dropdown"
                                  aria-haspopup="true" aria-expanded="false">
                                 Cerrar Sesión
                             </div>
@@ -133,12 +137,13 @@
                                     <%
                                         out.print("Salir");
                                         //sesionOK.invalidate();
-                                        
+
                                     %>
                                 </a>
 
                             </div>
                         </li>
+
 
 
                         <% }%>
@@ -172,6 +177,15 @@
             </div>
         </section>
 
+
+
+
+
+
+
+
+
+
         <section class="ftco-section">
             <div class="container-fluid px-4">
                 <div class="row justify-content-center mb-5 pb-2">
@@ -188,7 +202,16 @@
                             <h3>Desayunos</h3>
 
                         </div>
-                        ${beanProducto.listaMenuDesayunos()}
+                        <% if (sesion.getNombre().equalsIgnoreCase("")) { %>
+                        <a href="paginaError.xhtml">
+                            ${beanProducto.listaMenuDesayunos()}
+                        </a>
+                        <% } else { %>
+                        <a href="pedir.xhtml">
+                            ${beanProducto.listaMenuDesayunos()}
+                        </a>
+                        <%}%>
+
                     </div>
 
                     <!--Fin desayunos-->
@@ -198,7 +221,15 @@
                         <div class="heading-menu text-center ftco-animate">
                             <h3>Almuerzos</h3>
                         </div>
-                        ${beanProducto.listaMenuAlmuerzos()}
+                        <% if (sesion.getNombre().equalsIgnoreCase("")) { %>
+                        <a href="paginaError.xhtml">
+                            ${beanProducto.listaMenuAlmuerzos()}
+                        </a>
+                        <% } else { %>
+                        <a href="pedir.xhtml">
+                            ${beanProducto.listaMenuAlmuerzos()}
+                        </a>
+                        <%}%>
                     </div>
 
                     <!--Fin almuerzos-->
@@ -208,7 +239,16 @@
                         <div class="heading-menu text-center ftco-animate">
                             <h3>Cenas</h3>
                         </div>
-                        ${beanProducto.listaMenuCena()}
+                        <% if (sesion.getNombre().equalsIgnoreCase("")) { %>
+                        <a href="paginaError.xhtml">
+                            ${beanProducto.listaMenuCena()}
+                        </a>
+                        <% } else { %>
+                        <a href="pedir.xhtml">
+                            ${beanProducto.listaMenuCena()}
+                        </a>
+                        <%}%>
+
                     </div>
 
                     <!--Fin cenas-->
@@ -224,6 +264,44 @@
 
 
 
+
+        <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/fonco-inferior.jpg);" data-stellar-background-ratio="0.5">
+            
+            <div class="container">
+                <div class="row d-md-flex align-items-center justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="row d-md-flex align-items-center">
+                            
+                            <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                                <div class="block-18">
+                                    <div class="text">
+                                        <strong class="number" data-number="1500">0</strong>
+                                        <span>Usuarios</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                                <div class="block-18">
+                                    <div class="text">
+                                        <strong class="number" data-number="50">0</strong>
+                                        <span>Platillos</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                                <div class="block-18">
+                                    <div class="text">
+                                        <strong class="number" data-number="20">0</strong>
+                                        <span>Años de experiencia</span>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
 
@@ -278,5 +356,15 @@
 
         <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
+
+
+
+        <script src="js/jquery.animateNumber.min.js" type="text/javascript"></script>
+
+
+
+
+
+
     </h:body>
 </html>

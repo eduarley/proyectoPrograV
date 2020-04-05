@@ -284,9 +284,9 @@ public class ProductoDB {
             rsPA.close();//se cierra el ResultSeat.
 
             for (Producto producto : lista) {
-                estructura+="<a href=\"pedir.xhtml\">"
+                estructura+=
                 
-                            +"<div class=\"menus d-flex ftco-animate\">"
+                            "<div class=\"menus d-flex ftco-animate\">"
                                +"<img class=\"menu-img img\" src="+producto.getUrl()+" alt=\"imagen\"/>"
                               
                                +" <div class=\"text\">"
@@ -300,8 +300,7 @@ public class ProductoDB {
                                     +"</div>"
                                     +"<p><span>"+producto.getIngredientes()+"</span></p>"
                                 +"</div>"
-                            +"</div>"
-                      +"</a>";
+                            +"</div>";
             }
 
             return estructura;
@@ -353,9 +352,7 @@ public class ProductoDB {
             rsPA.close();//se cierra el ResultSeat.
 
             for (Producto producto : lista) {
-                estructura+="<a href=\"pedir.xhtml\">"
-                
-                            +"<div class=\"menus d-flex ftco-animate\">"
+                estructura+="<div class=\"menus d-flex ftco-animate\">"
                                +"<img class=\"menu-img img\" src="+producto.getUrl()+" alt=\"imagen\"/>"
                               
                                +" <div class=\"text\">"
@@ -369,8 +366,7 @@ public class ProductoDB {
                                     +"</div>"
                                     +"<p><span>"+producto.getIngredientes()+"</span></p>"
                                 +"</div>"
-                            +"</div>"
-                      +"</a>";
+                            +"</div>";
             }
 
             return estructura;
@@ -423,9 +419,7 @@ public class ProductoDB {
             rsPA.close();//se cierra el ResultSeat.
 
             for (Producto producto : lista) {
-                estructura+="<a href=\"pedir.xhtml\">"
-                
-                            +"<div class=\"menus d-flex ftco-animate\">"
+                estructura+="<div class=\"menus d-flex ftco-animate\">"
                                +"<img class=\"menu-img img\" src="+producto.getUrl()+" alt=\"imagen\"/>"
                               
                                +" <div class=\"text\">"
@@ -439,8 +433,7 @@ public class ProductoDB {
                                     +"</div>"
                                     +"<p><span>"+producto.getIngredientes()+"</span></p>"
                                 +"</div>"
-                            +"</div>"
-                      +"</a>";
+                            +"</div>";
             }
 
             return estructura;

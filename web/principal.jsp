@@ -215,11 +215,44 @@
             </div>
         </section>
 
-        <section class="ftco-section">
-            <center>
-                Principal para Internos
-            </center>
-        </section>
+        
+        <div class="ftco-section ftco-counter img" id="section-counter" data-stellar-background-ratio="0.5">
+            
+            <div class="container">
+                <div class="row d-md-flex align-items-center justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="row d-md-flex align-items-center">
+                            
+                            <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                                <div class="block-18">
+                                    <div class="text">
+                                        <strong class="number" data-number="1500">0</strong>
+                                        <span>Usuarios</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                                <div class="block-18">
+                                    <div class="text">
+                                        <strong class="number" data-number="50">0</strong>
+                                        <span>Platillos</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                                <div class="block-18">
+                                    <div class="text">
+                                        <strong class="number" data-number="20">0</strong>
+                                        <span>Años de experiencia</span>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 

@@ -276,9 +276,9 @@
 	  'format': 'm/d/yyyy',
 	  'autoclose': true
 	});
-	$('#book_time').timepicker();
+	$('#desde').timepicker();
 
-
+        $('#hasta').timepicker();
 
 
 })(jQuery);

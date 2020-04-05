@@ -221,6 +221,7 @@ public class beanInicioSesion implements Serializable {
         this.rol="";
         this.telefono="";
         this.usuario=null;
+        
     }
 
 }
