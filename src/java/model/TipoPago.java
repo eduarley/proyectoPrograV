@@ -9,11 +9,11 @@ package model;
  *
  * @author march
  */
-public class FacturaDB {
-
-    public FacturaDB() {
-        
+public enum TipoPago {
+    Efectivo,
+    Cuenta_Por_Cobrar{
+        public String toString(){
+            return "Cuenta por cobrar";
+        };
     }
-    
-    
 }
