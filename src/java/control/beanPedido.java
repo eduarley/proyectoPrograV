@@ -16,6 +16,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import model.Direccion;
+import model.DireccionDB;
 import model.Producto;
 import model.ProductoDB;
 import model.Usuario;
@@ -38,6 +39,7 @@ public class beanPedido implements Serializable {
     private int idProducto;
     private Producto productoTemp= new Producto();
     private LinkedList<SelectItem> comboProductos = new LinkedList();
+    private LinkedList<SelectItem> comboDirecciones = new LinkedList();
     
     
     public beanPedido() {
@@ -83,11 +85,32 @@ public class beanPedido implements Serializable {
         return resultList;
     }
 
-    
-    
-    
-    
-    
+    public LinkedList<SelectItem> getComboDirecciones(int idUsuario) throws SNMPExceptions, SQLException {
+        String direccion="";
+        int id=0;
+        
+        LinkedList<Direccion> lista= new LinkedList<Direccion>();
+        DireccionDB dirDB= new DireccionDB();
+        
+        lista=dirDB.listaDirecciones(idUsuario);
+        
+        LinkedList resultList= new LinkedList();
+        resultList.add(new SelectItem(0,"Seleccione una Dirección"));
+        
+        for(Iterator iter= lista.iterator();
+                iter.hasNext();){
+            
+            Direccion dir= (Direccion)iter.next();
+            id=dir.getId();
+            direccion=dir.getDireccion();
+            resultList.add(new SelectItem(id,direccion));
+        }
+        return resultList;
+    }
+
+    public void setComboDirecciones(LinkedList<SelectItem> comboDirecciones) {
+        this.comboDirecciones = comboDirecciones;
+    }
     
     public void removerProductoDeLista(Producto prod) throws SNMPExceptions, SQLException {
         try {
@@ -99,11 +122,7 @@ public class beanPedido implements Serializable {
             FacesMessage message = new FacesMessage("Error", "Hubo un error");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
-      
-
    }
-    
-    
     
     public double subtotal(){
         double monto=0;
@@ -112,7 +131,6 @@ public class beanPedido implements Serializable {
         }
         return monto;
     }
-    
     
     public void setComboProductos(LinkedList<SelectItem> comboProductos) {
         this.comboProductos = comboProductos;

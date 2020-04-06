@@ -36,7 +36,7 @@ create table Producto
 	id int not null identity(1,1),
 	descripcion varchar(50),
 	--imagen image,
-	urlImagen varchar(500),
+	urlImagen varchar(1500),
 	precio  money,
 	existencias int,
 	tipo varchar(50),
@@ -72,6 +72,7 @@ create table EncFactura
 	idPedido int not null,
 	idDireccion int not null,
 	tipoPago varchar(20),
+	subTotal money,
 	iva money,
 	descuento money,
 	total money
