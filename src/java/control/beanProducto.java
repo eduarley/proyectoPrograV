@@ -73,6 +73,11 @@ public class beanProducto implements Serializable {
         }
 
     }
+    
+    public void ayuda() {
+        FacesMessage message = new FacesMessage("Ayuda", "En esta página podrá insertar, modificar, eliminar y consultar productos");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 
     public String eliminarProducto(Producto pro) throws SNMPExceptions, SQLException {
 

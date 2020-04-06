@@ -40,7 +40,8 @@ public class beanCliente implements Serializable {
         this.mensaje="";
         this.nombre="";
         this.telefono="";*/
-
+//        FacesMessage message = new FacesMessage("Ayuda", "En esta página podrá insertar, modificar, eliminar y consultar usuarios");
+//        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
     public void insertarCliente() throws SNMPExceptions, SQLException {
