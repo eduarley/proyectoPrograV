@@ -174,6 +174,7 @@ public class beanCliente implements Serializable {
         HorarioDB hDB = new HorarioDB();
         Horario h = new Horario();
         
+        h.setIdUsuario(idUsuario);
         h.setHoraInicio(horaInicioTemp);
         h.setHoraFin(horaFinTemp);
         

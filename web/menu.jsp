@@ -120,7 +120,7 @@
 
                         <% if (sesion.getNombre().equalsIgnoreCase("")) { %>
 
-                        <li class="nav-item"><a href="paginaError.xhtml" class="nav-link">Realizar un pedido</a></li>
+                        
                         <li class="nav-item cta"><a href="faces/inicioSesion.xhtml" class="nav-link">Iniciar Sesión</a></li>
                             <% } else { %>
 

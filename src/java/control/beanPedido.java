@@ -17,6 +17,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import model.Direccion;
 import model.DireccionDB;
+import model.Horario;
+import model.HorarioDB;
 import model.Producto;
 import model.ProductoDB;
 import model.Usuario;
@@ -36,10 +38,11 @@ public class beanPedido implements Serializable {
     private String id, tipoPago, iva, descuento, total;
     private Usuario usuario;
     private Direccion direccion;
-    private int idProducto;
+    private int idProducto, idDireccion, idHorario;
     private Producto productoTemp= new Producto();
     private LinkedList<SelectItem> comboProductos = new LinkedList();
     private LinkedList<SelectItem> comboDirecciones = new LinkedList();
+    private LinkedList<SelectItem> comboHorarios = new LinkedList();
     
     
     public beanPedido() {
@@ -108,6 +111,36 @@ public class beanPedido implements Serializable {
             resultList.add(new SelectItem(id,direccion));
         }
         return resultList;
+    }
+
+    public LinkedList<SelectItem> getComboHorarios(int idUsuario) throws SNMPExceptions, SQLException {
+        String horaInicio,horaFin;
+        int id=0;
+        
+        LinkedList<Horario> lista= new LinkedList<Horario>();
+        HorarioDB horDB= new HorarioDB();
+        
+        lista=horDB.listaHorarios(idUsuario);
+        
+        LinkedList<SelectItem> resultList= new LinkedList<SelectItem>();
+        resultList.add(new SelectItem(0,"Seleccione una Horario"));
+        
+        
+        
+        for(Iterator iter= lista.iterator();
+                iter.hasNext();){
+            
+            Horario hor= (Horario)iter.next();
+            id=hor.getId();
+            horaInicio=hor.getHoraInicio();
+            horaFin=hor.getHoraFin();
+            resultList.add(new SelectItem(id,horaInicio + " --> " + horaFin));
+        }
+        return resultList;
+    }
+
+    public void setComboHorarios(LinkedList<SelectItem> comboHorarios) {
+        this.comboHorarios = comboHorarios;
     }
 
     public void setComboDirecciones(LinkedList<SelectItem> comboDirecciones) {
@@ -217,6 +250,20 @@ public class beanPedido implements Serializable {
     public void setIdProducto(int idProducto) {
         this.idProducto = idProducto;
     }
-    
-    
+
+    public int getIdDireccion() {
+        return idDireccion;
+    }
+
+    public void setIdDireccion(int idDireccion) {
+        this.idDireccion = idDireccion;
+    }
+
+    public int getIdHorario() {
+        return idHorario;
+    }
+
+    public void setIdHorario(int idHorario) {
+        this.idHorario = idHorario;
+    }
 }

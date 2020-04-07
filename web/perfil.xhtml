@@ -170,11 +170,13 @@
 
 
                                 </h:dataTable>
+                            </div>
 
-
-
+                            <div align="center" class="datagrid">
+                                
+                                <p:growl showDetail="true"/>
                                 <h:dataTable class="table table-striped table-hover" value="#{beanCliente.getListaHorarios(beanInicioSesion.id)}" var="hora">
-                                    
+
                                     <f:facet name="header">
                                         <h:outputText value="Horarios disponibles"></h:outputText>
                                     </f:facet>

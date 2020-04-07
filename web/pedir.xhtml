@@ -292,7 +292,7 @@
                                     <label>Dirección de entrega</label>
 
 
-                                    <h:selectOneMenu   class="form-control">
+                                    <h:selectOneMenu value="#{beanPedido.idDireccion}" class="form-control">
                                         <f:selectItems value="#{beanPedido.getComboDirecciones(beanInicioSesion.id)}"></f:selectItems>
                                     </h:selectOneMenu>
 
@@ -302,8 +302,8 @@
                                     <label>Horario de entrega</label>
 
 
-                                    <h:selectOneMenu   class="form-control">
-                                        <f:selectItem  ></f:selectItem>
+                                    <h:selectOneMenu value="#{beanPedido.idHorario}" class="form-control">
+                                        <f:selectItems value="#{beanPedido.getComboHorarios(beanInicioSesion.id)}"></f:selectItems>
                                     </h:selectOneMenu>
 
                                 </div>

@@ -12,6 +12,7 @@ import model.InicioSesion;
 import DAO.SNMPExceptions;
 import java.sql.SQLException;
 import java.util.Map;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import model.Usuario;
@@ -71,6 +72,11 @@ public class beanInicioSesion implements Serializable {
 	
     }*/
     
+    
+//    public void ayuda() {
+//        FacesMessage message = new FacesMessage("Ayuda", "Estimado Usuario, debe Iniciar Sesión como Cliente para poder realizar un Pedido");
+//        FacesContext.getCurrentInstance().addMessage(null, message);
+//    }
     
     
     
