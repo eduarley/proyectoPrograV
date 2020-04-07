@@ -20,7 +20,7 @@ public class DireccionDB {
     public DireccionDB() {
     }
     
-    public LinkedList listaDirecciones(int idUsuario)throws SNMPExceptions, SQLException{
+    public LinkedList<Direccion> listaDirecciones(int idUsuario)throws SNMPExceptions, SQLException{
         String select = "";
       LinkedList<Direccion> lista = new LinkedList<Direccion>();
           
@@ -45,7 +45,7 @@ public class DireccionDB {
                 dir.setId(rsPA.getInt("id"));
                 dir.setIdUsuario(rsPA.getInt("idUsuario"));
                 dir.setDireccion(rsPA.getString("direccion"));
-                
+                lista.add(dir);
               }
               
               rsPA.close(); // cierra conexion
@@ -61,6 +61,63 @@ public class DireccionDB {
               
           }
           
+    }
+    
+    
+    
+    
+    
+    
+    public boolean InsertarDireccion(Direccion direccion)
+            throws SNMPExceptions, SQLException {
+        String strSQL = "";
+        AccesoDatos acceso= new AccesoDatos();
+        try {
+            //Se obtienen los valores del objeto Departamento
+            Producto prod= new Producto();
+            
+
+            strSQL
+                    = "INSERT INTO DIRECCIONENTREGA(idUsuario,direccion) "
+                    + "VALUES ('" + direccion.getIdUsuario() + "','"
+                    + "" + direccion.getDireccion() + "')";
+                    
+
+            //Se ejecuta la sentencia SQL
+            acceso.ejecutaSQL(strSQL);
+            return true;
+
+        } catch (Exception e) {
+            //  throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+            return false;
+
+        } finally {
+
+        }
+    }
+    
+    
+    
+    public void eliminarProducto(Direccion direccion)
+            throws SNMPExceptions, SQLException {
+        String strSQL = "";
+        
+        AccesoDatos acceso= new AccesoDatos();
+        try {
+
+            strSQL
+                    = "delete from DireccionEntrega where id= '" + direccion.getId() + "'";
+
+            //Se ejecuta la sentencia SQL
+            acceso.ejecutaSQL(strSQL);
+          
+
+        } catch (Exception e) {
+            
+
+        } finally {
+
+        }
     }
     
 }

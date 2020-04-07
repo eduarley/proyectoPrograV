@@ -32,7 +32,7 @@
         <link rel="stylesheet" href="css/bootstrap-datepicker.css"/>
         <link rel="stylesheet" href="css/jquery.timepicker.css"/>
 
-        
+
         <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
 
         <link rel="stylesheet" href="css/flaticon.css"/>
@@ -115,12 +115,10 @@
 
                             </div>
                         </li>
-                        
-                        
-                        
-                        <li class="nav-item"><h:form><h:commandButton value="Ayuda" type='submit' class='btn btn-info' actionListener="#{beanProducto.ayuda()}"></h:commandButton></h:form></li>
 
 
+
+          
 
 
                         <li class="dropdown nav-item">
@@ -139,6 +137,9 @@
 
                             </div>
                         </li>
+
+                        <li class="nav-item"><h:form><h:commandButton value="Ayuda"  class='btn btn-info nav-link' actionListener="#{beanProducto.ayuda()}"></h:commandButton></h:form></li>
+
 
 
 
@@ -193,7 +194,7 @@
                                         </f:facet>
                                         <h:graphicImage style="max-height: 50px;" url="#{producto.url}"></h:graphicImage>
                                     </h:column>
-                                    
+
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="ID"></h:outputText>
@@ -362,7 +363,7 @@
                                         <div role="form" >
 
                                             <div class="col-lg-12">     
-                                                
+
                                                 <div class="form-group">
                                                     <label>ID</label>
                                                     <h:inputText   class="form-control" required="true" value="#{beanProducto.id}"/>

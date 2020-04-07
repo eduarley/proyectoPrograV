@@ -14,6 +14,10 @@ import java.util.LinkedList;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import model.Direccion;
+import model.DireccionDB;
+import model.Horario;
+import model.HorarioDB;
 import model.Usuario;
 import model.UsuarioDB;
 
@@ -29,11 +33,16 @@ public class beanCliente implements Serializable {
      * Creates a new instance of beanCliente
      */
     LinkedList<Usuario> listaUsuarios = new LinkedList<Usuario>();
-
-    String cedula, nombre, direccion, telefono;
+    LinkedList<Direccion> listaDirecciones = new LinkedList<Direccion>();
+    LinkedList<Horario> listaHorarios = new LinkedList<Horario>();
+    String cedula, nombre, direccion, telefono, horaInicioTemp,horaFinTemp;
 
     String mensaje = "";
 
+    
+    
+    String DireccionTemporal;
+    
     public beanCliente() {
         /*this.cedula="";
         this.direccion="";
@@ -62,12 +71,12 @@ public class beanCliente implements Serializable {
         }
 
     }
-    
+
     public void ayuda() {
         FacesMessage message = new FacesMessage("Ayuda", "En esta página podrá insertar, modificar, eliminar y consultar usuarios");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-    
+
     public void modificarCliente() throws SNMPExceptions, SQLException {
         Usuario usuario = new Usuario(Integer.parseInt(this.cedula), "activo", this.nombre, this.direccion, this.telefono);
         UsuarioDB uDB = new UsuarioDB();
@@ -124,6 +133,65 @@ public class beanCliente implements Serializable {
 
     }
 
+    public void insertarDireccion(int idUsuario) {
+        DireccionDB dDB = new DireccionDB();
+        Direccion dir = new Direccion();
+        
+        dir.setDireccion(DireccionTemporal);
+        dir.setIdUsuario(idUsuario);
+        
+        
+        try {
+            dDB.InsertarDireccion(dir);
+            FacesMessage message = new FacesMessage("Éxito","La dirección se insertó exitosamente!");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage("Error","La dirección no se pudo insertar");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+
+    public void eliminarDireccion(Direccion direccion) {
+        DireccionDB dDB = new DireccionDB();
+    
+        
+       
+       
+        try {
+            dDB.eliminarProducto(direccion);
+            FacesMessage message = new FacesMessage("Éxito","La dirección se ha eliminado exitosamente!");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage("Error","La dirección no se pudo eliminar");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+    
+    
+    
+    public void insertarHorario(int idUsuario) {
+        
+        HorarioDB hDB = new HorarioDB();
+        Horario h = new Horario();
+        
+        h.setHoraInicio(horaInicioTemp);
+        h.setHoraFin(horaFinTemp);
+        
+        
+        
+        
+        try {
+            hDB.InsertarHorario(h);
+            FacesMessage message = new FacesMessage("Éxito","El horario se insertó exitosamente!");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage("Error","El horario no se pudo insertar");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+    
+    
+    
     public LinkedList<Usuario> getListaUsuarios() throws SNMPExceptions, SQLException {
         UsuarioDB uDB = new UsuarioDB();
         return uDB.listaObjetosClientes();
@@ -172,5 +240,48 @@ public class beanCliente implements Serializable {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
+
+    public LinkedList<Direccion> getListaDirecciones(int idUsuario) throws SNMPExceptions, SQLException {
+        UsuarioDB uDB = new UsuarioDB();
+        return uDB.listaDirecciones(idUsuario);
+    }
+
+    public void setListaDirecciones(LinkedList<Direccion> listaDirecciones) {
+        this.listaDirecciones = listaDirecciones;
+    }
+
+    public String getDireccionTemporal() {
+        return DireccionTemporal;
+    }
+
+    public void setDireccionTemporal(String DireccionTemporal) {
+        this.DireccionTemporal = DireccionTemporal;
+    }
+
+    public LinkedList<Horario> getListaHorarios(int idUsuario)  throws SNMPExceptions, SQLException {
+        HorarioDB hDB = new  HorarioDB();
+        return hDB.listaHorarios(idUsuario);
+    }
+
+    public void setListaHorarios(LinkedList<Horario> listaHorarios) {
+        this.listaHorarios = listaHorarios;
+    }
+
+    public String getHoraInicioTemp() {
+        return horaInicioTemp;
+    }
+
+    public void setHoraInicioTemp(String horaInicioTemp) {
+        this.horaInicioTemp = horaInicioTemp;
+    }
+
+    public String getHoraFinTemp() {
+        return horaFinTemp;
+    }
+
+    public void setHoraFinTemp(String horaFinTemp) {
+        this.horaFinTemp = horaFinTemp;
+    }
+    
 
 }

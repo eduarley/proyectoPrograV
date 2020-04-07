@@ -94,8 +94,10 @@ public class beanPedido implements Serializable {
         
         lista=dirDB.listaDirecciones(idUsuario);
         
-        LinkedList resultList= new LinkedList();
+        LinkedList<SelectItem> resultList= new LinkedList<SelectItem>();
         resultList.add(new SelectItem(0,"Seleccione una Dirección"));
+        
+        
         
         for(Iterator iter= lista.iterator();
                 iter.hasNext();){

@@ -60,8 +60,7 @@
                             <a class="nav-link" href="menu.jsp">Menu</a>
                         </li>
                         
-                        <li class="nav-item"><h:form><h:commandButton value="Ayuda" type='submit' class='btn btn-info' actionListener="#{beanPedido.ayuda()}"></h:commandButton></h:form></li>
-
+         
                         <li class="dropdown nav-item">
                             <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
                                  aria-haspopup="true" aria-expanded="false">
@@ -80,6 +79,7 @@
 
                             </div>
                         </li>
+                        <li class="nav-item"><h:form><h:commandButton value="Ayuda"  class='btn btn-info nav-link' actionListener="#{beanPedido.ayuda()}"></h:commandButton></h:form></li>
 
 
 
@@ -289,22 +289,22 @@
 
 
                                 <div class="form-group">
-                                    <label>Seleccionar Dirección de entrega</label>
+                                    <label>Dirección de entrega</label>
 
 
-                                    <h:selectOneMenu value="#{beanPedido.idProducto}"  class="form-control">
+                                    <h:selectOneMenu   class="form-control">
                                         <f:selectItems value="#{beanPedido.getComboDirecciones(beanInicioSesion.id)}"></f:selectItems>
                                     </h:selectOneMenu>
 
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Seleccionar Horario de entrega</label>
+                                    <label>Horario de entrega</label>
 
 
-                                    <h:inputText class="datepicker"></h:inputText>
-                                    
-                                    
+                                    <h:selectOneMenu   class="form-control">
+                                        <f:selectItem  ></f:selectItem>
+                                    </h:selectOneMenu>
 
                                 </div>
 

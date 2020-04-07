@@ -4,6 +4,8 @@
     Author     : Eduardo
 --%>
 
+<%@page import="javax.faces.context.FacesContext"%>
+<%@page import="javax.faces.application.FacesMessage"%>
 <%@page import="model.Usuario"%>
 <%@page import="control.beanInicioSesion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" session="true" %>
@@ -61,6 +63,8 @@
         <jsp:setProperty name="sesion" property="rol" value="${beanInicioSesion.rol}"/>
         <jsp:setProperty name="sesion" property="telefono" value="${beanInicioSesion.telefono}"/>
 
+
+
         <!--jsp:setProperty name="" property="" value=""/-->
         <div class="py-1 bg-black top">
             <div class="container">
@@ -112,15 +116,17 @@
                     <ul class="navbar-nav ml-auto">
 
 
-                        <li class="nav-item"><a href="faces/pedir.xhtml" class="nav-link">Realizar un pedido</a></li>
 
 
                         <% if (sesion.getNombre().equalsIgnoreCase("")) { %>
+
+                        <li class="nav-item"><a href="paginaError.xhtml" class="nav-link">Realizar un pedido</a></li>
                         <li class="nav-item cta"><a href="faces/inicioSesion.xhtml" class="nav-link">Iniciar Sesión</a></li>
                             <% } else { %>
 
 
 
+                        <li class="nav-item"><a href="faces/pedir.xhtml" class="nav-link">Realizar un pedido</a></li>
                         <li class="dropdown nav-item">
                             <div class="nav-link cta"  id="dropdownMenuButton" data-toggle="dropdown"
                                  aria-haspopup="true" aria-expanded="false">
@@ -180,7 +186,7 @@
 
 
 
-
+                       
 
 
 
@@ -266,12 +272,12 @@
 
 
         <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/fonco-inferior.jpg);" data-stellar-background-ratio="0.5">
-            
+
             <div class="container">
                 <div class="row d-md-flex align-items-center justify-content-center">
                     <div class="col-lg-10">
                         <div class="row d-md-flex align-items-center">
-                            
+
                             <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
                                 <div class="block-18">
                                     <div class="text">
@@ -296,7 +302,7 @@
                                     </div>
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -328,7 +334,7 @@
                             Universidad Técnica Nacional
                             <br></br>
                             <script>
-                                document.write(new Date().getFullYear());
+document.write(new Date().getFullYear());
                             </script>
                         </p>
                     </div>

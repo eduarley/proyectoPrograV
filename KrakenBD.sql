@@ -21,14 +21,15 @@ create table DireccionEntrega
 (
 	id int identity(1,1) not null,
 	idUsuario int not null,
-	direccion varchar(50)
+	direccion varchar(1000)
 )
 
 create table HorarioEntrega
 (
 	id int identity(1,1) not null,
 	idUsuario int not null,
-	hora time(2)
+	horaInicio varchar(50),
+	horaFin varchar(50)
 )
 
 create table Producto
@@ -162,8 +163,25 @@ alter table EncFactura add constraint FK_PedidoEncFactura foreign key (idPedido)
 
 
 Insert into Usuario values (1, 'Eduardo Arley', '1234', 'Naranjo', '64488685', 'admin', 'activo')
-Insert into Usuario values (123456, 'Bananito Pérez', 'Sa', 'Chilamate de Poás', '86758675', 'admin', 'activo')
-Insert into Usuario values (1234, 'Eldes Pelote', 'Sa', 'Sarchí', '60973263', 'cliente', 'inactivo')
+Insert into Usuario values (123456, 'Bananito Pérez', '1234', 'Chilamate de Poás', '86758675', 'admin', 'activo')
+Insert into Usuario values (1234, 'Eldes Pelote', '1234', 'Sarchí', '60973263', 'cliente', 'inactivo')
+
+
+
+--insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
+--values ('','','','','','','');
+
+insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
+values ('Gallo Pinto','https://www.elmundo.cr/wp-content/uploads/2017/03/gallo-pinto1.jpg','1500','10','Desayuno','Arroz, frijoles y salsa Lizano','1');
+
+
+insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
+values ('Casado','https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Casado_costarricense2.png/220px-Casado_costarricense2.png','2000','5','Almuerzo','Arroz, frijoles y carne en salsa','1');
+
+insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
+values ('Taco al pastor','https://www.comedera.com/wp-content/uploads/2017/08/tacos-al-pastor-receta.jpg','1250','5','Cena','Tortilla de maíz con carne y especias','1');
+
+
 /*
 
 alter table EncFactura add constraint FK_EncFacturaDireccionEntrega foreign key (idDireccion) references DireccionEntrega(id)
