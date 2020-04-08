@@ -16,13 +16,13 @@ public class Pedido {
     private int id;
     private Usuario usuario;
     private Direccion direccion;
-    private Date fechaEntrega;
-    private Time horarioEntrega;
+    private String fechaEntrega;
+    private String horarioEntrega;
     private String direccionEntrega;
     private double monto;
     private String estado;
-
-    public Pedido(int id, Usuario usuario, Direccion direccion, Date fechaEntrega, Time horarioEntrega, String direccionEntrega, double monto, String estado) {
+    
+    public Pedido(int id, Usuario usuario, Direccion direccion, String fechaEntrega, String horarioEntrega, String direccionEntrega, double monto, String estado) {
         this.id = id;
         this.usuario = usuario;
         this.direccion = direccion;
@@ -33,6 +33,19 @@ public class Pedido {
         this.estado = estado;
     }
 
+    public Pedido(Usuario usuario, String fechaEntrega, String horarioEntrega, String direccionEntrega, String estado) {
+        this.usuario = usuario;
+        this.fechaEntrega = fechaEntrega;
+        this.horarioEntrega = horarioEntrega;
+        this.direccionEntrega = direccionEntrega;
+     
+        this.estado = estado;
+    }
+
+    
+    
+    
+    
     public Pedido() {
     }
 
@@ -60,21 +73,23 @@ public class Pedido {
         this.direccion = direccion;
     }
 
-    public Date getFechaEntrega() {
+    public String getFechaEntrega() {
         return fechaEntrega;
     }
 
-    public void setFechaEntrega(Date fechaEntrega) {
+    public void setFechaEntrega(String fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
     }
 
-    public Time getHorarioEntrega() {
+    public String getHorarioEntrega() {
         return horarioEntrega;
     }
 
-    public void setHorarioEntrega(Time horarioEntrega) {
+    public void setHorarioEntrega(String horarioEntrega) {
         this.horarioEntrega = horarioEntrega;
     }
+
+    
 
     public String getDireccionEntrega() {
         return direccionEntrega;

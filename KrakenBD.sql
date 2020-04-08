@@ -3,7 +3,6 @@ create database KrakenBD
 
 use KrakenBD
 
-
 --Tablas
 
 create table Usuario
@@ -49,10 +48,10 @@ create table Pedido
 (
 	id int identity(1,1) not null,
 	idUsuario int,
-	idDireccion int,
-	fechaEntrega date,
-	horarioEntrega time(2),
-	direccionEntrega varchar(50),
+	--idDireccion int,
+	fechaEntrega varchar(50),
+	horarioEntrega varchar(50),
+	direccionEntrega varchar(1000),
 	monto money,
 	estado varchar(30)
 )
@@ -162,7 +161,7 @@ alter table EncFactura add constraint FK_PedidoEncFactura foreign key (idPedido)
 ------------------------------------------------
 
 
-Insert into Usuario values (1, 'Eduardo Arley', '1234', 'Naranjo', '64488685', 'admin', 'activo')
+Insert into Usuario values (1, 'Eduardo Arley', '1', 'Naranjo', '64488685', 'admin', 'activo')
 Insert into Usuario values (123456, 'Bananito Pérez', '1234', 'Chilamate de Poás', '86758675', 'admin', 'activo')
 Insert into Usuario values (1234, 'Eldes Pelote', '1234', 'Sarchí', '60973263', 'cliente', 'inactivo')
 

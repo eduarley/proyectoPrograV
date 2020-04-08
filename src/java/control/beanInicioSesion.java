@@ -188,19 +188,19 @@ public class beanInicioSesion implements Serializable {
              
             
             
+            usuario=inicio.validarDatos(cedula, clave);
             
-            
-            if (inicio.validarDatos(cedula, clave) != null) {
+            if (usuario != null) {
                 
-                if (inicio.validarDatos(cedula, clave).getRol().equalsIgnoreCase("admin")) {
+                if (usuario.getRol().equalsIgnoreCase("admin")) {
                     setMensaje("");
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",inicio.validarDatos(cedula, clave));
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",usuario);
                     FacesContext.getCurrentInstance().getExternalContext().redirect("principal.jsp");
                     //return "faces/principal.jsp";
                 } else {
                     
                     setMensaje("");
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",inicio.validarDatos(cedula, clave));
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",usuario);
                     FacesContext.getCurrentInstance().getExternalContext().redirect("menu.jsp");
                     //return "faces/menu.jsp";
                 }

@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      >
     <h:head>
         <title>Kraken | Perfil</title>
         <meta charset="utf-8"/>
@@ -41,6 +43,7 @@
     <h:body>
 
 
+        
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
 
@@ -173,7 +176,7 @@
                             </div>
 
                             <div align="center" class="datagrid">
-                                
+
                                 <p:growl showDetail="true"/>
                                 <h:dataTable class="table table-striped table-hover" value="#{beanCliente.getListaHorarios(beanInicioSesion.id)}" var="hora">
 
@@ -310,14 +313,18 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Desde</label>
-                                        <input value="#{beanCliente.horaInicioTemp}" type="text" class="form-control" id="desde" placeholder="Seleccionar"/>
-                                        
+                                        <!--input value="#{beanCliente.horaInicioTemp}" type="text" class="form-control" id="desde" placeholder="Seleccionar"/-->
+                                        <h:inputText value="#{beanCliente.horaInicioTemp}" class="form-control" ></h:inputText>
+
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Hasta</label>
-                                        <input value="#{beanCliente.horaFinTemp}" type="text" class="form-control" id="hasta" placeholder="Seleccionar"/>
+                                        <!--input value="#{beanCliente.horaFinTemp}" type="text" class="form-control" id="hasta" placeholder="Seleccionar"/-->
+                                        <h:inputText value="#{beanCliente.horaFinTemp}" class="form-control" ></h:inputText>
+
+
                                     </div>
                                 </div>
 
@@ -346,46 +353,6 @@
 
 
 
-
-
-
-
-
-
-
-        <footer class="ftco-footer ftco-bg-dark ftco-section">
-            <div class="container-fluid px-md-5 px-3">
-                <div class="row mb-5">
-
-
-
-
-                </div>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <p>
-                            Eduardo Arley | Josué Marchena
-                            <ul class="ftco-footer-social list-unstyled  mt-3">
-                                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                            </ul>
-                        </p>
-                        <p>
-                            Universidad Técnica Nacional
-                            <br></br>
-                            <script>
-                                document.write(new Date().getFullYear());
-                            </script>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-
-
-
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery-migrate-3.0.1.min.js"></script>
         <script src="js/popper.min.js"></script>
@@ -401,7 +368,6 @@
         <script src="js/jquery.timepicker.min.js"></script>
         <script src="js/scrollax.min.js"></script>
 
-        <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
 
 
@@ -429,6 +395,12 @@
 
 
         </script>
+
+
+
+
+
+
 
 
 
