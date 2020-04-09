@@ -175,6 +175,104 @@ public class PedidoDB {
 
         }
     }
-
+   
+   
+   
+   public LinkedList listaPedido()throws SNMPExceptions, SQLException{
+        String select = "";
+      LinkedList<Pedido> lista = new LinkedList<Pedido>();
+          
+          try {
     
+              //Se instancia la clase de acceso a datos
+              AccesoDatos accesoDatos = new AccesoDatos();  
+
+              //Se crea la sentencia de búsqueda
+              select = 
+                      //"select id, idUsuario.nombre as [usuario], fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido";
+                      "select id, fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido";
+              
+              //Se ejecuta la sentencia SQL
+              ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+              
+             //Se llena el arryaList con los proyectos   
+              while (rsPA.next()) {
+
+                Pedido ped = new Pedido();
+
+                ped.setId(rsPA.getInt("id"));
+               // ped.getUsuario().setNombre(rsPA.getString("usuario"));
+                ped.setFechaEntrega(rsPA.getString("fechaEntrega"));
+                ped.setHorarioEntrega(rsPA.getString("horarioEntrega"));
+                ped.setDireccionEntrega(rsPA.getString("direccionEntrega"));
+                ped.setMonto(rsPA.getDouble("monto"));
+                ped.setEstado(rsPA.getString("estado"));
+                
+                lista.add(ped);
+                
+              }
+              
+              rsPA.close(); // cierra conexion
+              return lista;
+              
+          } catch (SQLException e) {
+              throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, 
+                                      e.getMessage(), e.getErrorCode());
+          }catch (Exception e) {
+              throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, 
+                                      e.getMessage());
+          } finally {
+              
+          }
+          
+    }
+   
+   
+   
+   
+   public LinkedList listaDetalle(Pedido pedido)throws SNMPExceptions, SQLException{
+        String select = "";
+      LinkedList<DetPedido> lista = new LinkedList<DetPedido>();
+          
+          try {
+    
+              //Se instancia la clase de acceso a datos
+              AccesoDatos accesoDatos = new AccesoDatos();  
+
+              //Se crea la sentencia de búsqueda
+              select = 
+                      //"select id, idUsuario.nombre as [usuario], fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido";
+                      "select idPedido, idProducto, cantidad, precio from DetPedido";
+              
+              //Se ejecuta la sentencia SQL
+              ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+              
+             //Se llena el arryaList con los proyectos   
+              while (rsPA.next()) {
+
+                DetPedido det = new DetPedido();
+
+                det.getPedido().setId(rsPA.getInt("idPedido"));
+                det.setIdProducto(rsPA.getInt("idProducto"));
+                det.setCantidad(rsPA.getInt("cantidad"));
+                det.setMonto(rsPA.getInt("precio"));
+                
+                lista.add(det);
+                
+              }
+              
+              rsPA.close(); // cierra conexion
+              return lista;
+              
+          } catch (SQLException e) {
+              throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, 
+                                      e.getMessage(), e.getErrorCode());
+          }catch (Exception e) {
+              throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, 
+                                      e.getMessage());
+          } finally {
+              
+          }
+          
+    }
 }

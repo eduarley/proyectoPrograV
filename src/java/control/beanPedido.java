@@ -58,7 +58,7 @@ public class beanPedido implements Serializable {
     public beanPedido() {
     }
 
-    public void realizarPedido(Usuario us) {
+    public void realizarPedido(Usuario us) throws SNMPExceptions, SQLException {
         /*
         //primero se debe insertar el pedido
         usuario = us;
@@ -110,53 +110,46 @@ public class beanPedido implements Serializable {
         //primero se debe insertar el pedido
         usuario = us;
 
-        try {
+        PedidoDB pDB = new PedidoDB();
+        Pedido p = new Pedido(usuario, fechaEntrega, horarioEntrega, direccionEntrega, "");
 
-            PedidoDB pDB = new PedidoDB();
-            Pedido p = new Pedido(usuario, fechaEntrega, horarioEntrega, direccionEntrega, "");
+        double monto = 0;
+        for (Producto l : listaProductos) {
+            monto += l.getPrecio() * cantidad;
+        }
 
-            double monto = 0;
-            for (Producto l : listaProductos) {
-                monto += l.getPrecio() * cantidad;
+        p.setMonto(monto);
+
+        if (pDB.insertarPedido(p)) {
+
+            p.setId(pDB.ultimoIdInsertado());
+            ArrayList<Producto> arrayProductoTemp = new ArrayList<Producto>();
+
+            for (Producto list : listaProductos) {
+                arrayProductoTemp.add(list);
+
             }
 
-            p.setMonto(monto);
+            DetPedido detalle = new DetPedido(arrayProductoTemp, p);
+            detalle.setCantidad(cantidad);
 
-            if (pDB.insertarPedido(p)) {
+            for (Producto producto : arrayProductoTemp) {
+                detalle.setMonto(producto.getPrecio() * cantidad);
+            }
 
-                p.setId(pDB.ultimoIdInsertado());
-                ArrayList<Producto> arrayProductoTemp = new ArrayList<Producto>();
-                
-                for (Producto list : listaProductos) {
-                    arrayProductoTemp.add(list);
-
-                }
-
-                DetPedido detalle = new DetPedido(arrayProductoTemp, p);
-                detalle.setCantidad(cantidad);
-                
-                for (Producto producto : arrayProductoTemp) {
-                    detalle.setMonto(producto.getPrecio()*cantidad);
-                }
-
-                if (pDB.InsertarDetallePedido(detalle)) {
-                    FacesMessage message = new FacesMessage("Exito", "Exito al registrar pedido");
-                    FacesContext.getCurrentInstance().addMessage(null, message);
-                } else {
-                    FacesMessage message = new FacesMessage("Error", "Error al crear detalle");
-                    FacesContext.getCurrentInstance().addMessage(null, message);
-                    return;
-                }
-
-               
+            if (pDB.InsertarDetallePedido(detalle)) {
+                FacesMessage message = new FacesMessage("Exito", "Exito al registrar pedido");
+                FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
-                FacesMessage message = new FacesMessage("Error", "Al crear la pedido");
+                FacesMessage message = new FacesMessage("Error", "Error al crear detalle");
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 return;
             }
 
-        } catch (Exception e) {
-
+        } else {
+            FacesMessage message = new FacesMessage("Error", "Al crear la pedido");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return;
         }
 
     }

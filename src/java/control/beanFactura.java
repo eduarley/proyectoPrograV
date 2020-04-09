@@ -5,11 +5,16 @@
  */
 package control;
 
+import DAO.SNMPExceptions;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import model.DetPedido;
 import model.Direccion;
 import model.Pedido;
+import model.PedidoDB;
 import model.Usuario;
 
 /**
@@ -33,12 +38,33 @@ public class beanFactura implements Serializable {
     private double subTotal;
     private double total;
     private String montoPagado;
+    LinkedList<Pedido> listaPedidos = new LinkedList<Pedido>();
+    LinkedList<DetPedido> listaDetalles = new LinkedList<DetPedido>();
     
     public beanFactura() {
     }
     
+    //AQUÍ SE VA A INSERTAR EL PRODUCTO
     public void insertarFactura(Pedido pedido, Usuario usuario){
         
+    }
+
+    public LinkedList<Pedido> getListaPedidos() throws SNMPExceptions, SQLException {
+        PedidoDB pDB = new PedidoDB();
+        return pDB.listaPedido();
+    }
+
+    public LinkedList<DetPedido> getListaDetalles(Pedido pedido) throws SNMPExceptions, SQLException {
+        PedidoDB pDB = new PedidoDB();
+        return pDB.listaDetalle(pedido);
+    }
+
+    public void setListaDetalles(LinkedList<DetPedido> listaDetalles) {
+        this.listaDetalles = listaDetalles;
+    }
+
+    public void setListaPedidos(LinkedList<Pedido> listaPedidos) {
+        this.listaPedidos = listaPedidos;
     }
 
     public String getMontoPagado() {

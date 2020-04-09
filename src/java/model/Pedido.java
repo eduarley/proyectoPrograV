@@ -47,6 +47,8 @@ public class Pedido {
     
     
     public Pedido() {
+        usuario= new Usuario();
+        direccion= new Direccion();
     }
 
     public int getId() {

@@ -17,13 +17,24 @@ public class DetPedido {
     private int cantidad;
     private double monto;
     private Pedido pedido;
+    private int idProducto;
     public DetPedido(ArrayList<Producto> listaProductos, Pedido pedido) {
         this.listaProductos = listaProductos;
         
         this.pedido= pedido;
     }
 
-    
+    public DetPedido() {
+        pedido= new Pedido();
+    }        
+
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
     
     public ArrayList<Producto> getListaProductos() {
         return listaProductos;
