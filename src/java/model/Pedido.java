@@ -7,6 +7,7 @@ package model;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,6 +22,8 @@ public class Pedido {
     private String direccionEntrega;
     private double monto;
     private String estado;
+    
+    private ArrayList<DetPedido> arregloDetPedido= new ArrayList<DetPedido>();
     
     public Pedido(int id, Usuario usuario, Direccion direccion, String fechaEntrega, String horarioEntrega, String direccionEntrega, double monto, String estado) {
         this.id = id;
@@ -44,7 +47,9 @@ public class Pedido {
 
     
     
-    
+    public void agregarDetalle(DetPedido det){
+        this.arregloDetPedido.add(det);
+    }
     
     public Pedido() {
         usuario= new Usuario();
@@ -115,6 +120,14 @@ public class Pedido {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public ArrayList<DetPedido> getArregloDetPedido() {
+        return arregloDetPedido;
+    }
+
+    public void setArregloDetPedido(ArrayList<DetPedido> arregloDetPedido) {
+        this.arregloDetPedido = arregloDetPedido;
     }
     
     

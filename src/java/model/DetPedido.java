@@ -13,36 +13,32 @@ import java.util.ArrayList;
  */
 public class DetPedido {
     
-    private ArrayList<Producto> listaProductos;
     private int cantidad;
     private double monto;
-    private Pedido pedido;
-    private int idProducto;
-    public DetPedido(ArrayList<Producto> listaProductos, Pedido pedido) {
-        this.listaProductos = listaProductos;
-        
-        this.pedido= pedido;
+
+    
+    private int IdPedido;
+    private Producto producto;
+    
+    
+    public DetPedido(Producto producto, Pedido pedido) {
+       
     }
 
     public DetPedido() {
-        pedido= new Pedido();
+        
     }        
 
-    public int getIdProducto() {
-        return idProducto;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
+
     
-    public ArrayList<Producto> getListaProductos() {
-        return listaProductos;
-    }
-
-    public void setListaProductos(ArrayList<Producto> listaProductos) {
-        this.listaProductos = listaProductos;
-    }
+   
 
     public int getCantidad() {
         return cantidad;
@@ -52,13 +48,7 @@ public class DetPedido {
         this.cantidad = cantidad;
     }
 
-    public Pedido getPedido() {
-        return pedido;
-    }
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
 
     public double getMonto() {
         return monto;
@@ -66,6 +56,14 @@ public class DetPedido {
 
     public void setMonto(double monto) {
         this.monto = monto;
+    }
+
+    public int getIdPedido() {
+        return IdPedido;
+    }
+
+    public void setIdPedido(int IdPedido) {
+        this.IdPedido = IdPedido;
     }
 
     

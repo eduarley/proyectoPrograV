@@ -55,101 +55,74 @@ public class beanPedido implements Serializable {
 
     private int cantidad;
 
+    private ArrayList<DetPedido> arregloDetPedido = new ArrayList<DetPedido>();
+
+    //private ArrayList<Integer> listaCantidad;
     public beanPedido() {
     }
 
+    
+    
+    
+    public void limpiarCombo(){
+        
+        this.arregloDetPedido.clear();
+    }
+    
+    
+    
     public void realizarPedido(Usuario us) throws SNMPExceptions, SQLException {
-        /*
-        //primero se debe insertar el pedido
-        usuario = us;
-
-        try {
-
-            PedidoDB pDB = new PedidoDB();
-            Pedido p = new Pedido(usuario, fechaEntrega, horarioEntrega, direccionEntrega, "");
-
-            double monto = 0;
-            for (Producto l : listaProductos) {
-                monto += l.getPrecio() * cantidad;
-            }
-            p.setMonto(monto);
-            
-            if (pDB.insertarPedido(p)) {
-                //FacesMessage message = new FacesMessage("Exito", "");
-                //FacesContext.getCurrentInstance().addMessage(null, message);
-            } else {
-                //FacesMessage message = new FacesMessage("Error", "");
-                //FacesContext.getCurrentInstance().addMessage(null, message);
-            }
-
-            
-            p.setId(pDB.ultimoIdInsertado());
-            
-            
-            // se inserta el detalle
-            ArrayList<Producto> arrayProductoTemp= new ArrayList<Producto>();
-            for (Producto l : listaProductos) {
-                arrayProductoTemp.add(l);
-            }
-            
-            if (pDB.InsertarDetallePedido(p, arrayProductoTemp, cantidad)) {
-                
-                FacesMessage message = new FacesMessage("Exito", "");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-            } else {
-                FacesMessage message = new FacesMessage("Error", "");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-            }
-
-        } catch (Exception e) {
-
-        }
-
-         */
 
         //primero se debe insertar el pedido
         usuario = us;
-
         PedidoDB pDB = new PedidoDB();
-        Pedido p = new Pedido(usuario, fechaEntrega, horarioEntrega, direccionEntrega, "");
-
+        Pedido pedido = new Pedido(usuario, fechaEntrega, horarioEntrega, direccionEntrega, "");
         double monto = 0;
-        for (Producto l : listaProductos) {
-            monto += l.getPrecio() * cantidad;
+
+        //aqui convierto de linkedlist a arraylist
+        ArrayList<Producto> arrayProductoTemp = new ArrayList<Producto>();
+        for (Producto prod : listaProductos) {
+            arrayProductoTemp.add(prod);
+
         }
 
-        p.setMonto(monto);
+        DetPedido detalle = null;
 
-        if (pDB.insertarPedido(p)) {
-
-            p.setId(pDB.ultimoIdInsertado());
-            ArrayList<Producto> arrayProductoTemp = new ArrayList<Producto>();
-
-            for (Producto list : listaProductos) {
-                arrayProductoTemp.add(list);
-
-            }
-
-            DetPedido detalle = new DetPedido(arrayProductoTemp, p);
-            detalle.setCantidad(cantidad);
-
+        if (pDB.insertarPedido(pedido)) {
+            pedido.setId(pDB.ultimoIdInsertado());
             for (Producto producto : arrayProductoTemp) {
-                detalle.setMonto(producto.getPrecio() * cantidad);
-            }
+                detalle = new DetPedido();
+                detalle.setProducto(producto);
+                detalle.setIdPedido(pedido.getId());
 
-            if (pDB.InsertarDetallePedido(detalle)) {
-                FacesMessage message = new FacesMessage("Exito", "Exito al registrar pedido");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-            } else {
-                FacesMessage message = new FacesMessage("Error", "Error al crear detalle");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-                return;
-            }
+                detalle.setCantidad(1);
+                detalle.setMonto(producto.getPrecio() * 1);
+                this.arregloDetPedido.add(detalle);
 
+            }
         } else {
-            FacesMessage message = new FacesMessage("Error", "Al crear la pedido");
-            FacesContext.getCurrentInstance().addMessage(null, message);
             return;
+        }
+        
+        
+        for (DetPedido detPed : arregloDetPedido) {
+            pedido.agregarDetalle(detPed);
+            pedido.setMonto(pedido.getMonto() + detPed.getMonto());
+            //pDB.actualizarMontoPedido(pedido);  //hace un update al monto de la factura
+
+        }
+
+        //pDB.actualizarMontoPedido(pedido);  //hace un update al monto de la factura
+        if (pDB.InsertarDetallePedido(pedido)) {
+
+            FacesMessage message = new FacesMessage("bien");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            
+        this.arregloDetPedido.clear();
+            //this.listaProductos.clear();
+        } else {
+            FacesMessage message = new FacesMessage("mal");
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
 
     }
@@ -164,7 +137,7 @@ public class beanPedido implements Serializable {
     }
 
     public void agregarProducto() throws SNMPExceptions, SQLException {
-        
+
         productoTemp = ProductoDB.consultarProducto(idProducto);
         listaProductos.add(productoTemp);
     }
@@ -264,9 +237,11 @@ public class beanPedido implements Serializable {
 
     public double subtotal() {
         double monto = 0;
+
         for (Producto p : listaProductos) {
-            monto += p.getPrecio() * cantidad;
+            monto += p.getPrecio() * 1;
         }
+
         return monto;
     }
 
@@ -410,4 +385,21 @@ public class beanPedido implements Serializable {
         this.cantidad = cantidad;
     }
 
+//    public ArrayList<Integer> getListaCantidad() {
+//        return listaCantidad;
+//    }
+//
+//    public void setListaCantidad(ArrayList<Integer> listaCantidad) {
+//        this.listaCantidad = listaCantidad;
+//    }
+//
+//    
+//    
+    public ArrayList<DetPedido> getArregloDetPedido() {
+        return arregloDetPedido;
+    }
+
+    public void setArregloDetPedido(ArrayList<DetPedido> arregloDetPedido) {
+        this.arregloDetPedido = arregloDetPedido;
+    }
 }

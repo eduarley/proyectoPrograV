@@ -36,7 +36,7 @@
 
 
         <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
-        
+
         #{beanInicioSesion.cerrarSesion()}
 
     </h:head>
@@ -96,13 +96,13 @@
                         <img src="images/logo amarillo.png" alt="logo" style="padding-top: 50px"/>
                     </div>
 
-                    <h:form class="login100-form validate-form">
+                    <h:form class="login100-form validate-form" >
                         <span class="login100-form-title">
                             Ingreso
                         </span>
 
                         <div class="wrap-input100 validate-input" data-validate = "Usuario Requerido" >
-                            <h:inputText value="#{beanInicioSesion.id}" class="input100" a:placeholder="Usuario"  ></h:inputText>
+                            <h:inputText value="#{beanInicioSesion.id}" tabindex="1"  class="input100" a:placeholder="Usuario"  ></h:inputText>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fa fa-user" aria-hidden="true"></i>
@@ -110,7 +110,7 @@
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate = "Contraseña Requerida" >
-                            <h:inputSecret value="#{beanInicioSesion.clave}" class="input100" a:placeholder="Contraseña" ></h:inputSecret>
+                            <h:inputSecret value="#{beanInicioSesion.clave}" tabindex="2" class="input100" a:placeholder="Contraseña" ></h:inputSecret>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fa fa-lock" aria-hidden="true"></i>
@@ -234,9 +234,13 @@
                                 $('.js-tilt').tilt({
                                     scale: 1.1
                                 })
+
+
+
+
         </script>
-        
-       
+
+
     </h:body>
 </html>
 

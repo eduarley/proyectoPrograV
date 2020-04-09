@@ -54,10 +54,11 @@ public class beanFactura implements Serializable {
         return pDB.listaPedido();
     }
 
+    /*
     public LinkedList<DetPedido> getListaDetalles(Pedido pedido) throws SNMPExceptions, SQLException {
         PedidoDB pDB = new PedidoDB();
         return pDB.listaDetalle(pedido);
-    }
+    }*/
 
     public void setListaDetalles(LinkedList<DetPedido> listaDetalles) {
         this.listaDetalles = listaDetalles;

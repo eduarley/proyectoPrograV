@@ -81,6 +81,7 @@ create table DetPedido
 (
 	idPedido int not null,
 	idProducto int not null,
+	--idProducto int,
 	cantidad int,
 	precio money
 )
@@ -117,6 +118,7 @@ alter table Despacho add constraint PK_Despacho primary key (id)
 alter table CXC add constraint PK_Cxc primary key (idEncFactura, idUsuario)
 alter table DetFactura add constraint PK_DetFactura primary key (idEncFactura, idProducto)
 alter table DetPedido add constraint PK_DetPedido primary key (idPedido, idProducto)
+--alter table DetPedido add constraint PK_DetPedido primary key (idPedido)
 alter table HorarioEntrega add constraint PK_HorarioEntrega primary key (id,idUsuario)
 alter table DetDespacho add constraint PK_DetDespacho primary key (idDespacho, idProducto)
 
@@ -162,7 +164,7 @@ alter table EncFactura add constraint FK_PedidoEncFactura foreign key (idPedido)
 
 Insert into Usuario values (1, 'Eduardo Arley', '1', 'Naranjo', '64488685', 'admin', 'activo')
 Insert into Usuario values (123456, 'Bananito Pérez', '1234', 'Chilamate de Poás', '86758675', 'admin', 'activo')
-Insert into Usuario values (1234, 'Eldes Pelote', '1234', 'Sarchí', '60973263', 'cliente', 'inactivo')
+Insert into Usuario values (1234, 'Eldes Pelote', '1234', 'Sarchí', '60973263', 'cliente', 'activo')
 
 
 
