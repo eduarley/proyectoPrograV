@@ -35,7 +35,6 @@ create table Producto
 (
 	id int not null identity(1,1),
 	descripcion varchar(50),
-	--imagen image,
 	urlImagen varchar(1500),
 	precio  money,
 	existencias int,

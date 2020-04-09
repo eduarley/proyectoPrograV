@@ -14,13 +14,13 @@ public class Factura {
     private Usuario usuario;
     private Pedido pedido;
     private Direccion direccion;
-    private TipoPago tipoPago;
+    private String tipoPago;
     private double iva;
     private double descuento;
     private double subTotal;
     private double total;
 
-    public Factura(int id, Usuario usuario, Pedido pedido, Direccion direccion, TipoPago tipoPago, double iva, double descuento, double subTotal, double total) {
+    public Factura(int id, Usuario usuario, Pedido pedido, Direccion direccion, String tipoPago, double iva, double descuento, double subTotal, double total) {
         this.id = id;
         this.usuario = usuario;
         this.pedido = pedido;
@@ -67,11 +67,11 @@ public class Factura {
         this.direccion = direccion;
     }
 
-    public TipoPago getTipoPago() {
+    public String getTipoPago() {
         return tipoPago;
     }
 
-    public void setTipoPago(TipoPago tipoPago) {
+    public void setTipoPago(String tipoPago) {
         this.tipoPago = tipoPago;
     }
 

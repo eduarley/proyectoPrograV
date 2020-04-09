@@ -171,6 +171,7 @@ public class beanPedido implements Serializable {
     }
 
     public void agregarProducto() throws SNMPExceptions, SQLException {
+        
         productoTemp = ProductoDB.consultarProducto(idProducto);
         listaProductos.add(productoTemp);
     }

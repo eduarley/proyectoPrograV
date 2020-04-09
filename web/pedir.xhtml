@@ -132,7 +132,7 @@
                                 <h:form>
                                     <h:panelGrid columns="2" cellpadding="5" styleClass="ui-grid">
                                         <h:outputLabel for="@next" value="Cantidad: " />
-                                        <p:spinner id="basic" value="#{beanPedido.cantidad}"  />
+                                        <p:spinner id="basic" min="1" max="40" value="#{beanPedido.cantidad}"  />
                                     </h:panelGrid>
                                 </h:form>
                                 <br></br>

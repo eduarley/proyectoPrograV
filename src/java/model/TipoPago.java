@@ -10,7 +10,11 @@ package model;
  * @author march
  */
 public enum TipoPago {
-    Efectivo,
+    Efectivo{
+        public String toString(){
+            return "Efectivo";
+        }
+    },
     Cuenta_Por_Cobrar{
         public String toString(){
             return "Cuenta por cobrar";
