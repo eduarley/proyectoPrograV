@@ -191,7 +191,6 @@ public class PedidoDB {
                 Pedido ped = new Pedido();
 
                 ped.setId(rsPA.getInt("id"));
-                // ped.getUsuario().setNombre(rsPA.getString("usuario"));
                 ped.setFechaEntrega(rsPA.getString("fechaEntrega"));
                 ped.setHorarioEntrega(rsPA.getString("horarioEntrega"));
                 ped.setDireccionEntrega(rsPA.getString("direccionEntrega"));
@@ -217,7 +216,7 @@ public class PedidoDB {
 
     }
 
-    /*
+    
    public LinkedList listaDetalle(Pedido pedido)throws SNMPExceptions, SQLException{
         String select = "";
       LinkedList<DetPedido> lista = new LinkedList<DetPedido>();
@@ -230,7 +229,7 @@ public class PedidoDB {
               //Se crea la sentencia de búsqueda
               select = 
                       //"select id, idUsuario.nombre as [usuario], fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido";
-                      "select idPedido, idProducto, cantidad, precio from DetPedido";
+                      "select idPedido, idProducto, cantidad, precio from DetPedido where='" + pedido.getId() + "'";
               
               //Se ejecuta la sentencia SQL
               ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
@@ -240,8 +239,8 @@ public class PedidoDB {
 
                 DetPedido det = new DetPedido();
 
-                det.getPedido().setId(rsPA.getInt("idPedido"));
-                det.setIdProducto(rsPA.getInt("idProducto"));
+                det.setIdPedido(rsPA.getInt("idPedido"));
+                det.getProducto().setId(rsPA.getInt("idProducto"));
                 det.setCantidad(rsPA.getInt("cantidad"));
                 det.setMonto(rsPA.getInt("precio"));
                 
@@ -262,5 +261,5 @@ public class PedidoDB {
               
           }
           
-    }*/
+    }
 }

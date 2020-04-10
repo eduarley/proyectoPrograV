@@ -16,6 +16,8 @@ import model.Direccion;
 import model.Pedido;
 import model.PedidoDB;
 import model.Usuario;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -40,25 +42,41 @@ public class beanFactura implements Serializable {
     private String montoPagado;
     LinkedList<Pedido> listaPedidos = new LinkedList<Pedido>();
     LinkedList<DetPedido> listaDetalles = new LinkedList<DetPedido>();
+    private Pedido pedidoFrame;
     
     public beanFactura() {
+        pedidoFrame= new Pedido();
     }
     
     //AQUÍ SE VA A INSERTAR EL PRODUCTO
     public void insertarFactura(Pedido pedido, Usuario usuario){
         
     }
+    
+    public void ayuda(){
+        FacesMessage message = new FacesMessage("Ayuda", "Aquí podrá consultar o facturar pedidos, recuerde que primero debe seleccionar el Pedido que desea consultar o facturar");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 
     public LinkedList<Pedido> getListaPedidos() throws SNMPExceptions, SQLException {
         PedidoDB pDB = new PedidoDB();
         return pDB.listaPedido();
     }
-
-    /*
-    public LinkedList<DetPedido> getListaDetalles(Pedido pedido) throws SNMPExceptions, SQLException {
+    
+    public LinkedList<DetPedido> getListaDetalles() throws SNMPExceptions, SQLException {
         PedidoDB pDB = new PedidoDB();
-        return pDB.listaDetalle(pedido);
-    }*/
+        return pDB.listaDetalle(pedidoFrame);
+    }
+
+    public Pedido getPedidoFrame() {
+        return pedidoFrame;
+    }
+
+    public void setPedidoFrame(Pedido pedidoFrame) {
+        this.pedidoFrame = pedidoFrame;
+//        FacesMessage message = new FacesMessage("Estimado Cliente", "Ha seleccionado el pedido " + this.pedidoFrame.getId() + ", está listo para ser consultado o facturado");
+//        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 
     public void setListaDetalles(LinkedList<DetPedido> listaDetalles) {
         this.listaDetalles = listaDetalles;

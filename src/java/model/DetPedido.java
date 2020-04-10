@@ -26,7 +26,7 @@ public class DetPedido {
     }
 
     public DetPedido() {
-        
+        producto= new Producto();
     }        
 
     public Producto getProducto() {

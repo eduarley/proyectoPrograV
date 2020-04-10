@@ -182,6 +182,26 @@ insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,
 values ('Taco al pastor','https://www.comedera.com/wp-content/uploads/2017/08/tacos-al-pastor-receta.jpg','1250','5','Cena','Tortilla de maíz con carne y especias','1');
 
 
+
+/*insert into DireccionEntrega(idUsuario, direccion) values (1234, 'Chilamate de Poás')
+insert into DireccionEntrega(idUsuario, direccion) values (1234, 'San Rafael de Poás')
+insert into DireccionEntrega(idUsuario, direccion) values (1234, 'San Pedro de Poás')
+
+
+
+insert into HorarioEntrega(idUsuario, horaInicio, horaFin) values (1234, '10:00AM', '11:30AM')
+insert into HorarioEntrega(idUsuario, horaInicio, horaFin) values (1234, '1:00PM', '4:30PM')*/
+
+
+
+/*insert into Pedido(idUsuario, fechaEntrega, horarioEntrega, direccionEntrega, monto, estado) values (1234, '30/04/2020', '10:00AM a 11:30AM', 'San Rafael de Poás', 3500, 'pendiente')
+
+
+
+insert into DetPedido(idPedido, idProducto, cantidad, precio) values (1, 1, 1, 1500)
+insert into DetPedido(idPedido, idProducto, cantidad, precio) values (1, 2, 1, 2000)*/
+
+
 /*
 
 alter table EncFactura add constraint FK_EncFacturaDireccionEntrega foreign key (idDireccion) references DireccionEntrega(id)
@@ -200,3 +220,10 @@ alter table EncFactura add constraint FK_EncFacturaDireccionEntrega foreign key 
 select * from Usuario
 select * from DireccionEntrega
 select * from HorarioEntrega
+
+select * from Pedido
+select * from DetPedido
+
+
+delete from Pedido
+delete from DetPedido
