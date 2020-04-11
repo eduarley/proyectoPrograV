@@ -39,8 +39,8 @@
         <link rel="stylesheet" href="css/icomoon.css"/>
         <link rel="stylesheet" href="css/style.css"/>
         <link href="css/tabla.css" rel="stylesheet" type="text/css"/>
-
-
+        <link href="css/ayuda.css" rel="stylesheet" type="text/css"/>
+        
     </h:head>
     <h:body>
 
@@ -83,7 +83,7 @@
 
 
 
-                        <li  class="nav-item"><a href="menu.jsp" class="nav-link">Inicio</a></li>
+                        <li  class="nav-item"><a href="principal.jsp" class="nav-link">Inicio</a></li>
 
                         <li class="dropdown nav-item">
                             <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
@@ -102,7 +102,7 @@
 
 
 
-                        <li class="nav-item"><a href="facturar.xhtml" class="nav-link">Facturación</a></li>
+                        <li class="nav-item"><a href="facturar.xhtml" class="nav-link">Facturar</a></li>
 
                         <li class="dropdown nav-item">
                             <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
@@ -138,7 +138,7 @@
                             </div>
                         </li>
 
-                        <li class="nav-item"><h:form><h:commandButton value="Ayuda"  class='btn btn-info nav-link' actionListener="#{beanProducto.ayuda()}"></h:commandButton></h:form></li>
+                       <li class="nav-item"><span class="bp-header__present">Ayuda <span class="bp-tooltip fa fa-info-circle" data-content="En esta página podrá insertar, modificar, eliminar y consultar productos"></span></span></li>
 
 
 

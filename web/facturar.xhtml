@@ -40,7 +40,7 @@
         <link rel="stylesheet" href="css/style.css"/>
         <link href="css/tabla.css" rel="stylesheet" type="text/css"/>
         
-
+        <link href="css/ayuda.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
 
@@ -83,7 +83,7 @@
 
 
 
-                        <li  class="nav-item"><a href="menu.jsp" class="nav-link">Inicio</a></li>
+                        <li  class="nav-item"><a href="principal.jsp" class="nav-link">Inicio</a></li>
 
                         <li class="dropdown nav-item">
                             <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
@@ -92,7 +92,7 @@
                             </div>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="clientes.xhtml">Clientes</a>
-                                <a class="dropdown-item active" href="producto.xhtml">Productos</a>
+                                <a class="dropdown-item" href="producto.xhtml">Productos</a>
                                 <!--<a class="dropdown-item" href="pedir.xhtml">Pedidos</a>-->
                                 <a class="dropdown-item" href="#">Despachos</a>
                             </div>
@@ -102,7 +102,7 @@
 
 
 
-                        <li class="nav-item"><a href="facturar.xhtml" class="nav-link">Facturación</a></li>
+                        <li class="nav-item active"><a href="facturar.xhtml" class="nav-link">Facturar</a></li>
 
                         <li class="dropdown nav-item">
                             <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
@@ -138,8 +138,8 @@
                             </div>
                         </li>
 
-                        <li class="nav-item"><h:form><h:commandButton value="Ayuda"  class='btn btn-info nav-link' actionListener="#{beanFactura.ayuda()}"></h:commandButton></h:form></li>
-
+                        <li class="nav-item"><span class="bp-header__present">Ayuda <span class="bp-tooltip fa fa-info-circle" data-content="Aquí podrá consultar o facturar
+                                                                                          pedidos, recuerde que primero debe seleccionar el Pedido que desea consultar o facturar"></span></span></li>
 
 
 
@@ -371,7 +371,7 @@
                                                             <f:facet name="header">
                                                                 <h:outputText value="Producto"></h:outputText>
                                                             </f:facet>
-                                                            <h:outputText value="#{detalle.producto.id}"></h:outputText>
+                                                            <h:outputText value="#{detalle.producto.descripcion}"></h:outputText>
                                                         </h:column>
 
                                                         <h:column>

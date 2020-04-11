@@ -47,11 +47,22 @@
                 white-space: nowrap;
             }
         </style>
+        
+        
+        <link href="css/ayuda.css" rel="stylesheet" type="text/css"/>
+        
     </h:head>
     <h:body>
 
-        <nav  class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" >
-            <div  class="container" style="background:-webkit-gradient(linear, 72% 56%, 10% 21%, from(#9BE0FF), to(#FFD928));">
+        <!--style="background:-webkit-gradient(linear, 72% 56%, 10% 21%, from(#9BE0FF), to(#FFD928));"
+        navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light
+        
+        
+        ftco-navbar-light
+        -->
+        
+        <nav  class="navbar navbar-expand-lg navbar-dark bg-dark " id="ftco-navbar" >
+            <div  class="container">
                 <a  class="navbar-brand" href="faces/menu.jsp">Kraken</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                         aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation" >
@@ -85,8 +96,7 @@
 
                             </div>
                         </li>
-                        <li class="nav-item"><h:form><h:commandButton value="Ayuda"  class='btn btn-info nav-link' actionListener="#{beanPedido.ayuda()}"></h:commandButton></h:form></li>
-
+                        <li class="nav-item"><span class="bp-header__present">Ayuda <span class="bp-tooltip fa fa-info-circle" data-content="En esta página podrá insertar, modificar, eliminar y consultar pedidos"></span></span></li>
 
 
                     </ul>

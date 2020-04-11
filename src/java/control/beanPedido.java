@@ -61,16 +61,11 @@ public class beanPedido implements Serializable {
     public beanPedido() {
     }
 
-    
-    
-    
-    public void limpiarCombo(){
-        
+    public void limpiarCombo() {
+
         this.arregloDetPedido.clear();
     }
-    
-    
-    
+
     public void realizarPedido(Usuario us) throws SNMPExceptions, SQLException {
 
         //primero se debe insertar el pedido
@@ -85,6 +80,40 @@ public class beanPedido implements Serializable {
             arrayProductoTemp.add(prod);
 
         }
+
+        ///////////////////////////////////validaciones//////////////////////
+        
+        
+        
+//        for (Producto pr : arrayProductoTemp) {
+//            if (pr.getDescripcion().equalsIgnoreCase("")) {
+//                FacesMessage message = new FacesMessage("Error", "No se puede elegir la primera opcion.");
+//                FacesContext.getCurrentInstance().addMessage(null, message);
+//                return;
+//            }
+//        }
+
+        if (arrayProductoTemp.isEmpty()) {
+            FacesMessage message = new FacesMessage("Error", "No se ha seleccionado ningún producto.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return;
+        }
+        if (direccionEntrega.equalsIgnoreCase("0")) {
+            FacesMessage message = new FacesMessage("Error", "No se ha seleccionado ninguna dirección.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return;
+        }
+        if (horarioEntrega.equalsIgnoreCase("0")) {
+            FacesMessage message = new FacesMessage("Error", "No se ha seleccionado ningún horario.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return;
+        }
+        if (fechaEntrega.equalsIgnoreCase("")) {
+            FacesMessage message = new FacesMessage("Error", "No se ha seleccionado ninguna fecha de entrega.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return;
+        }
+        ///////////////////////////////////fin validaciones//////////////////////////
 
         DetPedido detalle = null;
 
@@ -103,8 +132,7 @@ public class beanPedido implements Serializable {
         } else {
             return;
         }
-        
-        
+
         for (DetPedido detPed : arregloDetPedido) {
             pedido.agregarDetalle(detPed);
             pedido.setMonto(pedido.getMonto() + detPed.getMonto());
@@ -115,13 +143,13 @@ public class beanPedido implements Serializable {
         //pDB.actualizarMontoPedido(pedido);  //hace un update al monto de la factura
         if (pDB.InsertarDetallePedido(pedido)) {
 
-            FacesMessage message = new FacesMessage("bien");
+            FacesMessage message = new FacesMessage("Éxito", "El pedido se ha registrado con éxito!.");
             FacesContext.getCurrentInstance().addMessage(null, message);
-            
-        this.arregloDetPedido.clear();
+
+            this.arregloDetPedido.clear();
             //this.listaProductos.clear();
         } else {
-            FacesMessage message = new FacesMessage("mal");
+            FacesMessage message = new FacesMessage("Error", "Hubo un error al guardar el pedido.");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
 

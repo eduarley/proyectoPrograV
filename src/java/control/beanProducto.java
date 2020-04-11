@@ -68,7 +68,7 @@ public class beanProducto implements Serializable {
             FacesMessage message = new FacesMessage("Éxito", "Guardado con éxito");
             FacesContext.getCurrentInstance().addMessage(null, message);
         } else {
-            FacesMessage message = new FacesMessage("Error al guardar la imagen.!");
+            FacesMessage message = new FacesMessage("Error","Error al guardar la imagen.!");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
 

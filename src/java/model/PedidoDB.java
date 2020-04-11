@@ -96,7 +96,7 @@ public class PedidoDB {
     public boolean InsertarDetallePedido(Pedido p)
             throws SNMPExceptions, SQLException {
         String strSQL = "";
-        
+
         /*
         ArrayList<DetPedido> listaSinRepetidos = new ArrayList<DetPedido>();
 
@@ -113,13 +113,11 @@ public class PedidoDB {
             listaSinRepetidos.add(d.getValue());
             System.out.println(d.getValue());
         }
-*/
-        
+         */
         try {
 
             AccesoDatos acceso = new AccesoDatos();
-            
-            
+
             for (DetPedido detalle : p.getArregloDetPedido()) {
                 strSQL
                         = "INSERT INTO DetPedido"
@@ -141,7 +139,7 @@ public class PedidoDB {
         } finally {
 
         }
-        
+
     }
 
     public boolean actualizarMontoPedido(Pedido p)
@@ -215,51 +213,109 @@ public class PedidoDB {
         }
 
     }
-
-    
-   public LinkedList listaDetalle(Pedido pedido)throws SNMPExceptions, SQLException{
+        
+        
+        
+    public ArrayList<DetPedido> listaDetallePedidoPorPedido(Pedido pedido) 
+            throws SNMPExceptions, SQLException {
         String select = "";
-      LinkedList<DetPedido> lista = new LinkedList<DetPedido>();
-          
-          try {
-    
-              //Se instancia la clase de acceso a datos
-              AccesoDatos accesoDatos = new AccesoDatos();  
+        ArrayList<DetPedido> lista = new ArrayList<DetPedido>();
 
-              //Se crea la sentencia de búsqueda
-              select = 
-                      //"select id, idUsuario.nombre as [usuario], fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido";
-                      "select idPedido, idProducto, cantidad, precio from DetPedido where='" + pedido.getId() + "'";
-              
-              //Se ejecuta la sentencia SQL
-              ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
-              
-             //Se llena el arryaList con los proyectos   
-              while (rsPA.next()) {
+        try {
+
+            //Se instancia la clase de acceso a datos
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            //Se crea la sentencia de búsqueda
+            select
+                    = //"select id, idUsuario.nombre as [usuario], fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido";
+                    "select * from DetPedido where idPedido='"+pedido.getId()+"'";
+
+            //Se ejecuta la sentencia SQL
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+            
+            ProductoDB pDB= new ProductoDB();
+            
+            //Se llena el arryaList con los proyectos   
+            while (rsPA.next()) {
+                
+               DetPedido detalle = new DetPedido();
+               Producto prod= pDB.consultarProducto(rsPA.getInt("idProducto"));
+               
+               detalle.setCantidad(rsPA.getInt("cantidad"));
+               detalle.setIdPedido(rsPA.getInt("idPedido"));
+               detalle.setProducto(prod);
+               detalle.setMonto(rsPA.getDouble("precio"));
+               
+                lista.add(detalle);
+
+            }
+
+            rsPA.close(); // cierra conexion
+            return lista;
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage());
+        } finally {
+
+        }
+
+    }
+        
+
+
+    public LinkedList listaDetalle(Pedido pedido) throws SNMPExceptions, SQLException {
+        String select = "";
+        LinkedList<DetPedido> lista = new LinkedList<DetPedido>();
+        
+        
+        ArrayList<DetPedido> detalles= listaDetallePedidoPorPedido(pedido);
+        try {
+
+            //Se instancia la clase de acceso a datos
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            //Se crea la sentencia de búsqueda
+            select
+                    = //"select id, idUsuario.nombre as [usuario], fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido";
+                    // "select idPedido, idProducto, cantidad, precio from DetPedido where idPedido='" + pedido.getId() + "'";
+                    "select d.idPedido, p.descripcion, d.cantidad, d.precio from DetPedido d,producto p where idPedido ='" + pedido.getId() + "' and idProducto=id";
+//            for (DetPedido detPedido : detalles) {
+//                select += "and idProducto='" + detPedido.getProducto().getId() + "'";
+//            }
+            //Se ejecuta la sentencia SQL
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+
+            //Se llena el arryaList con los proyectos   
+            while (rsPA.next()) {
 
                 DetPedido det = new DetPedido();
 
                 det.setIdPedido(rsPA.getInt("idPedido"));
-                det.getProducto().setId(rsPA.getInt("idProducto"));
+            det.getProducto().setDescripcion(rsPA.getString("descripcion"));
                 det.setCantidad(rsPA.getInt("cantidad"));
                 det.setMonto(rsPA.getInt("precio"));
-                
+
                 lista.add(det);
-                
-              }
-              
-              rsPA.close(); // cierra conexion
-              return lista;
-              
-          } catch (SQLException e) {
-              throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, 
-                                      e.getMessage(), e.getErrorCode());
-          }catch (Exception e) {
-              throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, 
-                                      e.getMessage());
-          } finally {
-              
-          }
-          
+
+            }
+
+            rsPA.close(); // cierra conexion
+            return lista;
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage());
+        } finally {
+
+        }
+
     }
 }

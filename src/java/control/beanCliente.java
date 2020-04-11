@@ -59,14 +59,14 @@ public class beanCliente implements Serializable {
 
         try {
             if (uDB.InsertarUsuario(usuario)) {
-                FacesMessage message = new FacesMessage("El usuario " + usuario.getNombre() + " se ha registrado correctamente");
+                FacesMessage message = new FacesMessage("Éxito","El usuario " + usuario.getNombre() + " se ha registrado correctamente");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
-                FacesMessage message = new FacesMessage("Error al registrar");
+                FacesMessage message = new FacesMessage("Error","Error al registrar");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage("Hubo una falla: " + e.getMessage());
+            FacesMessage message = new FacesMessage("Error","Hubo una falla: " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
 
@@ -83,14 +83,14 @@ public class beanCliente implements Serializable {
 
         try {
             if (uDB.InsertarUsuario(usuario)) {
-                FacesMessage message = new FacesMessage("El usuario " + usuario.getNombre() + " se ha registrado correctamente");
+                FacesMessage message = new FacesMessage("Éxito","El usuario " + usuario.getNombre() + " se ha registrado correctamente");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
-                FacesMessage message = new FacesMessage("Error al registrar");
+                FacesMessage message = new FacesMessage("Error","Hubo un error al registrar");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage("Hubo una falla: " + e.getMessage());
+            FacesMessage message = new FacesMessage("Error","Hubo una falla: " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
 
@@ -102,14 +102,14 @@ public class beanCliente implements Serializable {
 
         try {
             if (uDB.eliminarUsuario(us)) {
-                FacesMessage message = new FacesMessage("El usuario " + us.getNombre() + " ha sido desactivado correctamente");
+                FacesMessage message = new FacesMessage("Éxito","El usuario " + us.getNombre() + " ha sido desactivado correctamente");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
-                FacesMessage message = new FacesMessage("Error al desactivar");
+                FacesMessage message = new FacesMessage("Error","Error al desactivar");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage("Hubo una falla: " + e.getMessage());
+            FacesMessage message = new FacesMessage("Error","Hubo una falla: " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
 
@@ -120,14 +120,14 @@ public class beanCliente implements Serializable {
 
         try {
             if (uDB.activarUsuario(us.getId())) {
-                FacesMessage message = new FacesMessage("El usuario " + us.getNombre() + " ha sido activado correctamente");
+                FacesMessage message = new FacesMessage("Éxito","El usuario " + us.getNombre() + " ha sido activado correctamente");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
-                FacesMessage message = new FacesMessage("Error al activar");
+                FacesMessage message = new FacesMessage("Error","Error al activar");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage("Hubo una falla: " + e.getMessage());
+            FacesMessage message = new FacesMessage("Error","Hubo una falla: " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
 
