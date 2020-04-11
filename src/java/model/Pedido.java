@@ -22,6 +22,7 @@ public class Pedido {
     private String direccionEntrega;
     private double monto;
     private String estado;
+    private String nombreUsuario;
     
     private ArrayList<DetPedido> arregloDetPedido= new ArrayList<DetPedido>();
     
@@ -129,6 +130,12 @@ public class Pedido {
     public void setArregloDetPedido(ArrayList<DetPedido> arregloDetPedido) {
         this.arregloDetPedido = arregloDetPedido;
     }
-    
-    
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
 }

@@ -20,11 +20,13 @@ public class Factura {
     private double subTotal;
     private double total;
 
-    public Factura(int id, Usuario usuario, Pedido pedido, Direccion direccion, String tipoPago, double iva, double descuento, double subTotal, double total) {
-        this.id = id;
-        this.usuario = usuario;
-        this.pedido = pedido;
-        this.direccion = direccion;
+    public Factura(int idUsuario, int idPedido, String direccion, String tipoPago, double iva, double descuento, double subTotal, double total) {
+        this.usuario= new Usuario();
+        this.pedido= new Pedido();
+        this.direccion= new Direccion();
+        this.usuario.setId(idUsuario);
+        this.pedido.setId(idPedido);
+        this.direccion.setDireccion(direccion);
         this.tipoPago = tipoPago;
         this.iva = iva;
         this.descuento = descuento;

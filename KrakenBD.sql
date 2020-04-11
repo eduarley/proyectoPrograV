@@ -69,7 +69,7 @@ create table EncFactura
 	id int identity(1,1) not null,
 	idUsuario int not null,
 	idPedido int not null,
-	idDireccion int not null,
+	direccion varchar(1000),
 	tipoPago varchar(20),
 	subTotal money,
 	iva money,

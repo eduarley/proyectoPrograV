@@ -177,8 +177,9 @@ public class PedidoDB {
 
             //Se crea la sentencia de búsqueda
             select
-                    = //"select id, idUsuario.nombre as [usuario], fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido";
-                    "select id, fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido";
+                    = //"select id, idUsuario, fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido where estado='" + "pendiente" + "'";
+//                    "select id, idUsuario, fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido where estado='" + "pendiente" + "'";
+                    "select p.id, p.idUsuario, u.nombre, p.fechaEntrega, p.horarioEntrega, p.direccionEntrega, p.monto, p.estado from Pedido p, Usuario u where p.estado='" + "pendiente" + "' and idUsuario=u.id";
 
             //Se ejecuta la sentencia SQL
             ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
@@ -189,6 +190,10 @@ public class PedidoDB {
                 Pedido ped = new Pedido();
 
                 ped.setId(rsPA.getInt("id"));
+                ped.getUsuario().setId(rsPA.getInt("idUsuario"));
+                ped.getUsuario().setNombre(rsPA.getString("nombre"));
+       //         ped.getUsuario().setNombre(UsuarioDB.seleccionarNombre(ped.getUsuario().getId()));
+                
                 ped.setFechaEntrega(rsPA.getString("fechaEntrega"));
                 ped.setHorarioEntrega(rsPA.getString("horarioEntrega"));
                 ped.setDireccionEntrega(rsPA.getString("direccionEntrega"));
@@ -283,7 +288,7 @@ public class PedidoDB {
             select
                     = //"select id, idUsuario.nombre as [usuario], fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido";
                     // "select idPedido, idProducto, cantidad, precio from DetPedido where idPedido='" + pedido.getId() + "'";
-                    "select d.idPedido, p.descripcion, d.cantidad, d.precio from DetPedido d,producto p where idPedido ='" + pedido.getId() + "' and idProducto=id";
+                    "select d.idPedido, d.idProducto, p.descripcion, d.cantidad, d.precio from DetPedido d,producto p where idPedido ='" + pedido.getId() + "' and idProducto=id";
 //            for (DetPedido detPedido : detalles) {
 //                select += "and idProducto='" + detPedido.getProducto().getId() + "'";
 //            }
@@ -296,7 +301,8 @@ public class PedidoDB {
                 DetPedido det = new DetPedido();
 
                 det.setIdPedido(rsPA.getInt("idPedido"));
-            det.getProducto().setDescripcion(rsPA.getString("descripcion"));
+                det.getProducto().setDescripcion(rsPA.getString("descripcion"));
+                det.getProducto().setId(rsPA.getInt("idProducto"));
                 det.setCantidad(rsPA.getInt("cantidad"));
                 det.setMonto(rsPA.getInt("precio"));
 

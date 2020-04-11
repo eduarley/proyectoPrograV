@@ -74,6 +74,42 @@ public class UsuarioDB {
         }
 
     }
+    
+    
+    public static String seleccionarNombre(int id) throws SNMPExceptions, SQLException {
+        String select = "";
+
+        try {
+
+            //Se instancia la clase de acceso a datos
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            //Se crea la sentencia de búsqueda
+            select
+                    = "select nombre from Usuario where id='" + id + "'";
+
+            //Se ejecuta la sentencia SQL
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+            
+            String nombre= rsPA.getString("nombre");
+
+            rsPA.close(); // cierra conexion
+            return nombre;
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage());
+        } finally {
+
+        }
+
+    }
+    
+    
+    
 /*
     public String listaClientes() throws SNMPExceptions, SQLException {
 

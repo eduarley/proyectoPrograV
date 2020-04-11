@@ -193,6 +193,12 @@
                                     </h:column>
                                     
                                     
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Usuario"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{pedido.usuario.nombre}"></h:outputText>
+                                    </h:column>
                                     
                                     <h:column>
                                         <f:facet name="header">
@@ -232,30 +238,22 @@
                                     
                                     
                                     <h:column>
-                                        <!--
+                                        
                                         <h:commandButton 
                                             class="btn btn-info" 
-                                            actionListener=""
+                                            actionListener="#{beanFactura.setPedidoFrame(pedido)}"
                                             value="Seleccionar"
 
                                             type="submit">
                                         </h:commandButton>
-                                        -->
-
                                         
-                                        <button type="button" onclick="#{beanFactura.setPedidoFrame(pedido)};consulta();" class="btn btn-info" >
+
+                                        <!--
+                                        <button type="button" onclick="" class="btn btn-info" >
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Consultar pedido
                                         </button>
-                                        
+                                        -->
                                     </h:column>
-
-                                    <h:column>
-                                        <button type="button" onclick="infoPago()" class="btn btn-dark" >
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Facturar Pedido
-                                        </button>
-                                    </h:column>
-
-
 
                                 </h:dataTable>
                             </div>
@@ -286,24 +284,38 @@
                                         </div>
                                         <div role="form" >
 
-                                            <div class="col-lg-12">     
-
+                                            <div class="col-lg-12">  
+                                                
                                                 <div class="form-group">
-                                                    
-                                                    <label>Tipo de pago</label>
-                                                    <h:selectOneMenu onchange="mostrar()" id="comboMostrar" value="#{beanFactura.tipoPago}" class="form-control">
-                                                        <f:selectItem itemLabel="Efectivo" itemValue="1"></f:selectItem>
-                                                        <f:selectItem itemLabel="Cuenta por cobrar" itemValue="2"></f:selectItem>
-                                                    </h:selectOneMenu>
-                                                    
-                                                    <!--
-                                                    <h:selectOneRadio value="">
-                                                        <f:selectItem id="mostrar" itemValue = "Efectivo" itemLabel = "Efectivo" /> 
-                                                        <br></br>
-                                                        <f:selectItem id="ocultar" itemValue = "Cuenta por cobrar" itemLabel = "Cuenta por cobrar" />
-                                                    </h:selectOneRadio>
-                                                    -->
-
+                                                    <label>ID Pedido</label>
+                                                    <h:outputText class="form-control" value="#{beanFactura.pedidoFrame.id}"></h:outputText>
+                                                </div>
+                                                
+                                                
+                                                <div class="form-group">
+                                                    <label>Usuario que realizó el Pedido</label>
+                                                    <h:outputText class="form-control" value="#{beanFactura.pedidoFrame.usuario.nombre}"></h:outputText>
+                                                </div>
+                                                
+                                                
+                                                <div>
+                                                    <label>Monto del Pedido</label>
+                                                    <h:outputText class="form-control" value="#{beanFactura.pedidoFrame.monto}"></h:outputText>
+                                                </div>
+                                                
+                                                <div>
+                                                    <label>Descuento</label>
+                                                    <h:outputText class="form-control" value="#{beanFactura.descuento}"></h:outputText>
+                                                </div>
+                                                
+                                                <div>
+                                                    <label>IVA</label>
+                                                    <h:outputText class="form-control" value="#{beanFactura.iva}"></h:outputText>
+                                                </div>
+                                                
+                                                <div>
+                                                    <label>Total a cancelar</label>
+                                                    <h:outputText class="form-control" value="#{beanFactura.total}"></h:outputText>
                                                 </div>
 
                                                 <div id="divEscondido" class="form-group">
@@ -311,9 +323,9 @@
                                                     <h:inputText   class="form-control" required="true" value="#{beanFactura.montoPagado}"/>
                                                 </div>
 
-                                                <h:commandButton 
+                                                <h:commandButton
                                                     class="btn btn-primary btn-lg" 
-                                                    actionListener="#{beanFactura.insertarFactura(pedido, beanInicioSesion.user)}"
+                                                    actionListener="#{beanFactura.insertarFactura()}"
                                                     value="Facturar el Pedido"
 
                                                     type="submit">
@@ -400,13 +412,34 @@
                             </div>
                         </h:form>
                         
-                        <!--
-                        <button type="button" onclick="consulta()" class="btn btn-dark" >
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Consultar pedido seleccionado
-                        </button>
-                        -->
                         
-
+                        <button type="button" onclick="consulta()" class="btn btn-dark" >
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Consultar Detalle
+                        </button>
+                        
+                        <button type="button" onclick="infoPago()" class="btn btn-dark" >
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Facturar
+                        </button>
+                        
+                        <h:form>
+                            <h:commandButton 
+                                class="btn btn-dark" 
+                                actionListener="#{beanFactura.insertarCXC()}"
+                                value="Generar Cuenta por Cobrar"
+                                type="submit">
+                            </h:commandButton>
+                        </h:form>
+                        
+                        <br></br>
+                        <br></br>
+                        <h:form>
+                            <h:commandButton 
+                                class="btn btn-outline-info" 
+                                actionListener="#{beanFactura.ayuda()}"
+                                value="¿Cuál seleccioné?"
+                                type="submit">
+                            </h:commandButton>
+                        </h:form>
 
                     </div>
                 </div>
