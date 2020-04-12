@@ -177,10 +177,8 @@ public class PedidoDB {
 
             //Se crea la sentencia de búsqueda
             select
-                    = //"select id, idUsuario, fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido where estado='" + "pendiente" + "'";
-//                    "select id, idUsuario, fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido where estado='" + "pendiente" + "'";
-                    "select p.id, p.idUsuario, u.nombre, p.fechaEntrega, p.horarioEntrega, p.direccionEntrega, p.monto, p.estado from Pedido p, Usuario u where p.estado='" + "pendiente" + "' and idUsuario=u.id";
-
+                    = "select p.id, p.idUsuario, u.nombre, p.fechaEntrega, p.horarioEntrega, p.direccionEntrega, p.monto, p.estado from Pedido p, Usuario u where p.estado='" + "pendiente" + "' and idUsuario=u.id";
+                    //"select p.id, p.idUsuario, u.nombre, p.fechaEntrega, p.horarioEntrega, p.direccionEntrega, p.monto, p.estado from Pedido p, Usuario u where idUsuario=u.id";
             //Se ejecuta la sentencia SQL
             ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
 

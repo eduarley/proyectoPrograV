@@ -81,26 +81,28 @@
                         <!--button class="btn btn-primary btn-lg" onclick="mostrarEditar()">Editar Perfil</button>
                         <div id="editar" style="display: none"-->
                          <div id="editar">
-                            <form action="#">
+                            <h:form >
                                 <div class="form-group">
-                                    <input type="text" class="form-control ftco-animate" placeholder="Identificación: #{beanInicioSesion.id}" disabled="true"/>
+                                    <input type="text" class="form-control ftco-animate" placeholder="Identificación: #{beanInicioSesion.id}"
+                                           disabled="true" value="#{beanCliente.usuarioEditar.setId(beanInicioSesion.getId())}" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control ftco-animate" placeholder="Nombre"/>
+                                    <input type="text" class="form-control ftco-animate" placeholder="Nombre" value="#{beanCliente.usuarioEditar.nombre}"/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control ftco-animate" placeholder="Clave"/>
+                                    <input type="text" class="form-control ftco-animate" placeholder="Clave" value="#{beanCliente.usuarioEditar.clave}"/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control ftco-animate" placeholder="Dirección"/>
+                                    <input type="text" class="form-control ftco-animate" placeholder="Dirección" value="#{beanCliente.usuarioEditar.direccion}"/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control ftco-animate" placeholder="Teléfono"/>
+                                    <input type="text" class="form-control ftco-animate" placeholder="Teléfono" value="#{beanCliente.usuarioEditar.telefono}"/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" value="Actualizar" class="btn btn-primary py-3 px-5 ftco-animate"/>
+                                    <!--input type="submit" value="Actualizar" class="btn btn-primary py-3 px-5 ftco-animate"/-->
+                                    <h:commandButton value="Actualizar"  class="btn btn-primary py-3 px-5 ftco-animate" actionListener="#{beanCliente.modificarCliente()}"></h:commandButton>
                                 </div>
-                            </form>
+                            </h:form>
                         </div>
                     </div>
                     <div class="col-md-6 d-flex ">
@@ -198,7 +200,7 @@
                                         <h:commandButton type='submit'
                                                          value="Eliminar"
                                                          class='btn btn-danger'
-
+                                                         actionListener="#{beanCliente.eliminarHorario(hora)}"
                                                          >
                                         </h:commandButton>
                                     </h:column>

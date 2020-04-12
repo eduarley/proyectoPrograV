@@ -98,7 +98,7 @@ public class DireccionDB {
     
     
     
-    public void eliminarProducto(Direccion direccion)
+    public void eliminarDireccion(Direccion direccion)
             throws SNMPExceptions, SQLException {
         String strSQL = "";
         
@@ -107,6 +107,31 @@ public class DireccionDB {
 
             strSQL
                     = "delete from DireccionEntrega where id= '" + direccion.getId() + "'";
+
+            //Se ejecuta la sentencia SQL
+            acceso.ejecutaSQL(strSQL);
+          
+
+        } catch (Exception e) {
+            
+
+        } finally {
+
+        }
+    }
+    
+    
+    
+    
+    public void eliminarHorario(Horario horario)
+            throws SNMPExceptions, SQLException {
+        String strSQL = "";
+        
+        AccesoDatos acceso= new AccesoDatos();
+        try {
+
+            strSQL
+                    = "delete from HorarioEntrega where id= '" + horario.getId() + "'";
 
             //Se ejecuta la sentencia SQL
             acceso.ejecutaSQL(strSQL);

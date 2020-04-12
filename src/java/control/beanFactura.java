@@ -46,12 +46,12 @@ public class beanFactura implements Serializable {
     LinkedList<Pedido> listaPedidos = new LinkedList<Pedido>();
     LinkedList<DetPedido> listaDetalles = new LinkedList<DetPedido>();
     private Pedido pedidoFrame;
-    
+
     public beanFactura() {
-        pedidoFrame= new Pedido();
-        montoPagado= 0;
+        pedidoFrame = new Pedido();
+        montoPagado = 0;
     }
-    
+
     //AQUÍ SE VA A INSERTAR EL PRODUCTO
     public void insertarFactura() throws SNMPExceptions, SQLException {
         if (montoPagado < total) {
@@ -60,12 +60,14 @@ public class beanFactura implements Serializable {
         } else {
             Factura fac = new Factura(pedidoFrame.getUsuario().getId(), pedidoFrame.getId(), pedidoFrame.getDireccionEntrega(), "efectivo", iva, descuento, subTotal, total);
             if (FacturaDB.insertarFactura(fac)) {
+
                 for (DetPedido detPed : getListaDetalles()) {
-                    int idFactura= FacturaDB.ultimoIdInsertado();
-                FacturaDB.insertarDetalle(detPed, idFactura);
+                    int idFactura = FacturaDB.ultimoIdInsertado();
+                    FacturaDB.insertarDetalle(detPed, idFactura);
                 }
+                
                 if (FacturaDB.facturado(pedidoFrame)) {
-                    double cambio= montoPagado-total;
+                    double cambio = montoPagado - total;
                     FacesMessage message = new FacesMessage("Estimado Cliente", "El pedido se facturó correctamente, su cambio es: " + cambio + "colones");
                     FacesContext.getCurrentInstance().addMessage(null, message);
                 }
@@ -75,17 +77,21 @@ public class beanFactura implements Serializable {
             }
         }
     }
-    
+
     public void insertarCXC() throws SNMPExceptions, SQLException {
         Factura fac = new Factura(pedidoFrame.getUsuario().getId(), pedidoFrame.getId(), pedidoFrame.getDireccionEntrega(), "efectivo", iva, descuento, subTotal, total);
         if (FacturaDB.insertarFactura(fac)) {
             for (DetPedido detPed : getListaDetalles()) {
-                int idFactura= FacturaDB.ultimoIdInsertado();
+                int idFactura = FacturaDB.ultimoIdInsertado();
                 FacturaDB.insertarDetalle(detPed, idFactura);
             }
             if (FacturaDB.facturado(pedidoFrame) && FacturaDB.insertarCXC(fac)) {
                 FacesMessage message = new FacesMessage("Estimado Cliente", "a Cuenta por Cobrar se generó correctamente");
                 FacesContext.getCurrentInstance().addMessage(null, message);
+            } else {
+                FacesMessage message = new FacesMessage("¡UPS!", "Ocurrió un error, no se pudo generar la Cuenta por Cobrar");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                return;
             }
         } else {
             FacesMessage message = new FacesMessage("¡UPS!", "Ocurrió un error, no se pudo generar la Cuenta por Cobrar");
@@ -93,12 +99,12 @@ public class beanFactura implements Serializable {
         }
 
     }
-    
-    public void ayuda(){
-        if(pedidoFrame.getId()!=0){
+
+    public void ayuda() {
+        if (pedidoFrame.getId() != 0) {
             FacesMessage message = new FacesMessage("Estimado Usuario", "Ha seleccionado el pedido " + this.pedidoFrame.getId());
             FacesContext.getCurrentInstance().addMessage(null, message);
-        }else{
+        } else {
             FacesMessage message = new FacesMessage("Estimado Usuario", "Primero debe seleccionar un Pedido de la Lista");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
@@ -108,7 +114,7 @@ public class beanFactura implements Serializable {
         PedidoDB pDB = new PedidoDB();
         return pDB.listaPedido();
     }
-    
+
     public LinkedList<DetPedido> getListaDetalles() throws SNMPExceptions, SQLException {
         PedidoDB pDB = new PedidoDB();
         return pDB.listaDetalle(pedidoFrame);
@@ -120,16 +126,17 @@ public class beanFactura implements Serializable {
 
     public void setPedidoFrame(Pedido pedidoFrame) {
         this.pedidoFrame = pedidoFrame;
-        
+
         //AQUÍ LLENAMOS LOS MONTOS DE LA FACTURA, SE ACTUALIZAN AUTOMÁTICAMENTE DEPENDIENDO DEL PEDIDO QUE SE SELECCIONE
-        subTotal= this.pedidoFrame.getMonto();
-        descuento= subTotal * 0.10;
-        iva= subTotal * 0.13;
-        this.total= subTotal - descuento + iva;
-        
-        
+        subTotal = this.pedidoFrame.getMonto();
+        descuento = subTotal * 0.10;
+        iva = subTotal * 0.13;
+        this.total = subTotal - descuento + iva;
+       
+
         FacesMessage message = new FacesMessage("Estimado Cliente", "Ha seleccionado el pedido " + this.pedidoFrame.getId());
         FacesContext.getCurrentInstance().addMessage(null, message);
+        
     }
 
     public void setListaDetalles(LinkedList<DetPedido> listaDetalles) {

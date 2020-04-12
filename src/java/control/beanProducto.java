@@ -59,7 +59,7 @@ public class beanProducto implements Serializable {
     }
 
     public void insertarProducto() throws SNMPExceptions, SQLException {
-
+        
         Producto producto = new Producto(Integer.parseInt(this.existencias), descripcion, tipo, ingredientes, Double.valueOf(this.precio), this.url);
         ProductoDB pDB = new ProductoDB();
 
@@ -92,6 +92,9 @@ public class beanProducto implements Serializable {
         return mensaje;
 
     }
+    
+   
+    
     
     public void modificarProducto() throws SNMPExceptions, SQLException {
 

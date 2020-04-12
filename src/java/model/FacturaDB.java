@@ -54,10 +54,10 @@ public class FacturaDB {
 
             AccesoDatos acceso = new AccesoDatos();
                 strSQL
-                        = "INSERT INTO DetFactura"
+                        = "INSERT INTO EncFactura(idUsuario,idPedido,direccion,tipoPago,subTotal,iva,descuento,total)"
                         + " VALUES ("
                         + "'" + fac.getUsuario().getId() + "','"
-                        + "'" + fac.getPedido().getId() + "','"
+                        + "" + fac.getPedido().getId() + "','"
                         + "" + fac.getDireccion().getDireccion() + "','"
                         + "" + fac.getTipoPago() + "','"
                         + "" + fac.getSubTotal() + "','"
@@ -121,7 +121,13 @@ public class FacturaDB {
             //Se ejecuta la sentencia SQL
             ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
  
-            id = rsPA.getInt("id");
+            
+             while (rsPA.next()) {
+
+                id = rsPA.getInt("id");
+
+            }
+            
 
             rsPA.close(); // cierra conexion
             return id;
@@ -147,7 +153,7 @@ public class FacturaDB {
 
             AccesoDatos acceso = new AccesoDatos();
                 strSQL
-                        = "INSERT INTO DetFactura"
+                        = "INSERT INTO CXC"
                         + " VALUES ("
                         + "'" + fac.getId() + "','"
                         + "" + fac.getUsuario().getId() + "'); ";

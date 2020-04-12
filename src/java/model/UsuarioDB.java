@@ -211,6 +211,42 @@ public class UsuarioDB {
         }
     }
 
+    
+    
+    public static boolean editarUsuario(Usuario usuarioEditar)
+            throws SNMPExceptions, SQLException {
+        String strSQL = "";
+        AccesoDatos acceso= new AccesoDatos();
+        try {
+            //Se obtienen los valores del objeto Departamento
+           
+
+            strSQL
+                    = "UPDATE USUARIO set nombre='"+usuarioEditar.getNombre()+"',"
+                    + "clave='"+usuarioEditar.getClave()+"',"
+                    + "direccion='"+usuarioEditar.getDireccion()+"',"
+                    + "telefono='"+usuarioEditar+"',"
+                    + "where id='"+usuarioEditar.getId()+"';";
+
+            //Se ejecuta la sentencia SQL
+            acceso.ejecutaSQL(strSQL);
+            return true;
+
+        } catch (Exception e) {
+            //  throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+            return false;
+
+        } finally {
+
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     public boolean eliminarUsuario(Usuario usuario)
             throws SNMPExceptions, SQLException {
         String strSQL = "";

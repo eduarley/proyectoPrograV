@@ -35,14 +35,14 @@ public class beanCliente implements Serializable {
     LinkedList<Usuario> listaUsuarios = new LinkedList<Usuario>();
     LinkedList<Direccion> listaDirecciones = new LinkedList<Direccion>();
     LinkedList<Horario> listaHorarios = new LinkedList<Horario>();
-    String cedula, nombre, direccion, telefono, horaInicioTemp,horaFinTemp;
+    String cedula, nombre, direccion, telefono, horaInicioTemp, horaFinTemp;
 
     String mensaje = "";
 
-    
-    
     String DireccionTemporal;
-    
+
+    Usuario usuarioEditar= new Usuario();
+
     public beanCliente() {
         /*this.cedula="";
         this.direccion="";
@@ -59,14 +59,14 @@ public class beanCliente implements Serializable {
 
         try {
             if (uDB.InsertarUsuario(usuario)) {
-                FacesMessage message = new FacesMessage("Éxito","El usuario " + usuario.getNombre() + " se ha registrado correctamente");
+                FacesMessage message = new FacesMessage("Éxito", "El usuario " + usuario.getNombre() + " se ha registrado correctamente");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
-                FacesMessage message = new FacesMessage("Error","Error al registrar");
+                FacesMessage message = new FacesMessage("Error", "Error al registrar");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage("Error","Hubo una falla: " + e.getMessage());
+            FacesMessage message = new FacesMessage("Error", "Hubo una falla: " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
 
@@ -78,19 +78,18 @@ public class beanCliente implements Serializable {
     }
 
     public void modificarCliente() throws SNMPExceptions, SQLException {
-        Usuario usuario = new Usuario(Integer.parseInt(this.cedula), "activo", this.nombre, this.direccion, this.telefono);
-        UsuarioDB uDB = new UsuarioDB();
-
+        
+        
         try {
-            if (uDB.InsertarUsuario(usuario)) {
-                FacesMessage message = new FacesMessage("Éxito","El usuario " + usuario.getNombre() + " se ha registrado correctamente");
+            if (UsuarioDB.editarUsuario(usuarioEditar)) {
+                FacesMessage message = new FacesMessage("Éxito", "Datos actualizados!");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
-                FacesMessage message = new FacesMessage("Error","Hubo un error al registrar");
+                FacesMessage message = new FacesMessage("Error", "Error al actualizar");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage("Error","Hubo una falla: " + e.getMessage());
+            FacesMessage message = new FacesMessage("Error", "Error al actualizar");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
 
@@ -102,14 +101,14 @@ public class beanCliente implements Serializable {
 
         try {
             if (uDB.eliminarUsuario(us)) {
-                FacesMessage message = new FacesMessage("Éxito","El usuario " + us.getNombre() + " ha sido desactivado correctamente");
+                FacesMessage message = new FacesMessage("Éxito", "El usuario " + us.getNombre() + " ha sido desactivado correctamente");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
-                FacesMessage message = new FacesMessage("Error","Error al desactivar");
+                FacesMessage message = new FacesMessage("Error", "Error al desactivar");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage("Error","Hubo una falla: " + e.getMessage());
+            FacesMessage message = new FacesMessage("Error", "Hubo una falla: " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
 
@@ -120,14 +119,14 @@ public class beanCliente implements Serializable {
 
         try {
             if (uDB.activarUsuario(us.getId())) {
-                FacesMessage message = new FacesMessage("Éxito","El usuario " + us.getNombre() + " ha sido activado correctamente");
+                FacesMessage message = new FacesMessage("Éxito", "El usuario " + us.getNombre() + " ha sido activado correctamente");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
-                FacesMessage message = new FacesMessage("Error","Error al activar");
+                FacesMessage message = new FacesMessage("Error", "Error al activar");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage("Error","Hubo una falla: " + e.getMessage());
+            FacesMessage message = new FacesMessage("Error", "Hubo una falla: " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
 
@@ -136,63 +135,65 @@ public class beanCliente implements Serializable {
     public void insertarDireccion(int idUsuario) {
         DireccionDB dDB = new DireccionDB();
         Direccion dir = new Direccion();
-        
+
         dir.setDireccion(DireccionTemporal);
         dir.setIdUsuario(idUsuario);
-        
-        
+
         try {
             dDB.InsertarDireccion(dir);
-            FacesMessage message = new FacesMessage("Éxito","La dirección se insertó exitosamente!");
+            FacesMessage message = new FacesMessage("Éxito", "La dirección se insertó exitosamente!");
             FacesContext.getCurrentInstance().addMessage(null, message);
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage("Error","La dirección no se pudo insertar");
+            FacesMessage message = new FacesMessage("Error", "La dirección no se pudo insertar");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
 
     public void eliminarDireccion(Direccion direccion) {
         DireccionDB dDB = new DireccionDB();
-    
-        
-       
-       
+
         try {
-            dDB.eliminarProducto(direccion);
-            FacesMessage message = new FacesMessage("Éxito","La dirección se ha eliminado exitosamente!");
+            dDB.eliminarDireccion(direccion);
+            FacesMessage message = new FacesMessage("Éxito", "La dirección se ha eliminado exitosamente!");
             FacesContext.getCurrentInstance().addMessage(null, message);
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage("Error","La dirección no se pudo eliminar");
+            FacesMessage message = new FacesMessage("Error", "La dirección no se pudo eliminar");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
-    
-    
-    
+
+    public void eliminarHorario(Horario hora) {
+        DireccionDB dDB = new DireccionDB();
+
+        try {
+            dDB.eliminarHorario(hora);
+            FacesMessage message = new FacesMessage("Éxito", "El horario se ha eliminado exitosamente!");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage("Error", "El horario no se pudo eliminar");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+
     public void insertarHorario(int idUsuario) {
-        
+
         HorarioDB hDB = new HorarioDB();
         Horario h = new Horario();
-        
+
         h.setIdUsuario(idUsuario);
         h.setHoraInicio(horaInicioTemp);
         h.setHoraFin(horaFinTemp);
-        
-        
-        
-        
+
         try {
             hDB.InsertarHorario(h);
-            FacesMessage message = new FacesMessage("Éxito","El horario se insertó exitosamente!");
+            FacesMessage message = new FacesMessage("Éxito", "El horario se insertó exitosamente!");
             FacesContext.getCurrentInstance().addMessage(null, message);
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage("Error","El horario no se pudo insertar");
+            FacesMessage message = new FacesMessage("Error", "El horario no se pudo insertar");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
-    
-    
-    
+
     public LinkedList<Usuario> getListaUsuarios() throws SNMPExceptions, SQLException {
         UsuarioDB uDB = new UsuarioDB();
         return uDB.listaObjetosClientes();
@@ -259,8 +260,8 @@ public class beanCliente implements Serializable {
         this.DireccionTemporal = DireccionTemporal;
     }
 
-    public LinkedList<Horario> getListaHorarios(int idUsuario)  throws SNMPExceptions, SQLException {
-        HorarioDB hDB = new  HorarioDB();
+    public LinkedList<Horario> getListaHorarios(int idUsuario) throws SNMPExceptions, SQLException {
+        HorarioDB hDB = new HorarioDB();
         return hDB.listaHorarios(idUsuario);
     }
 
@@ -283,6 +284,13 @@ public class beanCliente implements Serializable {
     public void setHoraFinTemp(String horaFinTemp) {
         this.horaFinTemp = horaFinTemp;
     }
-    
+
+    public Usuario getUsuarioEditar() {
+        return usuarioEditar;
+    }
+
+    public void setUsuarioEditar(Usuario usuarioEditar) {
+        this.usuarioEditar = usuarioEditar;
+    }
 
 }

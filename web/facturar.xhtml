@@ -39,7 +39,7 @@
         <link rel="stylesheet" href="css/icomoon.css"/>
         <link rel="stylesheet" href="css/style.css"/>
         <link href="css/tabla.css" rel="stylesheet" type="text/css"/>
-        
+
         <link href="css/ayuda.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
@@ -118,7 +118,7 @@
 
 
 
-          
+
 
 
                         <li class="dropdown nav-item">
@@ -166,12 +166,32 @@
 
 
 
-        
+
 
 
         <section class="ftco-section">
 
             <div class="container">
+
+
+                <p style="color: blue">Debes seleccionar un pedido primero*</p>
+
+
+
+                <button type="submit" onclick="consulta()" class="btn btn-dark" >
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Consultar Detalle
+                </button>
+
+                <button type="submit" onclick="infoPago()" class="btn btn-dark" >
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Facturar
+                </button>
+
+                <button type="submit" onclick="cxc()" class="btn btn-dark" >
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Generar Cuenta por Cobrar
+                </button>
+
+
+
 
 
                 <div class="panel panel-default">
@@ -191,54 +211,54 @@
                                         </f:facet>
                                         <h:outputText value="#{pedido.id}"></h:outputText>
                                     </h:column>
-                                    
-                                    
+
+
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Usuario"></h:outputText>
                                         </f:facet>
                                         <h:outputText value="#{pedido.usuario.nombre}"></h:outputText>
                                     </h:column>
-                                    
+
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Fecha de entrega"></h:outputText>
                                         </f:facet>
                                         <h:outputText value="#{pedido.fechaEntrega}"></h:outputText>
                                     </h:column>
-                                    
+
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Horario de entrega"></h:outputText>
                                         </f:facet>
                                         <h:outputText value="#{pedido.horarioEntrega}"></h:outputText>
                                     </h:column>
-                                    
+
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Direccion de entrega"></h:outputText>
                                         </f:facet>
                                         <h:outputText value="#{pedido.direccionEntrega}"></h:outputText>
                                     </h:column>
-                                    
+
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Monto"></h:outputText>
                                         </f:facet>
                                         <h:outputText value="#{pedido.monto}"></h:outputText>
                                     </h:column>
-                                    
+
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Estado del Pedido"></h:outputText>
                                         </f:facet>
                                         <h:outputText value="#{pedido.estado}"></h:outputText>
                                     </h:column>
-                                    
-                                    
-                                    
+
+
+
                                     <h:column>
-                                        
+
                                         <h:commandButton 
                                             class="btn btn-info" 
                                             actionListener="#{beanFactura.setPedidoFrame(pedido)}"
@@ -246,7 +266,7 @@
 
                                             type="submit">
                                         </h:commandButton>
-                                        
+
 
                                         <!--
                                         <button type="button" onclick="" class="btn btn-info" >
@@ -259,7 +279,7 @@
                             </div>
 
                         </h:form>
-                        
+
 
 
 
@@ -285,34 +305,34 @@
                                         <div role="form" >
 
                                             <div class="col-lg-12">  
-                                                
+
                                                 <div class="form-group">
                                                     <label>ID Pedido</label>
                                                     <h:outputText class="form-control" value="#{beanFactura.pedidoFrame.id}"></h:outputText>
                                                 </div>
-                                                
-                                                
+
+
                                                 <div class="form-group">
                                                     <label>Usuario que realizó el Pedido</label>
                                                     <h:outputText class="form-control" value="#{beanFactura.pedidoFrame.usuario.nombre}"></h:outputText>
                                                 </div>
-                                                
-                                                
+
+
                                                 <div>
                                                     <label>Monto del Pedido</label>
                                                     <h:outputText class="form-control" value="#{beanFactura.pedidoFrame.monto}"></h:outputText>
                                                 </div>
-                                                
+
                                                 <div>
                                                     <label>Descuento</label>
                                                     <h:outputText class="form-control" value="#{beanFactura.descuento}"></h:outputText>
                                                 </div>
-                                                
+
                                                 <div>
                                                     <label>IVA</label>
                                                     <h:outputText class="form-control" value="#{beanFactura.iva}"></h:outputText>
                                                 </div>
-                                                
+
                                                 <div>
                                                     <label>Total a cancelar</label>
                                                     <h:outputText class="form-control" value="#{beanFactura.total}"></h:outputText>
@@ -340,7 +360,7 @@
                                 </div>
                             </div>
                         </h:form>
-                        
+
 
 
 
@@ -350,7 +370,7 @@
                         <!--////////////////////////////////////////////////  MODAL CONSULTA DETALLE  ///////////////////////////////////////////////-->
 
 
-                        
+
                         <h:form enctype="multipart/form-data">
 
                             <div class="modal fade" id="consulta" tabindex="-1" role="dialog" aria-hidden="true">
@@ -411,25 +431,86 @@
                                 </div>
                             </div>
                         </h:form>
-                        
-                        
-                        <button type="button" onclick="consulta()" class="btn btn-dark" >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <!--////////////////////////////////////////////////  MODAL CXC///////////////////////////////////////////////-->
+
+
+
+                        <h:form enctype="multipart/form-data">
+
+                            <div class="modal fade" id="cxc" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <!--h4 class="modal-title">Modificar</h4-->
+                                        </div>
+                                        <div role="form" >
+
+                                            <div class="col-lg-12">  
+
+                                                <div class="form-group">
+                                                    <label>Desea generar una cuenta por cobrar?</label>
+
+                                                </div>
+                                                <center>
+                                                    <h:commandButton
+                                                        class="btn btn-primary btn-lg" 
+                                                        actionListener="#{beanFactura.insertarCXC()}"
+                                                        value="Confirmar"
+
+                                                        type="submit">
+                                                    </h:commandButton>
+                                                </center>
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+
+
+
+
+
+
+
+
+                        <!--button type="button" onclick="consulta()" class="btn btn-dark" >
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Consultar Detalle
                         </button>
-                        
+
                         <button type="button" onclick="infoPago()" class="btn btn-dark" >
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Facturar
-                        </button>
-                        
-                        <h:form>
+                        </button-->
+
+                        <!--h:form>
                             <h:commandButton 
                                 class="btn btn-dark" 
                                 actionListener="#{beanFactura.insertarCXC()}"
                                 value="Generar Cuenta por Cobrar"
                                 type="submit">
                             </h:commandButton>
-                        </h:form>
-                        
+                        </h:form-->
+
                         <br></br>
                         <br></br>
                         <h:form>
@@ -516,23 +597,25 @@
                                 function infoPago() {
                                     $('#infoPago').modal('show');
                                 }
-                                
+
                                 function consulta() {
                                     $('#consulta').modal('show');
                                 }
-                                
-  
-                                function mostrar(){
-                                    if($("#comboMostrar").val()=="1"){
-                                            $("#divEscondido").show("slow");
-                                        }
-                                        
-                                        if($("#comboMostrar").val()=="2"){
-                                            $("#divEscondido").hide(1500);
-                                        }
-                                }     
-                                
-                        
+                                function cxc() {
+                                    $('#cxc').modal('show');
+                                }
+
+                                function mostrar() {
+                                    if ($("#comboMostrar").val() == "1") {
+                                        $("#divEscondido").show("slow");
+                                    }
+
+                                    if ($("#comboMostrar").val() == "2") {
+                                        $("#divEscondido").hide(1500);
+                                    }
+                                }
+
+
 
 
         </script>
