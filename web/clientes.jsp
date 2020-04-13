@@ -160,8 +160,9 @@
                             </div>
                             <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
 
-                                <a class="dropdown-item" href="#"><img src="images/usuario.png" height="80" width="80" /></a>
-                                <a class="dropdown-item" href="#">${sesion.nombre}</a>
+                                <a class="dropdown-item" href="perfil.xhtml"><img src="images/usuario.png" height="80" width="80" /></a>
+                                <a class="dropdown-item" href="perfil.xhtml">#{beanInicioSesion.nombre}</a>
+
 
                                 <div class="dropdown-divider" href="#"></div>
 
@@ -267,12 +268,12 @@
                             <script type="text/javascript">
 
                                 function eliminar() {
-                                        <%
-                                        
-                                        %>
+                                <%
+
+                                %>
 
                                 }
-                                
+
                             </script>
 
 
@@ -346,8 +347,7 @@
 
 
                                     <button type="submit" class="btn btn-primary btn-lg" button='agregar' onclick="
-                                            <%
-                                                String cedula = "";
+                                            <%                                                String cedula = "";
                                                 String nombre = "";
                                                 String direccion = "";
                                                 String telefono = "";
@@ -376,7 +376,7 @@
                                                     }
 
                                                 } catch (Exception e) {
-                                                    out.println("<script>alertt('Se ha producido un error al guardar debido a </script>" + e.getMessage()+"')");
+                                                    out.println("<script>alertt('Se ha producido un error al guardar debido a </script>" + e.getMessage() + "')");
                                                 }
 
 

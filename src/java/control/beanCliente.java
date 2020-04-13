@@ -41,7 +41,14 @@ public class beanCliente implements Serializable {
 
     String DireccionTemporal;
 
-    Usuario usuarioEditar= new Usuario();
+    Usuario usuarioEditar;
+    
+    
+    String nombreEditar;
+    String claveEditar;
+    String direccionEditar;
+    String telefonoEditar;
+    
 
     public beanCliente() {
         /*this.cedula="";
@@ -77,12 +84,59 @@ public class beanCliente implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public void modificarCliente() throws SNMPExceptions, SQLException {
+    
+    public void cargarModificar(Usuario usuario){
+        usuarioEditar= new Usuario();
+        
+        
+        usuarioEditar.setId(usuario.getId());
+        usuarioEditar.setNombre(usuario.getNombre());
+        usuarioEditar.setClave(usuario.getClave());
+        usuarioEditar.setDireccion(usuario.getDireccion());
+        usuarioEditar.setTelefono(usuario.getTelefono());
+    }
+    
+    
+    public void modificarCliente(Usuario usuario) throws SNMPExceptions, SQLException {
+        usuarioEditar= usuario;
+   
+        
+        usuarioEditar.setId(usuario.getId());
+        usuarioEditar.setNombre(nombreEditar);
+        usuarioEditar.setClave(claveEditar);
+        usuarioEditar.setDireccion(direccionEditar);
+        usuarioEditar.setTelefono(telefonoEditar);
+        
+        //validar campos en blanco///
+        
+        if(usuarioEditar.getNombre().equalsIgnoreCase("")){
+            FacesMessage message = new FacesMessage("Campos en blanco", "Debe completar el nombre!");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return;
+   
+        }
+        if(usuarioEditar.getClave().equalsIgnoreCase("")){
+            FacesMessage message = new FacesMessage("Campos en blanco", "Debe completar la contraseña!");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return;
+        }
+        if(usuarioEditar.getDireccion().equalsIgnoreCase("")){
+            FacesMessage message = new FacesMessage("Campos en blanco", "Debe completarla dirección!");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return;
+        }
+        if(usuarioEditar.getTelefono().equalsIgnoreCase("")){
+            FacesMessage message = new FacesMessage("Campos en blanco", "Debe completar el teléfono!");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return;
+        }
+        
+        //fin validaciones//
         
         
         try {
             if (UsuarioDB.editarUsuario(usuarioEditar)) {
-                FacesMessage message = new FacesMessage("Éxito", "Datos actualizados!");
+                FacesMessage message = new FacesMessage("Éxito", "Datos actualizados! Los cambios se notarán al iniciar sesión nuevamente");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
                 FacesMessage message = new FacesMessage("Error", "Error al actualizar");
@@ -291,6 +345,38 @@ public class beanCliente implements Serializable {
 
     public void setUsuarioEditar(Usuario usuarioEditar) {
         this.usuarioEditar = usuarioEditar;
+    }
+
+    public String getNombreEditar() {
+        return nombreEditar;
+    }
+
+    public void setNombreEditar(String nombreEditar) {
+        this.nombreEditar = nombreEditar;
+    }
+
+    public String getClaveEditar() {
+        return claveEditar;
+    }
+
+    public void setClaveEditar(String claveEditar) {
+        this.claveEditar = claveEditar;
+    }
+
+    public String getDireccionEditar() {
+        return direccionEditar;
+    }
+
+    public void setDireccionEditar(String direccionEditar) {
+        this.direccionEditar = direccionEditar;
+    }
+
+    public String getTelefonoEditar() {
+        return telefonoEditar;
+    }
+
+    public void setTelefonoEditar(String telefonoEditar) {
+        this.telefonoEditar = telefonoEditar;
     }
 
 }

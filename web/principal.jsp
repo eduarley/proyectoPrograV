@@ -173,8 +173,8 @@
                             </div>
                             <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
 
-                                <a class="dropdown-item" href="#"><img src="images/usuario.png" height="80" width="80" /></a>
-                                <a class="dropdown-item" href="#"><% out.print(sesion.getNombre()); %></a>
+                                <a class="dropdown-item" href="perfil.xhtml"><img src="images/usuario.png" height="80" width="80" /></a>
+                                <a class="dropdown-item" href="perfil.xhtml"><% out.print(sesion.getNombre()); %></a>
 
                                 <div class="dropdown-divider" href="#"></div>
 

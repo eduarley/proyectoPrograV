@@ -225,7 +225,7 @@ public class UsuarioDB {
                     = "UPDATE USUARIO set nombre='"+usuarioEditar.getNombre()+"',"
                     + "clave='"+usuarioEditar.getClave()+"',"
                     + "direccion='"+usuarioEditar.getDireccion()+"',"
-                    + "telefono='"+usuarioEditar+"',"
+                    + "telefono='"+usuarioEditar.getTelefono()+"'"
                     + "where id='"+usuarioEditar.getId()+"';";
 
             //Se ejecuta la sentencia SQL
