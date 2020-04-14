@@ -186,7 +186,7 @@
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Facturar
                 </button>
 
-                <button type="submit" onclick="cxc()" class="btn btn-dark" >
+                <button type="submit" onclick="#{beanFactura.insertarCXC()}" class="btn btn-dark" >
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Generar Cuenta por Cobrar
                 </button>
 
@@ -195,7 +195,7 @@
 
 
                 <div class="panel panel-default">
-                    <div class="panel-heading text-center">LISTA DE PEDIDOS</div>
+                    <div class="panel-heading text-center">LISTA DE PEDIDOS SIN FACTURAR</div>
                     <div class="table-responsive">
                         <h:form enctype="multipart/form-data">
                             <div align="center" class="datagrid">
@@ -467,13 +467,15 @@
 
                                                 </div>
                                                 <center>
+                                                    <!--
                                                     <h:commandButton
                                                         class="btn btn-primary btn-lg" 
-                                                        actionListener="#{beanFactura.insertarCXC()}"
+                                                        actionListener=""
                                                         value="Confirmar"
 
                                                         type="submit">
                                                     </h:commandButton>
+                                                    -->
                                                 </center>
 
 
@@ -520,6 +522,91 @@
                                 value="¿Cuál seleccioné?"
                                 type="submit">
                             </h:commandButton>
+                        </h:form>
+
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <br></br>
+                
+                
+                
+                
+                
+                
+                
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">LISTA DE PEDIDOS</div>
+                    <div class="table-responsive">
+                        <h:form enctype="multipart/form-data">
+                            <div align="center" class="datagrid">
+
+                                <p:growl showDetail="true"/>
+
+
+                                <h:dataTable class="table table-striped table-hover" value="#{beanFactura.listaPedidosFacturados}" var="pedido2">
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="ID"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{pedido2.id}"></h:outputText>
+                                    </h:column>
+
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Usuario"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{pedido2.usuario.nombre}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Fecha de entrega"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{pedido2.fechaEntrega}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Horario de entrega"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{pedido2.horarioEntrega}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Direccion de entrega"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{pedido2.direccionEntrega}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Monto"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{pedido2.monto}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Estado del Pedido"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{pedido2.estado}"></h:outputText>
+                                    </h:column>
+
+                                </h:dataTable>
+                            </div>
+
                         </h:form>
 
                     </div>

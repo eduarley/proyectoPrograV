@@ -44,6 +44,7 @@ public class beanFactura implements Serializable {
     private double montoPagado;
     private double vuelto;
     LinkedList<Pedido> listaPedidos = new LinkedList<Pedido>();
+    LinkedList<Pedido> listaPedidosFacturados = new LinkedList<Pedido>();
     LinkedList<DetPedido> listaDetalles = new LinkedList<DetPedido>();
     private Pedido pedidoFrame;
 
@@ -54,50 +55,64 @@ public class beanFactura implements Serializable {
 
     //AQUÍ SE VA A INSERTAR EL PRODUCTO
     public void insertarFactura() throws SNMPExceptions, SQLException {
-        if (montoPagado < total) {
-            FacesMessage message = new FacesMessage("Estimado Usuario", "Debe pagar con un monto MAYOR al TOTAL A CANCELAR");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-        } else {
-            Factura fac = new Factura(pedidoFrame.getUsuario().getId(), pedidoFrame.getId(), pedidoFrame.getDireccionEntrega(), "efectivo", iva, descuento, subTotal, total);
-            if (FacturaDB.insertarFactura(fac)) {
+        if (pedidoFrame!=null) {
+            if (montoPagado < total) {
+                FacesMessage message = new FacesMessage("Estimado Usuario", "Debe pagar con un monto MAYOR al TOTAL A CANCELAR");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            } else {
+                Factura fac = new Factura(pedidoFrame.getUsuario().getId(), pedidoFrame.getId(), pedidoFrame.getDireccionEntrega(), "efectivo", iva, descuento, subTotal, total);
+                if (FacturaDB.insertarFactura(fac)) {
 
-                for (DetPedido detPed : getListaDetalles()) {
-                    int idFactura = FacturaDB.ultimoIdInsertado();
-                    FacturaDB.insertarDetalle(detPed, idFactura);
-                }
-                
-                if (FacturaDB.facturado(pedidoFrame)) {
-                    double cambio = montoPagado - total;
-                    FacesMessage message = new FacesMessage("Estimado Cliente", "El pedido se facturó correctamente, su cambio es: " + cambio + "colones");
+                    for (DetPedido detPed : getListaDetalles()) {
+                        int idFactura = FacturaDB.ultimoIdInsertado();
+                        FacturaDB.insertarDetalle(detPed, idFactura);
+                    }
+
+                    if (FacturaDB.facturado(fac.getId())) {
+                        double cambio = montoPagado - total;
+                        limpiar();
+                        FacesMessage message = new FacesMessage("Estimado Cliente", "El pedido se facturó correctamente, su cambio es: " + cambio + "colones");
+                        FacesContext.getCurrentInstance().addMessage(null, message);
+                    }
+                } else {
+                    FacesMessage message = new FacesMessage("¡UPS!", "Ocurrió un error, no pudo registrarse la factura");
                     FacesContext.getCurrentInstance().addMessage(null, message);
                 }
-            } else {
-                FacesMessage message = new FacesMessage("¡UPS!", "Ocurrió un error, no pudo registrarse la factura");
-                FacesContext.getCurrentInstance().addMessage(null, message);
             }
         }
     }
 
     public void insertarCXC() throws SNMPExceptions, SQLException {
-        Factura fac = new Factura(pedidoFrame.getUsuario().getId(), pedidoFrame.getId(), pedidoFrame.getDireccionEntrega(), "efectivo", iva, descuento, subTotal, total);
-        if (FacturaDB.insertarFactura(fac)) {
-            for (DetPedido detPed : getListaDetalles()) {
-                int idFactura = FacturaDB.ultimoIdInsertado();
-                FacturaDB.insertarDetalle(detPed, idFactura);
-            }
-            if (FacturaDB.facturado(pedidoFrame) && FacturaDB.insertarCXC(fac)) {
-                FacesMessage message = new FacesMessage("Estimado Cliente", "a Cuenta por Cobrar se generó correctamente");
-                FacesContext.getCurrentInstance().addMessage(null, message);
+        if (pedidoFrame != null) {
+            Factura fac = new Factura(pedidoFrame.getUsuario().getId(), pedidoFrame.getId(), pedidoFrame.getDireccionEntrega(), "efectivo", iva, descuento, subTotal, total);
+            if (FacturaDB.insertarFactura(fac)) {
+                for (DetPedido detPed : getListaDetalles()) {
+                    int idFactura = FacturaDB.ultimoIdInsertado();
+                    FacturaDB.insertarDetalle(detPed, idFactura);
+                }
+                if (FacturaDB.facturado(fac.getId()) && FacturaDB.insertarCXC(fac)) {
+                    limpiar();
+                    FacesMessage message = new FacesMessage("Estimado Cliente", "a Cuenta por Cobrar se generó correctamente");
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                } else {
+                    FacesMessage message = new FacesMessage("¡UPS!", "Ocurrió un error, no se pudo generar la Cuenta por Cobrar");
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    return;
+                }
             } else {
                 FacesMessage message = new FacesMessage("¡UPS!", "Ocurrió un error, no se pudo generar la Cuenta por Cobrar");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-                return;
             }
-        } else {
-            FacesMessage message = new FacesMessage("¡UPS!", "Ocurrió un error, no se pudo generar la Cuenta por Cobrar");
-            FacesContext.getCurrentInstance().addMessage(null, message);
         }
 
+    }
+    
+    public void limpiar() {
+        pedidoFrame=null;
+        descuento = 0;
+        subTotal = 0;
+        total = 0;
+        iva = 0;
     }
 
     public void ayuda() {
@@ -108,6 +123,15 @@ public class beanFactura implements Serializable {
             FacesMessage message = new FacesMessage("Estimado Usuario", "Primero debe seleccionar un Pedido de la Lista");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+    }
+
+    public LinkedList<Pedido> getListaPedidosFacturados() throws SNMPExceptions, SQLException {
+        PedidoDB pDB = new PedidoDB();
+        return pDB.listaPedidosFacturados();
+    }
+
+    public void setListaPedidosFacturados(LinkedList<Pedido> listaPedidosFacturados) {
+        this.listaPedidosFacturados = listaPedidosFacturados;
     }
 
     public LinkedList<Pedido> getListaPedidos() throws SNMPExceptions, SQLException {

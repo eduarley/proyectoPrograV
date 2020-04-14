@@ -78,7 +78,7 @@ public class FacturaDB {
     }
     
     
-    public static boolean facturado(Pedido p)
+    public static boolean facturado(int id)
             throws SNMPExceptions, SQLException {
         String strSQL = "";
 
@@ -87,7 +87,7 @@ public class FacturaDB {
             AccesoDatos acceso = new AccesoDatos();
 
             strSQL
-                    = "update Pedido set estado='" + "cancelado" + "' where id='" + p.getId() + "'";
+                    = "update Pedido set estado='" + "cancelado" + "' where id='" + id + "'";
 
             acceso.ejecutaSQL(strSQL);
 
