@@ -6,6 +6,7 @@
 package control;
 
 import DAO.SNMPExceptions;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -45,17 +46,31 @@ public class beanFactura implements Serializable {
     private double vuelto;
     LinkedList<Pedido> listaPedidos = new LinkedList<Pedido>();
     LinkedList<Pedido> listaPedidosFacturados = new LinkedList<Pedido>();
-    LinkedList<DetPedido> listaDetalles = new LinkedList<DetPedido>();
+    LinkedList<DetPedido> listaDetallePedido = new LinkedList<DetPedido>();
+    LinkedList<DetPedido> listaCXC = new LinkedList<DetPedido>();
     private Pedido pedidoFrame;
+
+    LinkedList<DetPedido> listaResultadoPedido = new LinkedList<DetPedido>(); //esta muestra los detalles del pedido en la pagina consultarDetalle.xhtml
 
     public beanFactura() {
         pedidoFrame = new Pedido();
         montoPagado = 0;
     }
 
+    public void mostrarDetalleFactura(Pedido pedido) throws SNMPExceptions, SQLException, IOException {
+        PedidoDB pDB = new PedidoDB();
+        
+        listaDetallePedido.clear();
+        //this.setListaDetalles(pDB.listaDetallePedidoPorPedidoLinkedList(pedido));
+        this.setListaResultadoPedido(pDB.listaDetallePedidoPorPedidoLinkedList(pedido));
+        this.setPedidoFrame(pedido);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("facturarDetalle.xhtml");
+
+    }
+
     //AQUÍ SE VA A INSERTAR EL PRODUCTO
-    public void insertarFactura() throws SNMPExceptions, SQLException {
-        if (pedidoFrame!=null) {
+    public void insertarFactura() throws SNMPExceptions, SQLException, IOException {
+        if (pedidoFrame != null) {
             if (montoPagado < total) {
                 FacesMessage message = new FacesMessage("Estimado Usuario", "Debe pagar con un monto MAYOR al TOTAL A CANCELAR");
                 FacesContext.getCurrentInstance().addMessage(null, message);
@@ -63,16 +78,19 @@ public class beanFactura implements Serializable {
                 Factura fac = new Factura(pedidoFrame.getUsuario().getId(), pedidoFrame.getId(), pedidoFrame.getDireccionEntrega(), "efectivo", iva, descuento, subTotal, total);
                 if (FacturaDB.insertarFactura(fac)) {
 
-                    for (DetPedido detPed : getListaDetalles()) {
-                        int idFactura = FacturaDB.ultimoIdInsertado();
+                    
+                    int idFactura = FacturaDB.ultimoIdInsertado();
+                    fac.setId(idFactura);
+                    for (DetPedido detPed : getListaDetalles()) {                       
                         FacturaDB.insertarDetalle(detPed, idFactura);
                     }
 
-                    if (FacturaDB.facturado(fac.getId())) {
+                    if (FacturaDB.facturado(pedidoFrame.getId())) {
                         double cambio = montoPagado - total;
                         limpiar();
                         FacesMessage message = new FacesMessage("Estimado Cliente", "El pedido se facturó correctamente, su cambio es: " + cambio + "colones");
                         FacesContext.getCurrentInstance().addMessage(null, message);
+                       // FacesContext.getCurrentInstance().getExternalContext().redirect("facturar.xhtml");
                     }
                 } else {
                     FacesMessage message = new FacesMessage("¡UPS!", "Ocurrió un error, no pudo registrarse la factura");
@@ -82,16 +100,22 @@ public class beanFactura implements Serializable {
         }
     }
 
+    
     public void insertarCXC() throws SNMPExceptions, SQLException {
         if (pedidoFrame != null) {
             Factura fac = new Factura(pedidoFrame.getUsuario().getId(), pedidoFrame.getId(), pedidoFrame.getDireccionEntrega(), "efectivo", iva, descuento, subTotal, total);
             if (FacturaDB.insertarFactura(fac)) {
+                
+                
+                int idFactura = FacturaDB.ultimoIdInsertado();
+                fac.setId(idFactura);
                 for (DetPedido detPed : getListaDetalles()) {
-                    int idFactura = FacturaDB.ultimoIdInsertado();
+                    
                     FacturaDB.insertarDetalle(detPed, idFactura);
                 }
-                if (FacturaDB.facturado(fac.getId()) && FacturaDB.insertarCXC(fac)) {
+                if (FacturaDB.facturado(fac.getId()) && FacturaDB.insertarCXC(fac) && FacturaDB.actualizarACXC(pedidoFrame)) {
                     limpiar();
+                    
                     FacesMessage message = new FacesMessage("Estimado Cliente", "a Cuenta por Cobrar se generó correctamente");
                     FacesContext.getCurrentInstance().addMessage(null, message);
                 } else {
@@ -106,9 +130,9 @@ public class beanFactura implements Serializable {
         }
 
     }
-    
+
     public void limpiar() {
-        pedidoFrame=null;
+        pedidoFrame = null;
         descuento = 0;
         subTotal = 0;
         total = 0;
@@ -156,15 +180,14 @@ public class beanFactura implements Serializable {
         descuento = subTotal * 0.10;
         iva = subTotal * 0.13;
         this.total = subTotal - descuento + iva;
-       
 
         FacesMessage message = new FacesMessage("Estimado Cliente", "Ha seleccionado el pedido " + this.pedidoFrame.getId());
         FacesContext.getCurrentInstance().addMessage(null, message);
-        
+
     }
 
     public void setListaDetalles(LinkedList<DetPedido> listaDetalles) {
-        this.listaDetalles = listaDetalles;
+        this.listaDetallePedido = listaDetalles;
     }
 
     public void setListaPedidos(LinkedList<Pedido> listaPedidos) {
@@ -258,4 +281,32 @@ public class beanFactura implements Serializable {
     public void setVuelto(double vuelto) {
         this.vuelto = vuelto;
     }
+
+    public LinkedList<DetPedido> getListaDetallePedido() {
+        return listaDetallePedido;
+    }
+
+    public void setListaDetallePedido(LinkedList<DetPedido> listaDetallePedido) {
+        this.listaDetallePedido = listaDetallePedido;
+    }
+
+    public LinkedList<DetPedido> getListaResultadoPedido() {
+        return listaResultadoPedido;
+    }
+
+    public void setListaResultadoPedido(LinkedList<DetPedido> listaResultadoPedido) {
+        this.listaResultadoPedido = listaResultadoPedido;
+    }
+
+    public LinkedList<DetPedido> getListaCXC() throws SNMPExceptions, SQLException {
+        PedidoDB pDB = new PedidoDB();
+        return pDB.listaPedidosFacturados();
+        
+    }
+
+    public void setListaCXC(LinkedList<DetPedido> listaCXC) {
+        this.listaCXC = listaCXC;
+    }
+    
+    
 }

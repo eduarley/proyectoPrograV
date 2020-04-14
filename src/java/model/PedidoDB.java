@@ -177,7 +177,7 @@ public class PedidoDB {
 
             //Se crea la sentencia de búsqueda
             select
-                    = "select p.id, p.idUsuario, u.nombre, p.fechaEntrega, p.horarioEntrega, p.direccionEntrega, p.monto, p.estado from Pedido p, Usuario u where p.estado='" + "pendiente" + "' and idUsuario=u.id";
+                    = "select p.id, p.idUsuario, u.nombre, p.fechaEntrega, p.horarioEntrega, p.direccionEntrega, p.monto, p.estado from Pedido p, Usuario u where idUsuario=u.id and p.estado='" + "pendiente" + "'or p.estado='cxc' ";
                     //"select p.id, p.idUsuario, u.nombre, p.fechaEntrega, p.horarioEntrega, p.direccionEntrega, p.monto, p.estado from Pedido p, Usuario u where idUsuario=u.id";
             //Se ejecuta la sentencia SQL
             ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
@@ -323,6 +323,59 @@ public class PedidoDB {
 
     }
         
+    
+    
+    public LinkedList<DetPedido> listaDetallePedidoPorPedidoLinkedList(Pedido pedido) 
+            throws SNMPExceptions, SQLException {
+        String select = "";
+        LinkedList<DetPedido> lista = new LinkedList<DetPedido>();
+
+        try {
+
+            //Se instancia la clase de acceso a datos
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            //Se crea la sentencia de búsqueda
+            select
+                    = //"select id, idUsuario.nombre as [usuario], fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido";
+                    "select * from DetPedido where idPedido='"+pedido.getId()+"'";
+
+            //Se ejecuta la sentencia SQL
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+            
+            ProductoDB pDB= new ProductoDB();
+            
+            //Se llena el arryaList con los proyectos   
+            while (rsPA.next()) {
+                
+               DetPedido detalle = new DetPedido();
+               Producto prod= pDB.consultarProducto(rsPA.getInt("idProducto"));
+               
+               detalle.setCantidad(rsPA.getInt("cantidad"));
+               detalle.setIdPedido(rsPA.getInt("idPedido"));
+               detalle.setProducto(prod);
+               detalle.setMonto(rsPA.getDouble("precio"));
+               
+                lista.add(detalle);
+
+            }
+
+            rsPA.close(); // cierra conexion
+            return lista;
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage());
+        } finally {
+
+        }
+
+    }
+    
+    
 
 
     public LinkedList listaDetalle(Pedido pedido) throws SNMPExceptions, SQLException {

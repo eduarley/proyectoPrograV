@@ -9,6 +9,7 @@ import DAO.AccesoDatos;
 import DAO.SNMPExceptions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 /**
  *
@@ -20,6 +21,9 @@ public class FacturaDB {
         
     }
     
+    
+    
+   
     public static boolean insertarDetalle(DetPedido detalle, int id) throws SNMPExceptions, SQLException{
         String strSQL = "";
         try {
@@ -169,4 +173,33 @@ public class FacturaDB {
 
         }
     }
+    
+    
+    
+    
+    public static boolean actualizarACXC(Pedido p) throws SNMPExceptions, SQLException{
+        String strSQL = "";
+        try {
+
+            AccesoDatos acceso = new AccesoDatos();
+                strSQL
+                        = "Update pedido set estado='CXC' where id='"+ p.getId()+"'";
+
+                acceso.ejecutaSQL(strSQL);
+            return true;
+
+        } catch (Exception e) {
+            //  throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+            return false;
+
+        } finally {
+
+        }
+    }
+    
+    
+    
+    
+    
+  
 }
