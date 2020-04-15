@@ -134,7 +134,7 @@
                                 <a class="dropdown-item" href="clientes.xhtml">Clientes</a>
                                 <a class="dropdown-item" href="producto.xhtml">Productos</a>
                                 <!--<a class="dropdown-item" href="pedir.xhtml">Pedidos</a>-->
-                                <a class="dropdown-item" href="#">Despachos</a>
+                                <a class="dropdown-item" href="despacho.xhtml">Despachos</a>
                             </div>
                         </li>
 
@@ -150,8 +150,8 @@
                                 Reportes
                             </div>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Pedidos realizados</a>
-                                <a class="dropdown-item" href="#">Ventas</a>
+                                <a class="dropdown-item" href="reportepedidos.xhtml">Pedidos realizados</a>
+                                <a class="dropdown-item" href="reporteventas.xhtml">Ventas</a>
 
                             </div>
                         </li>
