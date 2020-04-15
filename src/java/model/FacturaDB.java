@@ -199,7 +199,110 @@ public class FacturaDB {
     
     
     
+    public static LinkedList listaCreditoReporte() throws SNMPExceptions, SQLException {
+        String select = "";
+        LinkedList<Factura> lista = new LinkedList<Factura>();
+
+        try {
+
+            //Se instancia la clase de acceso a datos
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            //Se crea la sentencia de búsqueda
+            select
+                    = "select p.id, u.nombre, p.idPedido, p.direccion, p.tipoPago, p.subTotal, p.iva, p.descuento, p.total from EncFactura p, Usuario u where p.idUsuario=u.id and p.tipoPago='" + "credito" + "'";
+                    //"select p.id, p.idUsuario, u.nombre, p.fechaEntrega, p.horarioEntrega, p.direccionEntrega, p.monto, p.estado from Pedido p, Usuario u where idUsuario=u.id";
+            //Se ejecuta la sentencia SQL
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+
+            //Se llena el arryaList con los proyectos   
+            while (rsPA.next()) {
+
+                Factura fac = new Factura();
+
+                fac.setId(rsPA.getInt("id"));
+                fac.getUsuario().setNombre(rsPA.getString("nombre"));
+       //         ped.getUsuario().setNombre(UsuarioDB.seleccionarNombre(ped.getUsuario().getId()));
+                
+                fac.getPedido().setId(rsPA.getInt("idPedido"));
+                fac.getDireccion().setDireccion(rsPA.getString("direccion"));
+                fac.setTipoPago(rsPA.getString("tipoPago"));
+                fac.setSubTotal(rsPA.getDouble("subTotal"));
+                fac.setIva(rsPA.getDouble("iva"));
+                fac.setDescuento(rsPA.getDouble("descuento"));
+                fac.setTotal(rsPA.getDouble("total"));
+
+                lista.add(fac);
+
+            }
+
+            rsPA.close(); // cierra conexion
+            return lista;
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage());
+        } finally {
+
+        }
+
+    }
     
+    
+    public static LinkedList listaContadoReporte() throws SNMPExceptions, SQLException {
+        String select = "";
+        LinkedList<Factura> lista = new LinkedList<Factura>();
+
+        try {
+
+            //Se instancia la clase de acceso a datos
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            //Se crea la sentencia de búsqueda
+            select
+                    = "select p.id, u.nombre, p.idPedido, p.direccion, p.tipoPago, p.subTotal, p.iva, p.descuento, p.total from EncFactura p, Usuario u where p.idUsuario=u.id and p.tipoPago='" + "contado" + "'";
+                    //"select p.id, p.idUsuario, u.nombre, p.fechaEntrega, p.horarioEntrega, p.direccionEntrega, p.monto, p.estado from Pedido p, Usuario u where idUsuario=u.id";
+            //Se ejecuta la sentencia SQL
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+
+            //Se llena el arryaList con los proyectos   
+            while (rsPA.next()) {
+
+                Factura fac = new Factura();
+
+                fac.setId(rsPA.getInt("id"));
+                fac.getUsuario().setNombre(rsPA.getString("nombre"));
+       //         ped.getUsuario().setNombre(UsuarioDB.seleccionarNombre(ped.getUsuario().getId()));
+                
+                fac.getPedido().setId(rsPA.getInt("idPedido"));
+                fac.getDireccion().setDireccion(rsPA.getString("direccion"));
+                fac.setTipoPago(rsPA.getString("tipoPago"));
+                fac.setSubTotal(rsPA.getDouble("subTotal"));
+                fac.setIva(rsPA.getDouble("iva"));
+                fac.setDescuento(rsPA.getDouble("descuento"));
+                fac.setTotal(rsPA.getDouble("total"));
+
+                lista.add(fac);
+
+            }
+
+            rsPA.close(); // cierra conexion
+            return lista;
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage());
+        } finally {
+
+        }
+
+    }
     
   
 }

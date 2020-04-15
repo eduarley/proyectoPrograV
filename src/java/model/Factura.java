@@ -35,6 +35,9 @@ public class Factura {
     }
 
     public Factura() {
+        this.usuario= new Usuario();
+        this.pedido= new Pedido();
+        this.direccion= new Direccion();
     }
 
     public int getId() {

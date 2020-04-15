@@ -75,7 +75,13 @@ public class beanFactura implements Serializable {
                 FacesMessage message = new FacesMessage("Estimado Usuario", "Debe pagar con un monto MAYOR al TOTAL A CANCELAR");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
-                Factura fac = new Factura(pedidoFrame.getUsuario().getId(), pedidoFrame.getId(), pedidoFrame.getDireccionEntrega(), "efectivo", iva, descuento, subTotal, total);
+                String pago="";
+                if(pedidoFrame.getEstado().equalsIgnoreCase("pendiente")){
+                    pago="contado";
+                }else{
+                    pago="credito";
+                }
+                Factura fac = new Factura(pedidoFrame.getUsuario().getId(), pedidoFrame.getId(), pedidoFrame.getDireccionEntrega(), pago, iva, descuento, subTotal, total);
                 if (FacturaDB.insertarFactura(fac)) {
 
                     
