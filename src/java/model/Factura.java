@@ -19,6 +19,7 @@ public class Factura {
     private double descuento;
     private double subTotal;
     private double total;
+    private String estadoDespacho;
 
     public Factura(int idUsuario, int idPedido, String direccion, String tipoPago, double iva, double descuento, double subTotal, double total) {
         this.usuario= new Usuario();
@@ -111,6 +112,12 @@ public class Factura {
     public void setTotal(double total) {
         this.total = total;
     }
-    
-    
+
+    public String getEstadoDespacho() {
+        return estadoDespacho;
+    }
+
+    public void setEstadoDespacho(String estadoDespacho) {
+        this.estadoDespacho = estadoDespacho;
+    }
 }

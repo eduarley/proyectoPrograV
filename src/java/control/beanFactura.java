@@ -68,7 +68,7 @@ public class beanFactura implements Serializable {
 
     }
 
-    //AQUÍ SE VA A INSERTAR EL PRODUCTO
+    //AQUÍ SE VA A INSERTAR LA FACTURA
     public void insertarFactura() throws SNMPExceptions, SQLException, IOException {
         if (pedidoFrame != null) {
             if (montoPagado < total) {

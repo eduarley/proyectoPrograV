@@ -14,12 +14,11 @@ import java.util.Date;
 public class Despacho {
     private int id;
     private int idFactura;
-    private Date fechaEnvio;
+    private String fechaEnvio;
     private String medio;
     private int estado;
 
-    public Despacho(int id, int idFactura, Date fechaEnvio, String medio, int estado) {
-        this.id = id;
+    public Despacho(int idFactura, String fechaEnvio, String medio, int estado) {
         this.idFactura = idFactura;
         this.fechaEnvio = fechaEnvio;
         this.medio = medio;
@@ -45,11 +44,11 @@ public class Despacho {
         this.idFactura = idFactura;
     }
 
-    public Date getFechaEnvio() {
+    public String getFechaEnvio() {
         return fechaEnvio;
     }
 
-    public void setFechaEnvio(Date fechaEnvio) {
+    public void setFechaEnvio(String fechaEnvio) {
         this.fechaEnvio = fechaEnvio;
     }
 

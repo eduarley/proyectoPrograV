@@ -30,7 +30,7 @@ public class FacturaDB {
 
             AccesoDatos acceso = new AccesoDatos();
                 strSQL
-                        = "INSERT INTO DetFactura"
+                        = "INSERT INTO DetDespacho"
                         + " VALUES ("
                         + "'" + id + "','"
                         + "" + detalle.getProducto().getId() + "','"
@@ -58,7 +58,7 @@ public class FacturaDB {
 
             AccesoDatos acceso = new AccesoDatos();
                 strSQL
-                        = "INSERT INTO EncFactura(idUsuario,idPedido,direccion,tipoPago,subTotal,iva,descuento,total)"
+                        = "INSERT INTO EncFactura(idUsuario,idPedido,direccion,tipoPago,subTotal,iva,descuento,total, estadoDespacho)"
                         + " VALUES ("
                         + "'" + fac.getUsuario().getId() + "','"
                         + "" + fac.getPedido().getId() + "','"
@@ -67,7 +67,8 @@ public class FacturaDB {
                         + "" + fac.getSubTotal() + "','"
                         + "" + fac.getIva() + "','"
                         + "" + fac.getDescuento() + "','"
-                        + "" + fac.getTotal() + "'); ";
+                        + "" + fac.getTotal() + "','"
+                        + "" + "sin despachar" + "'); ";
 
                 acceso.ejecutaSQL(strSQL);
             return true;

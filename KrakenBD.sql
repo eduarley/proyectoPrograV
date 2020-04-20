@@ -55,13 +55,13 @@ create table Pedido
 	estado varchar(30)
 )
 
-create table Despacho
+create table DetPedido
 (
-	id int identity(1,1) not null,
-	idEncFactura int,
-	fechaEnvio date,
-	medio varchar(30),
-	estado int
+	idPedido int not null,
+	idProducto int not null,
+	--idProducto int,
+	cantidad int,
+	precio money
 )
 
 create table EncFactura
@@ -74,16 +74,8 @@ create table EncFactura
 	subTotal money,
 	iva money,
 	descuento money,
-	total money
-)
-
-create table DetPedido
-(
-	idPedido int not null,
-	idProducto int not null,
-	--idProducto int,
-	cantidad int,
-	precio money
+	total money,
+	estadoDespacho varchar(40)
 )
 
 create table DetFactura
@@ -92,6 +84,15 @@ create table DetFactura
 	idProducto int not null,
 	cantidad int,
 	precio money
+)
+
+create table Despacho
+(
+	id int identity(1,1) not null,
+	idEncFactura int,
+	fechaEnvio varchar(40),
+	medio varchar(30),
+	estado int
 )
 
 create table DetDespacho
@@ -163,8 +164,8 @@ alter table EncFactura add constraint FK_PedidoEncFactura foreign key (idPedido)
 
 
 Insert into Usuario values (1, 'Eduardo Arley', '1', 'Naranjo', '64488685', 'admin', 'activo')
-Insert into Usuario values (123456, 'Bananito Pérez', '1234', 'Chilamate de Poás', '86758675', 'admin', 'activo')
-Insert into Usuario values (1234, 'Eldes Pelote', '1234', 'Sarchí', '60973263', 'cliente', 'activo')
+Insert into Usuario values (123456, 'Ignacio Santos', '1234', 'Chilamate de Poás', '86758675', 'admin', 'activo')
+Insert into Usuario values (1234, 'Edgar Silva', '1234', 'Sarchí', '60973263', 'cliente', 'activo')
 
 
 

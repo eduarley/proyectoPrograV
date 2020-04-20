@@ -174,6 +174,201 @@
             <div class="container">
                 
                 
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">LISTA DE FACTURAS SIN DESPACHAR</div>
+                    <div class="table-responsive">
+                        <h:form enctype="multipart/form-data">
+                            <div align="center" class="datagrid">
+
+                                <p:growl showDetail="true"/>
+
+
+                                <h:dataTable class="table table-striped table-hover" value="#{beanDespacho.listaSinDespachar}" var="f">
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="ID"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.id}"></h:outputText>
+                                    </h:column>
+
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Usuario"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.usuario.nombre}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Fecha de entrega"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.pedido.id}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Horario de entrega"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.direccion.direccion}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Direccion de entrega"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.tipoPago}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Monto"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.subTotal}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Estado del Pedido"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.iva}"></h:outputText>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Estado del Pedido"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.descuento}"></h:outputText>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Estado del Pedido"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.total}"></h:outputText>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Estado del Pedido"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.estadoDespacho}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <h:commandButton 
+                                            class="btn btn-info"
+                                            actionListener="#{beanFactura.mostrarDetalleFactura(pedido)}"
+                                            value="Seleccionar"
+                                            type="submit">
+                                        </h:commandButton>
+                                    </h:column>
+
+
+                                </h:dataTable>
+                            </div>
+
+                        </h:form>
+
+                    </div>
+                </div>
+                
+                
+                <br></br>
+                
+                
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">LISTA DE FACTURAS DESPACHADAS</div>
+                    <div class="table-responsive">
+                        <h:form enctype="multipart/form-data">
+                            <div align="center" class="datagrid">
+
+                                <p:growl showDetail="true"/>
+
+
+                                <h:dataTable class="table table-striped table-hover" value="#{beanDespacho.listaSinDespachar}" var="f">
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="ID Factura"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.id}"></h:outputText>
+                                    </h:column>
+
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Usuario"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.usuario.nombre}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="ID Pedido"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.pedido.id}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Dirección"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.direccion.direccion}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Tipo de Pago"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.tipoPago}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="SubTotal"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.subTotal}"></h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="IVA"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.iva}"></h:outputText>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Descuento"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.descuento}"></h:outputText>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Total"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.total}"></h:outputText>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Estado/Despacho"></h:outputText>
+                                        </f:facet>
+                                        <h:outputText value="#{f.estadoDespacho}"></h:outputText>
+                                    </h:column>
+
+                                </h:dataTable>
+                            </div>
+
+                        </h:form>
+
+                    </div>
+                </div>
+                
+                
             </div>
         </section>
 
