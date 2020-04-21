@@ -125,13 +125,13 @@ public class beanProducto implements Serializable {
     }
     
     public void limpiar(){
-        this.id= "";
-        this.descripcion= "";
-        this.precio= "";
-        this.existencias= "";
-        this.tipo= "";
-        this.ingredientes= "";
-        this.url= "";
+        this.id= null;
+        this.descripcion= null;
+        this.precio= null;
+        this.existencias= null;
+        this.tipo= null;
+        this.ingredientes= null;
+        this.url= null;
         
     }
 

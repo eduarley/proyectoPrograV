@@ -16,9 +16,9 @@ public class Despacho {
     private int idFactura;
     private String fechaEnvio;
     private String medio;
-    private int estado;
+    private String estado;
 
-    public Despacho(int idFactura, String fechaEnvio, String medio, int estado) {
+    public Despacho(int idFactura, String fechaEnvio, String medio, String estado) {
         this.idFactura = idFactura;
         this.fechaEnvio = fechaEnvio;
         this.medio = medio;
@@ -60,13 +60,15 @@ public class Despacho {
         this.medio = medio;
     }
 
-    public int getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    
     
     
 }

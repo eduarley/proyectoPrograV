@@ -11,6 +11,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -39,11 +40,12 @@ public class beanDespacho implements Serializable {
     private Factura facturaFrame;
     private String fechaEnvio;
     private String medio;
-    
+
     public beanDespacho() {
-        facturaFrame= new Factura();
+        facturaFrame = new Factura();
     }
-    
+
+    /*
     //AQUÍ SE VA A INSERTAR EL DESPACHO   ------ NOTA: EL MÉTODO TIENE ERRORES PORQUE ESTABA MODIFICÁNDOLO CUANDO EMPEZÓ LA RAYERÍA
     public void insertarFactura() throws SNMPExceptions, SQLException, IOException {
         Despacho des = new Despacho(facturaFrame.getId(), fechaEnvio, medio, 1);
@@ -66,11 +68,57 @@ public class beanDespacho implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
-    
+     */
+    public void insertarDespacho() throws SNMPExceptions, SQLException {
+        Despacho des = new Despacho();
+        des.setIdFactura(facturaFrame.getId());
+        des.setFechaEnvio(fechaEnvio);
+        des.setMedio(medio);
+        des.setEstado("Despachado");
+
+        if (des.getMedio()==null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Estimado Usuario", "Debe seleccionar un medio de envio"));
+            return;
+        }
+        
+        
+        
+         if (des.getFechaEnvio().equalsIgnoreCase("") ) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Estimado Usuario", "Debe completar la fecha con el formato dd/MM/yyyy"));
+            return;
+        }
+
+        if (DespachoDB.insertarDespacho(des)) {
+            int idDespacho = DespachoDB.ultimoIdInsertado();
+            des.setId(idDespacho);
+            for (DetPedido detPed : getListaDetalles()) {
+                DespachoDB.insertarDetalleDespacho(detPed, idDespacho);
+            }
+
+            if (DespachoDB.actualizarEstadoDespacho(facturaFrame.getId())) {
+                limpiar();
+                FacesMessage message = new FacesMessage("Estimado Usuario", "La factura se despachó correctamente");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+
+            }
+
+        } else {
+            FacesMessage message = new FacesMessage("¡UPS!", "Ocurrió un error, no pudo registrarse el despacho");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+
+    }
+
+    public void mostrarDetalleDespacho(Factura f) throws IOException {
+        this.facturaFrame = f;
+        FacesContext.getCurrentInstance().getExternalContext().redirect("despachoDetalle.xhtml");
+    }
+//    
+
     public void limpiar() {
         facturaFrame = null;
-        fechaEnvio= "";
-        medio="";
+        fechaEnvio = "";
+        medio = "";
     }
 
     public LinkedList<Factura> getListaSinDespachar() throws SNMPExceptions, SQLException {
@@ -121,6 +169,5 @@ public class beanDespacho implements Serializable {
     public void setMedio(String medio) {
         this.medio = medio;
     }
-    
-    
+
 }

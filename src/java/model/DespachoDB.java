@@ -60,9 +60,11 @@ public class DespachoDB {
                     + "'" + desp.getIdFactura() + "','"
                     + "" + desp.getFechaEnvio() + "','"
                     + "" + desp.getMedio() + "','"
-                    + "" + desp.getEstado() + "')";
+                    + "" + 1 + "')";
 
             //Se ejecuta la sentencia SQL
+            
+            String prueba = strSQL;
             acceso.ejecutaSQL(strSQL);
             return true;
 
@@ -86,6 +88,8 @@ public class DespachoDB {
             strSQL
                     = "update EncFactura set estadoDespacho='" + "despachado" + "' where id='" + id + "'";
 
+            
+             String prueba = strSQL;
             acceso.ejecutaSQL(strSQL);
 
             return true;

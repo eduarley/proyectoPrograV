@@ -225,6 +225,6 @@ select * from HorarioEntrega
 select * from Pedido
 select * from DetPedido
 
+select * from EncFactura
+select * from DetDespacho
 
-delete from Pedido
-delete from DetPedido
