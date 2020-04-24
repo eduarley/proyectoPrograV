@@ -86,46 +86,51 @@ public class beanCliente implements Serializable {
 
     
     public void cargarModificar(Usuario usuario){
-        usuarioEditar= new Usuario();
+        this.setCedula(String.valueOf(usuario.getId()));
+        this.setNombre(usuario.getNombre());
+        this.setClaveEditar(usuario.getClave());
+        this.setDireccion(usuario.getDireccion());
+        this.setTelefono(usuario.getTelefono());
         
-        
-        usuarioEditar.setId(usuario.getId());
-        usuarioEditar.setNombre(usuario.getNombre());
-        usuarioEditar.setClave(usuario.getClave());
-        usuarioEditar.setDireccion(usuario.getDireccion());
-        usuarioEditar.setTelefono(usuario.getTelefono());
     }
     
     
-    public void modificarCliente(Usuario usuario) throws SNMPExceptions, SQLException {
-        usuarioEditar= usuario;
-   
-        
-        usuarioEditar.setId(usuario.getId());
-        usuarioEditar.setNombre(nombreEditar);
-        usuarioEditar.setClave(claveEditar);
-        usuarioEditar.setDireccion(direccionEditar);
-        usuarioEditar.setTelefono(telefonoEditar);
-        
+    public void refrescar(Usuario user) throws SNMPExceptions, SQLException {
+        Usuario u= UsuarioDB.usuarioPorID(user);
+        this.setCedula(u.getId()+"");
+        this.setNombre(u.getNombre());
+        this.setClaveEditar(u.getClave());
+        this.setDireccion(u.getDireccion());
+        this.setTelefono(u.getTelefono());
+    }
+    
+    public void modificarCliente() throws SNMPExceptions, SQLException {
+          
         //validar campos en blanco///
+        Usuario u= new Usuario();
+        u.setClave(claveEditar);
+        u.setDireccion(direccion);
+        u.setId(Integer.parseInt(cedula));
+        u.setNombre(nombre);
+        u.setTelefono(telefono);
         
-        if(usuarioEditar.getNombre().equalsIgnoreCase("")){
+        if(u.getNombre().equalsIgnoreCase("")){
             FacesMessage message = new FacesMessage("Campos en blanco", "Debe completar el nombre!");
             FacesContext.getCurrentInstance().addMessage(null, message);
             return;
    
         }
-        if(usuarioEditar.getClave().equalsIgnoreCase("")){
+        if(u.getClave().equalsIgnoreCase("")){
             FacesMessage message = new FacesMessage("Campos en blanco", "Debe completar la contraseña!");
             FacesContext.getCurrentInstance().addMessage(null, message);
             return;
         }
-        if(usuarioEditar.getDireccion().equalsIgnoreCase("")){
+        if(u.getDireccion().equalsIgnoreCase("")){
             FacesMessage message = new FacesMessage("Campos en blanco", "Debe completarla dirección!");
             FacesContext.getCurrentInstance().addMessage(null, message);
             return;
         }
-        if(usuarioEditar.getTelefono().equalsIgnoreCase("")){
+        if(u.getTelefono().equalsIgnoreCase("")){
             FacesMessage message = new FacesMessage("Campos en blanco", "Debe completar el teléfono!");
             FacesContext.getCurrentInstance().addMessage(null, message);
             return;
@@ -135,18 +140,26 @@ public class beanCliente implements Serializable {
         
         
         try {
-            if (UsuarioDB.editarUsuario(usuarioEditar)) {
+            if (UsuarioDB.editarUsuario(u)) {
                 FacesMessage message = new FacesMessage("Éxito", "Datos actualizados! Los cambios se notarán al iniciar sesión nuevamente");
                 FacesContext.getCurrentInstance().addMessage(null, message);
+                //refrescar(us);
             } else {
-                FacesMessage message = new FacesMessage("Error", "Error al actualizar");
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Hubo un error al actualizar"));
+
             }
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage("Error", "Error al actualizar");
-            FacesContext.getCurrentInstance().addMessage(null, message);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Hubo un error al actualizar"));
+
         }
 
+    }
+    
+    public void limpiar(){
+        this.cedula=null;
+        this.nombre=null;
+        this.direccion=null;
+        this.telefono=null;
     }
 
     public void eliminarCliente(Usuario us) throws SNMPExceptions, SQLException {

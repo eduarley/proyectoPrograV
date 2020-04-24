@@ -63,9 +63,16 @@ public class ProductoDB {
                 pro.setEstado(rsPA.getInt("estado"));
                 pro.setIngredientes(rsPA.getString("ingredientes"));
                 
-                if(pro.getEstado()==1){
+                
+                if(rsPA.getInt("estado")==1)
+                    pro.setEstadoString("Activo");
+                else
+                    pro.setEstadoString("Inactivo");
+                
+                
+                //if(pro.getEstado()==1){
                     lista.add(pro);
-                }
+                //}
                 
                 
               }
@@ -85,6 +92,66 @@ public class ProductoDB {
           
     }
     
+    
+     public static LinkedList<Producto> consultaProductoPorID(Producto p) 
+            throws SNMPExceptions, SQLException {
+        String select = "";
+        LinkedList<Producto> lista = new LinkedList<Producto>();
+
+        try {
+
+            //Se instancia la clase de acceso a datos
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            //Se crea la sentencia de búsqueda
+            select
+                    = //"select id, idUsuario.nombre as [usuario], fechaEntrega, horarioEntrega, direccionEntrega, monto, estado from Pedido";
+                    "select * from Producto where id='"+p.getId()+"'";
+
+            //Se ejecuta la sentencia SQL
+            
+            String prueba = select;
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+         
+            
+            //Se llena el arryaList con los proyectos   
+            while (rsPA.next()) {
+                
+               Producto pro = new Producto();
+
+                pro.setId(rsPA.getInt("id"));
+                pro.setDescripcion(rsPA.getString("descripcion"));
+                pro.setUrl(rsPA.getString("urlImagen"));
+                pro.setPrecio(rsPA.getDouble("precio"));
+                pro.setExistencias(rsPA.getInt("existencias"));
+                pro.setTipo(rsPA.getString("tipo"));
+                pro.setEstado(rsPA.getInt("estado"));
+                pro.setIngredientes(rsPA.getString("ingredientes"));
+                
+                if(rsPA.getInt("estado")==1)
+                    pro.setEstadoString("Activo");
+                else
+                    pro.setEstadoString("Inactivo");
+                
+                
+                lista.add(pro);
+
+            }
+
+            rsPA.close(); // cierra conexion
+            return lista;
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage());
+        } finally {
+
+        }
+
+    }
     
     
     public static Producto consultarProducto(int id)throws SNMPExceptions, SQLException{
@@ -202,6 +269,29 @@ public class ProductoDB {
         }
     }
     
+    
+    public boolean activarProducto(Producto producto)
+            throws SNMPExceptions, SQLException {
+        String strSQL = "";
+        Producto pro = new Producto();
+        pro = producto;
+        try {
+
+            strSQL
+                    = "UPDATE Producto SET ESTADO=1 WHERE ID= '" + pro.getId() + "'";
+
+            //Se ejecuta la sentencia SQL
+            accesoDatos.ejecutaSQL(strSQL);
+            return true;
+
+        } catch (Exception e) {
+            //  throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+            return false;
+
+        } finally {
+
+        }
+    }
     
     public boolean modificarProducto(Producto producto)
             throws SNMPExceptions, SQLException {

@@ -41,7 +41,7 @@
 
     
     </h:head>
-    <h:body>
+    <h:body onload="#{beanCliente.cargarModificar(beanInicioSesion.user)}">
 
         
         
@@ -58,8 +58,8 @@
 
 
 
-                        <li class="nav-item cta"><a href="menu.jsp" class="nav-link">Regresar</a></li>
-
+                        <li class="nav-item btn-info mr-5"><a href="menu.jsp" class="nav-link">Regresar</a></li>
+                        <li class="nav-item  btn btn-danger"><a href="inicioSesion.xhtml" class="nav-link">Cerrar Sesion</a></li>
 
                     </ul>
                 </div>
@@ -83,27 +83,27 @@
                         <div id="editar" style="display: none"-->
                          <div id="editar">
                             <h:form >
-                                
+                                <p:messages id="mensaje" showDetail="true" closable="true"></p:messages> 
                                 <p>Debes completar todos los campos*</p>
                                 <div class="form-group">
                                     <h:inputText  class="form-control ftco-animate" a:placeholder="Identificación: #{beanInicioSesion.id}"
                                            disabled="true" />
                                 </div>
                                 <div class="form-group">
-                                    <h:inputText  class="form-control ftco-animate" a:placeholder="Nombre" value="#{beanCliente.nombreEditar}"/>
+                                    <h:inputText  class="form-control ftco-animate" a:placeholder="Nombre" value="#{beanCliente.nombre}"/>
                                 </div>
                                 <div class="form-group">
                                     <h:inputText  class="form-control ftco-animate" a:placeholder="Clave" value="#{beanCliente.claveEditar}"/>
                                 </div>
                                 <div class="form-group">
-                                    <h:inputText  class="form-control ftco-animate" a:placeholder="Dirección" value="#{beanCliente.direccionEditar}"/>
+                                    <h:inputText  class="form-control ftco-animate" a:placeholder="Dirección" value="#{beanCliente.direccion}"/>
                                 </div>
                                 <div class="form-group">
-                                    <h:inputText  class="form-control ftco-animate" a:placeholder="Teléfono" value="#{beanCliente.telefonoEditar}"/>
+                                    <h:inputText  class="form-control ftco-animate" a:placeholder="Teléfono" value="#{beanCliente.telefono}"/>
                                 </div>
                                 <div class="form-group">
                                     <!--input type="submit" value="Actualizar" class="btn btn-primary py-3 px-5 ftco-animate"/-->
-                                    <h:commandButton value="Actualizar"  class="btn btn-primary py-3 px-5 ftco-animate" actionListener="#{beanCliente.modificarCliente(beanInicioSesion.user)}"></h:commandButton>
+                                    <h:commandButton value="Actualizar"  class="btn btn-primary py-3 px-5 ftco-animate" actionListener="#{beanCliente.modificarCliente()}"></h:commandButton>
                                 </div>
                             </h:form>
                         </div>
@@ -154,7 +154,7 @@
                         <h:form enctype="multipart/form-data">
                             <div align="center" class="datagrid">
 
-                                <p:growl showDetail="true"/>
+                               
 
 
                                 <h:dataTable class="table table-striped table-hover" value="#{beanCliente.getListaDirecciones(beanInicioSesion.id)}" var="dir">
@@ -183,7 +183,6 @@
 
                             <div align="center" class="datagrid">
 
-                                <p:growl showDetail="true"/>
                                 <h:dataTable class="table table-striped table-hover" value="#{beanCliente.getListaHorarios(beanInicioSesion.id)}" var="hora">
 
                                     <f:facet name="header">
@@ -249,7 +248,7 @@
 
         <h:form enctype="multipart/form-data">
 
-            <p:growl showDetail="true"/>
+          
 
             <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">

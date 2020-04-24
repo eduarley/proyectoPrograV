@@ -21,6 +21,8 @@ public class Producto {
     private int id, estado, existencias;
     private String descripcion, tipo, ingredientes;
    
+    private String EstadoString;
+    
     private double precio;
 
     private String url;
@@ -116,6 +118,14 @@ public class Producto {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getEstadoString() {
+        return EstadoString;
+    }
+
+    public void setEstadoString(String EstadoString) {
+        this.EstadoString = EstadoString;
     }
 
     

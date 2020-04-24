@@ -76,6 +76,56 @@ public class UsuarioDB {
     }
     
     
+    
+    public static Usuario usuarioPorID(Usuario usuario) throws SNMPExceptions, SQLException {
+        String select = "";
+       
+
+        try {
+
+            //Se instancia la clase de acceso a datos
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            //Se crea la sentencia de búsqueda
+            select
+                    = "select * from Usuario where id='"+usuario.getId()+"'";
+
+            //Se ejecuta la sentencia SQL
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+
+            //Se llena el arryaList con los proyectos   
+            Usuario us = new Usuario();
+            while (rsPA.next()) {
+
+                
+
+                us.setClave(rsPA.getString("clave"));
+                us.setId(rsPA.getInt("id"));
+                us.setNombre(rsPA.getString("nombre"));
+                us.setDireccion(rsPA.getString("direccion"));
+                us.setEstado(rsPA.getString("estado"));
+                us.setRol(rsPA.getString("rol"));
+                us.setTelefono(rsPA.getString("telefono"));
+
+               
+
+            }
+
+            rsPA.close(); // cierra conexion
+            return us;
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage());
+        } finally {
+
+        }
+
+    }
+    
     public static String seleccionarNombre(int id) throws SNMPExceptions, SQLException {
         String select = "";
 

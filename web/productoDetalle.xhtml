@@ -1,0 +1,416 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      template="/templates/template.xhtml"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      >
+    <h:head>
+        <title>Kraken | Producto</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <!--link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Miss+Fajardose&display=swap" rel="stylesheet"/-->
+
+        <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/animate.css"/>
+
+        <link rel="stylesheet" href="css/owl.carousel.min.css"/>
+        <link rel="stylesheet" href="css/owl.theme.default.min.css"/>
+        <link rel="stylesheet" href="css/magnific-popup.css"/>
+
+        <link rel="stylesheet" href="css/aos.css"/>
+
+        <link rel="stylesheet" href="css/ionicons.min.css"/>
+
+        <link rel="stylesheet" href="css/bootstrap-datepicker.css"/>
+        <link rel="stylesheet" href="css/jquery.timepicker.css"/>
+
+
+        <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
+
+        <link rel="stylesheet" href="css/flaticon.css"/>
+        <link rel="stylesheet" href="css/icomoon.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
+        <link href="css/tabla.css" rel="stylesheet" type="text/css"/>
+        <link href="css/ayuda.css" rel="stylesheet" type="text/css"/>
+
+
+
+    </h:head>
+    <h:body>
+
+        <div class="py-1 bg-black top">
+            <div class="container">
+                <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+                    <div class="col-lg-12 d-block">
+                        <div class="row d-flex">
+                            <div class="col-md pr-4 d-flex topper align-items-center">
+                                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
+                                        class="fa fa-user"></span></div>
+                                <span class="text"> ${beanInicioSesion.nombre} </span>
+                            </div>
+                            <div class="col-md pr-4 d-flex topper align-items-center">
+                                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
+                                        class="icon-paper-plane"></span></div>
+                                <span class="text">krakensystem@gmail.com</span>
+                            </div>
+                            <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right justify-content-end">
+                                <p class="mb-0 register-link"><span>Abierto:</span> <span>Lunes - Domingo</span>
+                                    <span>8:00AM
+                                        - 9:00PM</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="faces/principal.jsp">Kraken</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span> Menu
+                </button>
+
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav ml-auto">
+
+
+
+
+                        <li  class="nav-item"><a href="principal.jsp" class="nav-link">Inicio</a></li>
+
+                        <li class="dropdown nav-item">
+                            <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
+                                 aria-haspopup="true" aria-expanded="false">
+                                Registro
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="clientes.xhtml">Clientes</a>
+                                <a class="dropdown-item active" href="producto.xhtml">Productos</a>
+                                <!--<a class="dropdown-item" href="pedir.xhtml">Pedidos</a>-->
+                                <a class="dropdown-item" href="despacho.xhtml">Despachos</a>
+                            </div>
+                        </li>
+
+
+
+
+
+                        <li class="nav-item"><a href="facturar.xhtml" class="nav-link">Facturar</a></li>
+
+                        <li class="dropdown nav-item">
+                            <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
+                                 aria-haspopup="true" aria-expanded="false">
+                                Reportes
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="reportepedidos.xhtml">Pedidos realizados</a>
+                                <a class="dropdown-item" href="reporteventas.xhtml">Ventas</a>
+
+                            </div>
+                        </li>
+
+
+
+
+
+
+                        <li class="dropdown nav-item">
+                            <div class="nav-link"  id="dropdownMenuButton" data-toggle="dropdown"
+                                 aria-haspopup="true" aria-expanded="false">
+                                Cerrar Sesión
+                            </div>
+                            <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+
+                                <a class="dropdown-item" href="perfil.xhtml"><img src="images/usuario.png" height="80" width="80" /></a>
+                                <a class="dropdown-item" href="perfil.xhtmlf">${sesion.nombre}</a>
+
+                                <div class="dropdown-divider" href="#"></div>
+
+                                <a href="inicioSesion.xhtml">Salir</a>
+
+                            </div>
+                        </li>
+
+                        <li class="nav-item"><span class="bp-header__present">Ayuda <span class="bp-tooltip fa fa-info-circle" data-content="En esta página podrá insertar, modificar, eliminar y consultar productos"></span></span></li>
+
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- fin nav -->
+
+        <section class="hero-wrap hero-wrap-2" style="background-image: url('images/fondo-login.jpg');"
+                 data-stellar-background-ratio="0.5">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text align-items-end justify-content-center">
+                    <div class="col-md-9 ftco-animate text-center">
+                        <h1 class="mb-2 bread"><img src="images/logo blanco blanco.png" alt="" style="max-height: 200px;"/>
+                        </h1>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+        <section class="ftco-section">
+
+            <div class="container">
+                <h:form>
+                    <h:commandButton value="Regresar" action="producto.xhtml" actionListener="#{beanProducto.limpiar()}" class="btn btn-dark" >
+
+                    </h:commandButton>
+                </h:form>
+
+                <div class="container shadow-lg">
+                    <p:messages id="mensaje" showDetail="true" closable="true"></p:messages> 
+
+                    <div class="row d-flex align-items-stretch no-gutters">
+
+                        <div class="col-md-12  ftco-animate">
+
+                            <div id="editar">
+                                <h2 class="h4 mb-5 font-weight-bold">Producto</h2>
+
+                                <h:form>
+
+                                    <h:dataTable class="table table-striped table-hover" value="#{beanProducto.detalleProducto}" var="producto">
+
+                                        <h:column>
+
+                                            <div class="zoom">
+                                                <a  href="#{producto.url}"><h:graphicImage class="ftco-animate" style="max-height: 55px" url="#{producto.url}"></h:graphicImage></a>
+                                            </div>
+
+                                            <h:outputText value="ID: #{producto.id}" class="form-control ftco-animate"></h:outputText>
+
+                                            <h:outputText value="Descripción: #{producto.descripcion}"  class="form-control ftco-animate"></h:outputText>
+
+                                            <h:outputText value="Precio: #{producto.precio}"  class="form-control ftco-animate"></h:outputText>
+
+                                            <h:outputText value="Existencias: #{producto.existencias}"  class="form-control ftco-animate"></h:outputText>
+
+
+                                            <h:outputText value="Tipo: #{producto.tipo}"  class="form-control ftco-animate"></h:outputText>
+
+                                            <h:outputText value="Ingredientes: #{producto.ingredientes}"  class="form-control ftco-animate"></h:outputText>
+
+
+                                            <h:outputText value="Estado: #{producto.estadoString}"  class="form-control ftco-animate"></h:outputText>
+
+
+
+
+                                            <ul class="ftco-footer-social list-unstyled  mt-3">
+                                                <li class="ftco-animate">
+                                                    <button type="button" onclick="#{beanProducto.cargarModificar(producto)};ventanaModificar()" class="btn btn-primary ftco-animate" >
+                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Modificar
+                                                    </button>
+                                                </li>
+                                                <li class="ftco-animate">
+                                                    <h:commandButton class="btn btn-info" value="Activar" actionListener="#{beanProducto.activarProducto(producto)}"></h:commandButton>
+                                                </li>
+                                                <li class="ftco-animate">
+                                                    <h:commandButton class="btn btn-danger" value="Desactivar" actionListener="#{beanProducto.eliminarProducto(producto)}"></h:commandButton>
+                                                </li>
+                                            </ul>
+
+
+
+
+                                        </h:column>
+
+
+                                    </h:dataTable>
+
+                                </h:form>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+        </section>
+
+
+
+
+
+        <!--////////////////////////////////////////////////  MODAL MODIFICAR///////////////////////////////////////////////-->
+
+
+
+        <div class="modal fade" id="modalModificar" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <!--h4 class="modal-title">Modificar</h4-->
+                    </div>
+                    <h:form role="form">
+
+                        <div class="col-lg-12">     
+
+
+
+                            <div class="form-group">
+                                <label>Descripción</label>
+                                <h:inputText   class="form-control" required="true" value="#{beanProducto.descripcion}"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Precio</label>
+                                <h:inputText  class="form-control" required="true" value="#{beanProducto.precio}"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Existencias</label>
+                                <h:inputText  class="form-control" required="true" value="#{beanProducto.existencias}"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Tipo</label>
+
+
+                                <h:selectOneMenu value="#{beanProducto.tipo}" class="form-control">
+                                    <f:selectItem itemLabel="Desayuno" itemValue="Desayuno"></f:selectItem>
+                                    <f:selectItem itemLabel="Almuerzo" itemValue="Almuerzo"></f:selectItem>
+                                    <f:selectItem itemLabel="Cena" itemValue="Cena"></f:selectItem>
+                                </h:selectOneMenu>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>URL Imagen</label>
+                                <h:inputText class="form-control" required="true" value="#{beanProducto.url}"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ingredientes</label>
+                                <h:inputTextarea  class="form-control" required="true" value="#{beanProducto.ingredientes}"/>
+                            </div>
+
+                            <h:commandButton 
+                                class="btn btn-primary btn-lg" 
+
+                                actionListener="#{beanProducto.modificarProducto()}"
+                                value="Modificar"
+
+                                type="submit">
+                            </h:commandButton>
+
+
+                        </div>
+                    </h:form>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <footer class="ftco-footer ftco-bg-dark ftco-section">
+            <div class="container-fluid px-md-5 px-3">
+                <div class="row mb-5">
+
+
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>
+                            Eduardo Arley | Josué Marchena
+                            <ul class="ftco-footer-social list-unstyled  mt-3">
+                                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                            </ul>
+                        </p>
+                        <p>
+                            Universidad Técnica Nacional
+                            <br></br>
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-migrate-3.0.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.easing.1.3.js"></script>
+        <script src="js/jquery.waypoints.min.js"></script>
+        <script src="js/jquery.stellar.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/jquery.animateNumber.min.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <script src="js/jquery.timepicker.min.js"></script>
+        <script src="js/scrollax.min.js"></script>
+
+        <script src="js/google-map.js"></script>
+        <script src="js/main.js"></script>
+
+        <script type="text/javascript">
+
+                                function ventananuevo() {
+                                    $('#modal').modal('show');
+                                    $('#descripcion').val('');
+                                    //$('#{beanProducto.descripcion}').val('');
+                                }
+                                function cambiar() {
+                                    $('#modal2').modal('show');
+                                }
+
+                                function recargarPagina() {
+                                    location.reload(true);
+                                }
+
+
+                                function ventanaModificar() {
+                                    $('#modalModificar').modal('show');
+                                }
+
+
+        </script>
+
+
+    </h:body>
+</html>
+

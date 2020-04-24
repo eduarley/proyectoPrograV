@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import java.io.File;
+import java.io.IOException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -43,96 +44,129 @@ public class beanProducto implements Serializable {
      */
     LinkedList<Producto> listaProductos = new LinkedList<Producto>();
 
-    private String id, descripcion, precio, existencias, tipo, ingredientes, mensaje,url;
+    private String id, descripcion, precio, existencias, tipo, ingredientes, mensaje, url;
 
-   
-    
-    
+    LinkedList<Producto> detalleProducto = new LinkedList<Producto>();
+
     public beanProducto() {
-        this.id= "";
-        this.descripcion= "";
-        this.precio= "";
-        this.existencias= "";
-        this.tipo= "";
-        this.ingredientes= "";
-        this.url= "";
+        this.id = "";
+        this.descripcion = "";
+        this.precio = "";
+        this.existencias = "";
+        this.tipo = "";
+        this.ingredientes = "";
+        this.url = "";
+    }
+
+    public void mostrarDetalle(Producto prod) throws SNMPExceptions, SQLException, IOException {
+        this.detalleProducto = ProductoDB.consultaProductoPorID(prod);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("productoDetalle.xhtml");
     }
 
     public void insertarProducto() throws SNMPExceptions, SQLException {
-        
+
         Producto producto = new Producto(Integer.parseInt(this.existencias), descripcion, tipo, ingredientes, Double.valueOf(this.precio), this.url);
         ProductoDB pDB = new ProductoDB();
 
         if (pDB.InsertarProducto(producto)) {
-            
+
             FacesMessage message = new FacesMessage("Éxito", "Guardado con éxito");
             FacesContext.getCurrentInstance().addMessage(null, message);
         } else {
-            FacesMessage message = new FacesMessage("Error","Error al guardar la imagen.!");
+            FacesMessage message = new FacesMessage("Error", "Error al guardar la imagen.!");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
 
     }
-    
+
     public void ayuda() {
         FacesMessage message = new FacesMessage("Ayuda", "En esta página podrá insertar, modificar, eliminar y consultar productos");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public String eliminarProducto(Producto pro) throws SNMPExceptions, SQLException {
+    public void eliminarProducto(Producto pro) throws SNMPExceptions, SQLException, IOException {
 
         ProductoDB pDB = new ProductoDB();
 
         if (pDB.eliminarProducto(pro)) {
-            mensaje = "Se ha eliminado exitosamente!";
+            FacesMessage message = new FacesMessage("Éxito", "Eliminado con éxito");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            refrescar(pro);
         } else {
-            mensaje = "Se ha producido un error al eliminar!";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Hubo un error al desactivar el producto"));
+
         }
 
-        return mensaje;
+        refrescar(pro);
 
     }
-    
-   
-    
-    
-    public void modificarProducto() throws SNMPExceptions, SQLException {
 
-        Producto pro= new Producto(Integer.parseInt(id) ,Integer.parseInt(existencias), descripcion, tipo, ingredientes, Double.valueOf(precio), url);
+    public void refrescar(Producto prod) throws SNMPExceptions, SQLException, IOException {
+        try {
+
+            //Thread.sleep(1000);
+            this.detalleProducto = ProductoDB.consultaProductoPorID(prod);
+        } catch (Exception e) {
+        }
+
+    }
+
+    public void activarProducto(Producto pro) throws SNMPExceptions, SQLException, IOException {
+
+        ProductoDB pDB = new ProductoDB();
+
+        if (pDB.activarProducto(pro)) {
+
+            FacesMessage message = new FacesMessage("Éxito", "activado con éxito");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Hubo un error al activar el producto"));
+
+        }
+
+        refrescar(pro);
+
+    }
+
+    public void modificarProducto() throws SNMPExceptions, SQLException, IOException{
+
+        Producto pro = new Producto(Integer.parseInt(id), Integer.parseInt(existencias), descripcion, tipo, ingredientes, Double.valueOf(precio), url);
         ProductoDB pDB = new ProductoDB();
 
         if (pDB.modificarProducto(pro)) {
-            
+
             FacesMessage message = new FacesMessage("Éxito", "Modificado con éxito");
             FacesContext.getCurrentInstance().addMessage(null, message);
+            
         } else {
-            FacesMessage message = new FacesMessage("Error al modificar el producto!");
-            FacesContext.getCurrentInstance().addMessage(null, message);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Hubo un error al modificar el producto"));
+
         }
-    }
-    
-    
-    
-    public void cargarModificar(Producto pro){
-        this.id= String.valueOf(pro.getId());
-        this.descripcion= String.valueOf(pro.getDescripcion());
-        this.precio= String.valueOf(pro.getPrecio());
-        this.existencias= String.valueOf(pro.getExistencias());
-        this.tipo= pro.getTipo();
-        this.ingredientes= pro.getIngredientes();
-        this.url= pro.getUrl();
+        refrescar(pro);
         
     }
-    
-    public void limpiar(){
-        this.id= null;
-        this.descripcion= null;
-        this.precio= null;
-        this.existencias= null;
-        this.tipo= null;
-        this.ingredientes= null;
-        this.url= null;
-        
+
+    public void cargarModificar(Producto pro) {
+        this.id = String.valueOf(pro.getId());
+        this.descripcion = String.valueOf(pro.getDescripcion());
+        this.precio = String.valueOf(pro.getPrecio());
+        this.existencias = String.valueOf(pro.getExistencias());
+        this.tipo = pro.getTipo();
+        this.ingredientes = pro.getIngredientes();
+        this.url = pro.getUrl();
+
+    }
+
+    public void limpiar() {
+        this.id = null;
+        this.descripcion = null;
+        this.precio = null;
+        this.existencias = null;
+        this.tipo = null;
+        this.ingredientes = null;
+        this.url = null;
+
     }
 
     public LinkedList<Producto> getListaProductos() throws SNMPExceptions, SQLException {
@@ -142,22 +176,22 @@ public class beanProducto implements Serializable {
 
     public String listaMenuDesayunos() throws SNMPExceptions, SQLException {
         ProductoDB pDB = new ProductoDB();
-        String menu="";
-        if(pDB.listaMenuDesayuno().equalsIgnoreCase("")){
-            menu+="<h3 class=\"text-center\">No hay desayunos registrados</h3>";
-        }else{
-            menu+=pDB.listaMenuDesayuno();
+        String menu = "";
+        if (pDB.listaMenuDesayuno().equalsIgnoreCase("")) {
+            menu += "<h3 class=\"text-center\">No hay desayunos registrados</h3>";
+        } else {
+            menu += pDB.listaMenuDesayuno();
         }
         return menu;
     }
 
     public String listaMenuAlmuerzos() throws SNMPExceptions, SQLException {
         ProductoDB pDB = new ProductoDB();
-        String menu="";
-        if(pDB.listaMenuAlmuerzo().equalsIgnoreCase("")){
-            menu+="<h3 class=\"text-center\">No hay almuerzos registrados</h3>";
-        }else{
-            menu+=pDB.listaMenuAlmuerzo();
+        String menu = "";
+        if (pDB.listaMenuAlmuerzo().equalsIgnoreCase("")) {
+            menu += "<h3 class=\"text-center\">No hay almuerzos registrados</h3>";
+        } else {
+            menu += pDB.listaMenuAlmuerzo();
         }
         return menu;
         //return pDB.listaMenuAlmuerzo();
@@ -165,11 +199,11 @@ public class beanProducto implements Serializable {
 
     public String listaMenuCena() throws SNMPExceptions, SQLException {
         ProductoDB pDB = new ProductoDB();
-        String menu="";
-        if(pDB.listaMenuCena().equalsIgnoreCase("")){
-            menu+="<h3 class=\"text-center\">No hay cenas registrados</h3>";
-        }else{
-            menu+=pDB.listaMenuCena();
+        String menu = "";
+        if (pDB.listaMenuCena().equalsIgnoreCase("")) {
+            menu += "<h3 class=\"text-center\">No hay cenas registrados</h3>";
+        } else {
+            menu += pDB.listaMenuCena();
         }
         return menu;
     }
@@ -218,7 +252,6 @@ public class beanProducto implements Serializable {
         this.tipo = tipo;
     }
 
-
     public String getIngredientes() {
         return ingredientes;
     }
@@ -241,6 +274,14 @@ public class beanProducto implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public LinkedList<Producto> getDetalleProducto() {
+        return detalleProducto;
+    }
+
+    public void setDetalleProducto(LinkedList<Producto> detalleProducto) {
+        this.detalleProducto = detalleProducto;
     }
 
 }

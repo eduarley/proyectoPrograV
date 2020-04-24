@@ -234,31 +234,30 @@
                                         <h:outputText value="#{producto.ingredientes}"></h:outputText>
                                     </h:column>
 
+                                    
+                                    
+                                    
+                                    
+                                    
                                     <!---->
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Estado"></h:outputText>
                                         </f:facet>
-                                        <h:outputText value="#{producto.estado}"></h:outputText>
+                                        <h:outputText value="#{producto.estadoString}"></h:outputText>
                                     </h:column>
                                     <!---->
-
-
-                                    <h:column>
+                                    
+                                    
+                                     <h:column>
                                         <h:commandButton type='submit'
-                                                         value="Eliminar"
-                                                         class='btn btn-danger'
-                                                         actionListener="#{beanProducto.eliminarProducto(producto)}">
+                                                         value="Seleccionar"
+                                                         class='btn btn-outline-info'
+                                                         actionListener="#{beanProducto.mostrarDetalle(producto)}">
                                         </h:commandButton>
                                     </h:column>
 
 
-
-                                    <h:column>
-                                        <button type="button" onclick="#{beanProducto.cargarModificar(producto)};ventanaModificar()" class="btn btn-primary" >
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Modificar
-                                        </button>
-                                    </h:column>
 
                                 </h:dataTable>
                             </div>
@@ -353,7 +352,7 @@
 
 
 
-                        <h:form enctype="multipart/form-data">
+                        <h:form>
 
                             <div class="modal fade" id="modalModificar" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -438,7 +437,7 @@
                 </div>
 
                 <br></br>
-                <button type="button" onclick="ventananuevo()" class="btn btn-success btn-lg" >
+                <button type="button" onclick="#{beanProducto.limpiar()};  ventananuevo()" class="btn btn-success btn-lg" >
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar
                 </button>
 
