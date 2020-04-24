@@ -130,35 +130,16 @@ alter table DetDespacho add constraint PK_DetDespacho primary key (idDespacho, i
 alter table DireccionEntrega add constraint FK_UsuarioDireccionEntrega foreign key (idUsuario) references Usuario(id)
 alter table CXC add constraint FK_UsuarioCXC foreign key (idUsuario) references Usuario(id)
 alter table HorarioEntrega add constraint FK_HorarioEntrega foreign key (idUsuario) references Usuario(id)
-
 alter table Pedido add constraint FK_UsuarioPedido foreign key (idUsuario) references Usuario(id)
 alter table DetPedido add constraint FK_PedidoDetPedido foreign key (idPedido) references Pedido(id)
 alter table DetPedido add constraint FK_ProductoDetPedido foreign key (idProducto) references Producto(id)
-
-
-
 alter table DetFactura add constraint FK_EncFacturaDetFactura foreign key (idEncFactura) references EncFactura(id)
 alter table DetFactura add constraint FK_ProductoDetFactura foreign key (idProducto) references Producto(id)
-
-
-
-
 alter table DetDespacho add constraint FK_DespachoDetDespacho foreign key (idDespacho) references Despacho(id)
 alter table DetDespacho add constraint FK_ProductoDetDespacho foreign key (idProducto) references Producto(id)
-
-
-
 alter table EncFactura add constraint FK_UsuarioEncFactura foreign key (idUsuario) references Usuario(id)
-
-
 alter table Despacho add constraint FK_EncFacturaDespacho foreign key (idEncFactura) references EncFactura(id)
-
-
-
 alter table CXC add constraint FK_EncFacturaCXC foreign key (idEncFactura) references EncFactura(id)
-
-
-
 alter table EncFactura add constraint FK_PedidoEncFactura foreign key (idPedido) references Pedido(id)
 ------------------------------------------------
 
@@ -168,13 +149,8 @@ Insert into Usuario values (123456, 'Ignacio Santos', '1234', 'Chilamate de Poás
 Insert into Usuario values (1234, 'Edgar Silva', '1234', 'Sarchí', '60973263', 'cliente', 'activo')
 
 
-
---insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
---values ('','','','','','','');
-
 insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
 values ('Gallo Pinto','https://www.elmundo.cr/wp-content/uploads/2017/03/gallo-pinto1.jpg','1500','10','Desayuno','Arroz, frijoles y salsa Lizano','1');
-
 
 insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
 values ('Casado','https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Casado_costarricense2.png/220px-Casado_costarricense2.png','2000','5','Almuerzo','Arroz, frijoles y carne en salsa','1');
@@ -182,49 +158,38 @@ values ('Casado','https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Casa
 insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
 values ('Taco al pastor','https://www.comedera.com/wp-content/uploads/2017/08/tacos-al-pastor-receta.jpg','1250','5','Cena','Tortilla de maíz con carne y especias','1');
 
+insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
+values ('Filet de pescado','https://www.enmicocinahoy.cl/wp-content/uploads/2017/04/pescado-plancha-sarten-7.jpg','1800','20','Almuerzo','Pescado con salsa blanca y limon','1');
+
+insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
+values ('Sopa de mariscos','https://recetasdecocina.elmundo.es/wp-content/uploads/2018/11/receta-sopa-pescado.jpg','2300','17','Cena','Mariscos en sustancia con olores','1');
+
+insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
+values ('Sopa de lentejas','https://www.mexicoenmicocina.com/wp-content/uploads/2018/04/sopa-de-lentejas-500x500.jpg','1300','28','Cena','Lentejas, zanahoria, pan, olores','1');
+
+insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
+values ('Pupusas','https://cdn.kiwilimon.com/recetaimagen/2806/th5-640x426-25790.jpg','1500','8','Desayuno','Harina, queso, frijoles, salsa de tomate','1');
+
+insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
+values ('Hamburguesas artesanal','https://www.revistaperfil.com/resizer/6CJEQRAhqM0UZfozMPxCM1Ezcz8=/600x0/center/middle/filters:quality(100)/arc-anglerfish-arc2-prod-gruponacion.s3.amazonaws.com/public/QCRITEDPYNEV7KOS6IRT3OGWI4.jpg','2100','10','Almuerzo','Pan, lechuga, tomate, queso, salsas, pepinillos, papas','1');
+
+insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
+values ('Chop suey','https://s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2017/08/17091552/Jueves-QC-Chop-suey-con-pollo.jpg','2500','21','Almuerzo','Pasta, verduras, salsa inglesa, carne','1');
+
+insert into Producto(descripcion,urlImagen,precio,existencias,tipo,ingredientes,estado)
+values ('Arroz con camarones','https://www.laylita.com/recetas/wp-content/uploads/Receta-de-arroz-con-camarones.jpg','3000','13','Desayuno','Camarones, arroz, olores','1');
 
 
-/*insert into DireccionEntrega(idUsuario, direccion) values (1234, 'Chilamate de Poás')
-insert into DireccionEntrega(idUsuario, direccion) values (1234, 'San Rafael de Poás')
-insert into DireccionEntrega(idUsuario, direccion) values (1234, 'San Pedro de Poás')
+--Trigger para reducir existencias del producto después de insertar los DetFactura
+create trigger TR_ActualizarExistencia
+on DetFactura
+after insert
+as
+begin
+	set nocount on;
 
-
-
-insert into HorarioEntrega(idUsuario, horaInicio, horaFin) values (1234, '10:00AM', '11:30AM')
-insert into HorarioEntrega(idUsuario, horaInicio, horaFin) values (1234, '1:00PM', '4:30PM')*/
-
-
-
-/*insert into Pedido(idUsuario, fechaEntrega, horarioEntrega, direccionEntrega, monto, estado) values (1234, '30/04/2020', '10:00AM a 11:30AM', 'San Rafael de Poás', 3500, 'pendiente')
-
-
-
-insert into DetPedido(idPedido, idProducto, cantidad, precio) values (1, 1, 1, 1500)
-insert into DetPedido(idPedido, idProducto, cantidad, precio) values (1, 2, 1, 2000)*/
-
-
-/*
-
-alter table EncFactura add constraint FK_EncFacturaDireccionEntrega foreign key (idDireccion) references DireccionEntrega(id)
-*/
-
-
-
-
---PROCEDIMIENTOS ALMACENADOS
-
-
-
-
-
---PRUEBAS
-select * from Usuario
-select * from DireccionEntrega
-select * from HorarioEntrega
-
-select * from Pedido
-select * from DetPedido
-
-select * from EncFactura
-select * from DetDespacho
-
+	update Producto
+	set existencias= (select p.existencias from Producto p, inserted where inserted.idProducto=p.id)-1
+	from inserted
+	where Producto.id= inserted.idProducto
+end
