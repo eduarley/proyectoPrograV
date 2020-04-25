@@ -30,7 +30,7 @@ public class FacturaDB {
 
             AccesoDatos acceso = new AccesoDatos();
                 strSQL
-                        = "INSERT INTO DetDespacho"
+                        = "INSERT INTO DetFactura"
                         + " VALUES ("
                         + "'" + id + "','"
                         + "" + detalle.getProducto().getId() + "','"
